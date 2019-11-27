@@ -22,18 +22,18 @@ namespace DotnetGraph.Helper
             return nodes;
         }
 
-        public static Dictionary<int, T> ToDictionary<T>(this IEnumerable<T> items)
+        public static Dictionary<T, int> ToDictionary<T>(this IEnumerable<T> items)
         {
             if(items is null)
             {
                 throw new ArgumentNullException(nameof(items));
             }
 
-            var dict = new Dictionary<int, T>();
+            var dict = new Dictionary<T, int>();
             var counter = 0;
             foreach (var item in items)
             {
-                dict.Add(counter++, item);
+                dict.Add(item, counter++);
             }
             return dict;
         }

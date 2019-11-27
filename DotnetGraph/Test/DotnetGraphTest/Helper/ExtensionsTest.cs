@@ -23,8 +23,8 @@ namespace DotnetGraphTest.Helper
             var nodes = graph.ExtractNodes();
             var dict = nodes.ToDictionary();
             Assert.IsNotNull(dict);
-            Assert.AreEqual(0, dict.Min(x => x.Key));
-            Assert.AreEqual(5, dict.Max(x => x.Key));
+            Assert.AreEqual(0, dict.Min(x => x.Value));
+            Assert.AreEqual(5, dict.Max(x => x.Value));
         }
     }
 }

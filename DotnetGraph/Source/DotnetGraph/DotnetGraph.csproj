@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Algorithms\ShortestPath\" />
+    <Compile Remove="Algorithms\ShortestPath\**" />
+    <EmbeddedResource Remove="Algorithms\ShortestPath\**" />
+    <None Remove="Algorithms\ShortestPath\**" />
   </ItemGroup>
 
   <ItemGroup>
