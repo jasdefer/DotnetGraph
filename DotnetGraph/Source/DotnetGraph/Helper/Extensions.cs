@@ -1,4 +1,5 @@
 ﻿using DotnetGraph.Model;
+using System;
 using System.Collections.Generic;
 
 namespace DotnetGraph.Helper
@@ -7,6 +8,11 @@ namespace DotnetGraph.Helper
     {
         public static IEnumerable<T> ExtractNodes<T>(this IEnumerable<Arc<T>> arcs)
         {
+            if (arcs is null)
+            {
+                throw new ArgumentNullException(nameof(arcs));
+            }
+
             var nodes = new HashSet<T>();
             foreach (var arc in arcs)
             {
@@ -18,6 +24,11 @@ namespace DotnetGraph.Helper
 
         public static Dictionary<int, T> ToDictionary<T>(this IEnumerable<T> items)
         {
+            if(items is null)
+            {
+                throw new ArgumentNullException(nameof(items));
+            }
+
             var dict = new Dictionary<int, T>();
             var counter = 0;
             foreach (var item in items)
