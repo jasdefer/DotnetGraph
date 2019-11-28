@@ -5,6 +5,6 @@ namespace DotnetGraph.Algorithms.Contracts
 {
     public interface IShortestPathTreeAlgorithm
     {
-        Arc<T>[] GetShortestPathTree<T>(IEnumerable<Arc<T>> arcs, T origin);
+        Dictionary<T, Arc<T>[]> GetShortestPathTree<T>(IEnumerable<Arc<T>> arcs, T origin);
     }
 }

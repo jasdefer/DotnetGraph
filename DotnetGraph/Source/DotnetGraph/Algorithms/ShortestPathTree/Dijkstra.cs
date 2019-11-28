@@ -9,49 +9,51 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
 {
     public class Dijkstra : IShortestPathTreeAlgorithm
     {
-        public Arc<T>[] GetShortestPathTree<T>(IEnumerable<Arc<T>> arcs, T origin)
+        public Dictionary<T, Arc<T>[]> GetShortestPathTree<T>(IEnumerable<Arc<T>> arcs, T origin)
         {
-            var args = CreateDijkstraArgs(arcs, origin);
-            throw new NotImplementedException();
-        }
-
-        private DijkstraArguments CreateDijkstraArgs<T>(IEnumerable<Arc<T>> arcs, T origin)
-        {
-            if (arcs == null) throw new ArgumentNullException(nameof(arcs));
-            if (origin == null) throw new ArgumentNullException(nameof(origin));
-            var nodes = arcs.ExtractNodes().ToDictionary();
-            var args = Initialization(arcs, nodes, origin);
-            return args;
-        }
-
-        internal static Successor[] GetSuccessors<T>(IEnumerable<Arc<T>> arcs, Dictionary<T, int> nodes, int node)
-        {
-            var successors = new Dictionary<int, double>();
-            foreach (var arc in arcs)
+            var args = Initialization(arcs, origin);
+            while (args.Queue.Count > 0)
             {
-                if (nodes[arc.Origin] == node)
+                var node = args.BestDistances.GetIndexOfMin();
+                args.Queue.Remove(node);
+                var leavingArcs = args.Graph.GetLeavingArcs(node);
+                for (int i = 0; i < leavingArcs.Length; i++)
                 {
-                    var successor = nodes[arc.Destination];
-                    if (!successors.ContainsKey(successor))
+                    var successor = leavingArcs[i].Destination;
+                    var distanceToSuccessor = args.BestDistances[node] + leavingArcs[i].Weight;
+                    var improvesDistance = distanceToSuccessor < args.BestDistances[successor];
+                    if (improvesDistance)
                     {
-                        successors.Add(successor, arc.Weight);
-                    }
-                    else if (arc.Weight < successors[successor])
-                    {
-                        successors[successor] = arc.Weight;
+                        args.BestDistances[successor] = distanceToSuccessor;
+                        args.BestPredecessors[successor] = node;
                     }
                 }
             }
-            return successors.Select(x => new Successor(x.Key, x.Value)).ToArray();
+            var shortestPathTree = ExtractShortestPathTree(args);
+            return shortestPathTree;
         }
 
-        private DijkstraArguments Initialization<T>(IEnumerable<Arc<T>> arcs, Dictionary<T, int> nodes, T origin)
+        internal static Dictionary<T, Arc<T>[]> ExtractShortestPathTree<T>(DijkstraArguments<T> args)
         {
-            var args = new DijkstraArguments(nodes.Count, nodes[origin]);
-            for (int i = 0; i < nodes.Count; i++)
+            var bestArcs = new List<Arc<T>>();
+            for (int i = 0; i < args.BestPredecessors.Length; i++)
             {
-                args.Successors[i] = GetSuccessors(arcs, nodes, i);
+                if (args.BestPredecessors[i].HasValue)
+                {
+                    Arc<T> arc = args.Graph.GetShortestArc(args.BestPredecessors[i], i);
+                    bestArcs.Add(arc);
+                }
             }
+            return bestArcs.GetShortestPathTree();
+        }
+
+        private DijkstraArguments<T> Initialization<T>(IEnumerable<Arc<T>> arcs, T origin)
+        {
+            if (arcs == null) throw new ArgumentNullException(nameof(arcs));
+            if (origin == null) throw new ArgumentNullException(nameof(origin));
+            if (arcs.Any(x => x.Weight < 0)) throw new Exception("Dijkstra's algorithm cannot handle negative weights.");
+            var compactGraph = new CompactGraph<T>(arcs);
+            var args = new DijkstraArguments<T>(compactGraph, origin);
             return args;
         }
     }

@@ -4,24 +4,8 @@ using System.Collections.Generic;
 
 namespace DotnetGraph.Helper
 {
-    public static class Extensions
+    public static class CollectionExtensions
     {
-        public static IEnumerable<T> ExtractNodes<T>(this IEnumerable<Arc<T>> arcs)
-        {
-            if (arcs is null)
-            {
-                throw new ArgumentNullException(nameof(arcs));
-            }
-
-            var nodes = new HashSet<T>();
-            foreach (var arc in arcs)
-            {
-                nodes.Add(arc.Origin);
-                nodes.Add(arc.Destination);
-            }
-            return nodes;
-        }
-
         public static Dictionary<T, int> ToDictionary<T>(this IEnumerable<T> items)
         {
             if(items is null)
@@ -36,6 +20,22 @@ namespace DotnetGraph.Helper
                 dict.Add(item, counter++);
             }
             return dict;
+        }
+
+        public static int GetIndexOfMin(this double[] values)
+        {
+            if (values is null) throw new ArgumentNullException(nameof(values));
+            double min = double.PositiveInfinity;
+            var index = -1;
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] < min)
+                {
+                    min = values[i];
+                    index = i;
+                }
+            }
+            return index;
         }
     }
 }
