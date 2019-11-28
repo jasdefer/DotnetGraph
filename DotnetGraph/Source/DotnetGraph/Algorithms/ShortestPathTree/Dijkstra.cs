@@ -1,5 +1,4 @@
 ﻿using DotnetGraph.Algorithms.Contracts;
-using DotnetGraph.Helper;
 using DotnetGraph.Model;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,14 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
 {
     public class Dijkstra : IShortestPathTreeAlgorithm
     {
+        /// <summary>
+        /// Create the shortest path tree from an origin to all other reachable nodes in a graph.
+        /// Cannot handle arcs with negative edges.
+        /// </summary>
+        /// <typeparam name="T">The type of the nodes in the graph.</typeparam>
+        /// <param name="arcs">The collection of arcs in the graph.</param>
+        /// <param name="origin">The origin node of the shortest path tree.</param>
+        /// <returns>Returns a dictionary with a list of arcs as the shortest path (value) for a given destination node (key).</returns>
         public Dictionary<T, Arc<T>[]> GetShortestPathTree<T>(IEnumerable<Arc<T>> arcs, T origin)
         {
             var args = Initialization(arcs, origin);
@@ -35,6 +42,9 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
             return shortestPathTree;
         }
 
+        /// <summary>
+        /// Get the node in the queue with the lowest distance.
+        /// </summary>
         private static int GetIndexOfMin(double[] distances, List<int> queue)
         {
             double min = double.PositiveInfinity;
@@ -50,7 +60,11 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
             return index;
         }
 
-        internal static Dictionary<T, Arc<T>[]> ExtractShortestPathTree<T>(DijkstraArguments<T> args)
+        /// <summary>
+        /// Convert the result of the Dijkstra algorithm to a shortest path tree.
+        /// </summary>
+        /// <returns>Returns a dictionary with a list of arcs as the shortest path (value) for a given destination node (key).</returns>
+        private static Dictionary<T, Arc<T>[]> ExtractShortestPathTree<T>(DijkstraArguments<T> args)
         {
             var dict = new Dictionary<T, Arc<T>[]>();
             for (int i = 0; i < args.BestArrivingArc.Length; i++)
@@ -73,6 +87,9 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
             return dict;
         }
 
+        /// <summary>
+        /// Initialize the Dijkstra algorithm. Validate the input and create the compact graph with the Dijkstra initialization.
+        /// </summary>
         private DijkstraArguments<T> Initialization<T>(IEnumerable<Arc<T>> arcs, T origin)
         {
             if (arcs == null) throw new ArgumentNullException(nameof(arcs));
