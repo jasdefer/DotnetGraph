@@ -21,5 +21,15 @@ namespace DotnetGraph.Helper
             }
             return nodes;
         }
+
+        public static double TotalWeight<T>(this IEnumerable<Arc<T>> arcs)
+        {
+            var weight = 0d;
+            foreach (var arc in arcs)
+            {
+                weight += arc.Weight;
+            }
+            return weight;
+        }
     }
 }

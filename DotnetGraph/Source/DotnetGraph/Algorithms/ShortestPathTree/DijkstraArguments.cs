@@ -11,8 +11,8 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
         internal int Origin { get; }
         internal int?[] BestArrivingArc { get; }
         internal double[] BestDistances { get; }
-        public List<int> Queue { get; }
-        public CompactGraph<T> Graph { get; }
+        internal List<int> Queue { get; }
+        internal CompactGraph<T> Graph { get; }
 
         internal DijkstraArguments(CompactGraph<T> compactGraph, T origin)
         {
