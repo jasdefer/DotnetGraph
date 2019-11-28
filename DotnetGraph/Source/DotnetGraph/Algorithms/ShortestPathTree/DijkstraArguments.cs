@@ -9,7 +9,7 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
     internal class DijkstraArguments<T>
     {
         internal int Origin { get; }
-        internal int?[] BestPredecessors { get; }
+        internal int?[] BestArrivingArc { get; }
         internal double[] BestDistances { get; }
         public List<int> Queue { get; }
         public CompactGraph<T> Graph { get; }
@@ -17,11 +17,11 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
         internal DijkstraArguments(CompactGraph<T> compactGraph, T origin)
         {
             var nodeCount = compactGraph.Successors.Length - 1;
-            BestPredecessors = new int?[nodeCount];
+            BestArrivingArc = new int?[nodeCount];
             BestDistances = new double[nodeCount];
             for (int i = 0; i < nodeCount; i++)
             {
-                BestPredecessors[i] = null;
+                BestArrivingArc[i] = null;
                 BestDistances[i] = double.PositiveInfinity;
                 Queue.Add(i);
             }

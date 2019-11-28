@@ -8,16 +8,18 @@ namespace DotnetGraph.Model
     internal class CompactGraph<T>
     {
         private readonly Dictionary<T, int> nodeMap;
+        private Arc<T>[] BaseArcs;
+        private readonly int[] ArcMapping;
         public T[] Nodes { get; }
-        public Arc<T>[] BaseArcs { get; }
         public CompactArc[] Arcs { get; }
         public int[] Successors { get; set; }
-        public int[] C { get; set; }
+        public int[] DestinationSortedArcs { get; set; }
         public int[] Predecessors { get; set; }
         public CompactGraph(IEnumerable<Arc<T>> arcs)
         {
             BaseArcs = arcs.ToArray();
             Nodes = BaseArcs.ExtractNodes().ToArray();
+            nodeMap = Nodes.ToDictionary();
             throw new NotImplementedException();
         }
 
@@ -26,14 +28,17 @@ namespace DotnetGraph.Model
             return nodeMap[node];
         }
 
-        public CompactArc[] GetLeavingArcs(int node)
+        public (int startIndex, int endIndex) GetLeavingArcs(int node)
         {
-            throw new NotImplementedException();
+            var startIndex = Successors[node];
+            var endIndex = Successors[node + 1];
+            return (startIndex, endIndex);
         }
 
-        internal Arc<T> GetShortestArc(int? v, int i)
+        public Arc<T> GetArc(int index)
         {
-            throw new NotImplementedException();
+            var baseArcIndex = ArcMapping[index];
+            return BaseArcs[baseArcIndex];
         }
     }
 }

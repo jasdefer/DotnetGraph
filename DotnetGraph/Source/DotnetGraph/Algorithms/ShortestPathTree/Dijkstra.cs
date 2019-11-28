@@ -16,16 +16,16 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
             {
                 var node = args.BestDistances.GetIndexOfMin();
                 args.Queue.Remove(node);
-                var leavingArcs = args.Graph.GetLeavingArcs(node);
-                for (int i = 0; i < leavingArcs.Length; i++)
+                (var startIndex, var endIndex) = args.Graph.GetLeavingArcs(node);
+                for (int i = startIndex; i < endIndex; i++)
                 {
-                    var successor = leavingArcs[i].Destination;
-                    var distanceToSuccessor = args.BestDistances[node] + leavingArcs[i].Weight;
+                    var successor = args.Graph.Arcs[i].Destination;
+                    var distanceToSuccessor = args.BestDistances[node] + args.Graph.Arcs[i].Weight;
                     var improvesDistance = distanceToSuccessor < args.BestDistances[successor];
                     if (improvesDistance)
                     {
                         args.BestDistances[successor] = distanceToSuccessor;
-                        args.BestPredecessors[successor] = node;
+                        args.BestArrivingArc[successor] = i;
                     }
                 }
             }
@@ -35,16 +35,24 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
 
         internal static Dictionary<T, Arc<T>[]> ExtractShortestPathTree<T>(DijkstraArguments<T> args)
         {
-            var bestArcs = new List<Arc<T>>();
-            for (int i = 0; i < args.BestPredecessors.Length; i++)
+            var dict = new Dictionary<T, Arc<T>[]>();
+            for (int i = 0; i < args.BestArrivingArc.Length; i++)
             {
-                if (args.BestPredecessors[i].HasValue)
+                if (i != args.Origin &&args.BestArrivingArc[i].HasValue)
                 {
-                    Arc<T> arc = args.Graph.GetShortestArc(args.BestPredecessors[i], i);
-                    bestArcs.Add(arc);
+                    var arcs = new List<Arc<T>>();
+                    int previous = i;
+                    while (previous != args.Origin)
+                    {
+                        var arcIndex = args.BestArrivingArc[previous].Value;
+                        previous = args.Graph.Arcs[arcIndex].Origin;
+                        var arc = args.Graph.GetArc(arcIndex);
+                        arcs.Add(arc);
+                    }
+                    dict.Add(args.Graph.Nodes[i], arcs.ToArray());
                 }
             }
-            return bestArcs.GetShortestPathTree();
+            return dict;
         }
 
         private DijkstraArguments<T> Initialization<T>(IEnumerable<Arc<T>> arcs, T origin)

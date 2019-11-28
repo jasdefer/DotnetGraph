@@ -21,10 +21,5 @@ namespace DotnetGraph.Helper
             }
             return nodes;
         }
-
-        public static Dictionary<T, Arc<T>[]> GetShortestPathTree<T>(this IEnumerable<Arc<T>> arcs)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
