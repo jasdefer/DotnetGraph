@@ -16,16 +16,23 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
 
         internal DijkstraArguments(CompactGraph<T> compactGraph, T origin)
         {
+            Graph = compactGraph;
             var nodeCount = compactGraph.Successors.Length - 1;
             BestArrivingArc = new int?[nodeCount];
             BestDistances = new double[nodeCount];
+            Queue = new List<int>();
+            Origin = compactGraph.GetIndex(origin);
             for (int i = 0; i < nodeCount; i++)
             {
                 BestArrivingArc[i] = null;
                 BestDistances[i] = double.PositiveInfinity;
+                if(i == Origin)
+                {
+                    BestDistances[i] = 0;
+                }
                 Queue.Add(i);
             }
-            Origin = compactGraph.GetIndex(origin);
+            
         }
     }
 }

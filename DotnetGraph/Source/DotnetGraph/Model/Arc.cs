@@ -17,5 +17,10 @@
         {
             return new Arc<T>(Destination, Origin, Weight);
         }
+
+        public override string ToString()
+        {
+            return $"{Origin}->{Destination} ({Weight})";
+        }
     }
 }

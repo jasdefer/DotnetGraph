@@ -12,9 +12,11 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
         public Dictionary<T, Arc<T>[]> GetShortestPathTree<T>(IEnumerable<Arc<T>> arcs, T origin)
         {
             var args = Initialization(arcs, origin);
+            var iteration = 0;
             while (args.Queue.Count > 0)
             {
-                var node = args.BestDistances.GetIndexOfMin();
+                iteration++;
+                var node = GetIndexOfMin(args.BestDistances, args.Queue);
                 args.Queue.Remove(node);
                 (var startIndex, var endIndex) = args.Graph.GetLeavingArcs(node);
                 for (int i = startIndex; i < endIndex; i++)
@@ -33,6 +35,21 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
             return shortestPathTree;
         }
 
+        private static int GetIndexOfMin(double[] distances, List<int> queue)
+        {
+            double min = double.PositiveInfinity;
+            var index = -1;
+            foreach (var node in queue)
+            {
+                if (distances[node] < min)
+                {
+                    min = distances[node];
+                    index = node;
+                }
+            }
+            return index;
+        }
+
         internal static Dictionary<T, Arc<T>[]> ExtractShortestPathTree<T>(DijkstraArguments<T> args)
         {
             var dict = new Dictionary<T, Arc<T>[]>();
@@ -49,7 +66,8 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
                         var arc = args.Graph.GetArc(arcIndex);
                         arcs.Add(arc);
                     }
-                    dict.Add(args.Graph.Nodes[i], arcs.ToArray());
+                    arcs.Reverse();
+                    dict.Add(args.Graph.GetNode(i), arcs.ToArray());
                 }
             }
             return dict;

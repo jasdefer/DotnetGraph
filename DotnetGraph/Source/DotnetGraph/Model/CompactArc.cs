@@ -41,5 +41,10 @@ namespace DotnetGraph.Model
         {
             return !(left == right);
         }
+
+        public override string ToString()
+        {
+            return $"{Origin}->{Destination} ({Weight})";
+        }
     }
 }

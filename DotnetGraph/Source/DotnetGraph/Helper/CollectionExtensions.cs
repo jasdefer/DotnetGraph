@@ -22,20 +22,6 @@ namespace DotnetGraph.Helper
             return dict;
         }
 
-        public static int GetIndexOfMin(this double[] values)
-        {
-            if (values is null) throw new ArgumentNullException(nameof(values));
-            double min = double.PositiveInfinity;
-            var index = -1;
-            for (int i = 0; i < values.Length; i++)
-            {
-                if (values[i] < min)
-                {
-                    min = values[i];
-                    index = i;
-                }
-            }
-            return index;
-        }
+        
     }
 }

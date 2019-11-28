@@ -18,26 +18,17 @@ namespace DotnetGraphTest
         /// |D+------+E+------+F|
         /// +-+  1   +-+   1  +-+
         /// </summary>
-        public static Arc<Node>[] GetSmallGraph()
+        public static Arc<string>[] GetSmallGraph()
         {
-            var nodes = new Node[]
+            var arcs = new List<Arc<string>>()
             {
-                new Node("A"),
-                new Node("B"),
-                new Node("C"),
-                new Node("D"),
-                new Node("E"),
-                new Node("F")
-            };
-            var arcs = new List<Arc<Node>>()
-            {
-                new Arc<Node>(nodes[0], nodes[1], 5),
-                new Arc<Node>(nodes[0], nodes[3], 1),
-                new Arc<Node>(nodes[1], nodes[2], 5),
-                new Arc<Node>(nodes[1], nodes[4], 2),
-                new Arc<Node>(nodes[2], nodes[5], 1),
-                new Arc<Node>(nodes[3], nodes[4], 1),
-                new Arc<Node>(nodes[4], nodes[5], 1),
+                new Arc<string>("A", "B", 5),
+                new Arc<string>("A", "D", 1),
+                new Arc<string>("B", "C", 5),
+                new Arc<string>("B", "E", 2),
+                new Arc<string>("C", "F", 1),
+                new Arc<string>("D", "E", 1),
+                new Arc<string>("E", "F", 1),
             };
             var arcCount = arcs.Count;
             for (int i = 0; i < arcCount; i++)
