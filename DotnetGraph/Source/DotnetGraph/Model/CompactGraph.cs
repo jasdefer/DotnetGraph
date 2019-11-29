@@ -1,5 +1,4 @@
 ﻿using DotnetGraph.Helper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,18 +33,25 @@ namespace DotnetGraph.Model
 
         private void SetupPredecessors()
         {
-            var node = -1;
-            for (int i = 0; i < DestinationSortedArcs.Length; i++)
+            var arcIndex = 0;
+            var arc = Arcs[DestinationSortedArcs[arcIndex]];
+            for (int i = 0; i < nodes.Length; i++)
             {
-                var arcIndex = DestinationSortedArcs[i];
-                var arc = Arcs[arcIndex];
-                var destination = arc.Destination;
-                if (node != destination)
+                Predecessors[i] = arcIndex;
+                while (arc.Destination == i && arcIndex < Arcs.Length)
                 {
-                    Predecessors[destination] = i;
+                    if (arcIndex < Arcs.Length - 1)
+                    {
+                        arc = Arcs[DestinationSortedArcs[++arcIndex]];
+                    }
+                    else
+                    {
+                        arcIndex++;
+                    }
+
                 }
             }
-            Predecessors[nodes.Length] = DestinationSortedArcs.Length;
+            Predecessors[nodes.Length] = arcIndex;
         }
 
         private void SetupDestinationSortedArcs()
@@ -77,17 +83,25 @@ namespace DotnetGraph.Model
 
         private void SetupSuccessors()
         {
-            var node = -1;
-            for (int i = 0; i < Arcs.Length; i++)
+            var arcIndex = 0;
+            var arc = Arcs[arcIndex];
+            for (int i = 0; i < nodes.Length; i++)
             {
-                var origin = Arcs[i].Origin;
-                if (node != origin)
+                Successors[i] = arcIndex;
+                while(arc.Origin == i && arcIndex<Arcs.Length)
                 {
-                    Successors[origin] = i;
-                    node = origin;
+                    if (arcIndex < Arcs.Length - 1)
+                    {
+                        arc = Arcs[++arcIndex];
+                    }
+                    else
+                    {
+                        arcIndex++;
+                    }
+                    
                 }
             }
-            Successors[nodes.Length] = Arcs.Length;
+            Successors[nodes.Length] = arcIndex;
         }
 
         private void SetupCompactArcs()
@@ -113,9 +127,22 @@ namespace DotnetGraph.Model
             return (startIndex, endIndex);
         }
 
+        public (int startIndex, int endIndex) GetArrivingArcs(int node)
+        {
+            var startIndex = Predecessors[node];
+            var endIndex = Predecessors[node + 1];
+            return (startIndex, endIndex);
+        }
+
         public int CountSuccessors(int node)
         {
             (int startIndex, int endIndex) = GetLeavingArcs(node);
+            return endIndex - startIndex;
+        }
+
+        public int CountPredecessors(int node)
+        {
+            (int startIndex, int endIndex) = GetArrivingArcs(node);
             return endIndex - startIndex;
         }
 

@@ -15,7 +15,7 @@ namespace DotnetGraphTest.ShortestPathTreeTests
         [TestMethod]
         public void SmallGraphWithNegativeArcShortestPathTree()
         {
-            var graph = GraphGenerator.GetSmallGraphWithNegativeArc();
+            var graph = DirectedGraphGenerator.GetSmallGraphWithNegativeArc();
             var algorithm = GetShortestPathTreeAlgorithm();
             var shortestPath = algorithm.GetShortestPathTree(graph, graph[0].Origin);
             Assert.IsNotNull(shortestPath);

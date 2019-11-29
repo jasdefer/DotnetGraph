@@ -24,6 +24,11 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
             {
                 iteration++;
                 var node = GetIndexOfMin(args.BestDistances, args.Queue);
+                if (node == -1)
+                {
+                    //The graph is not connected, some nodes cannot be reached
+                    return ExtractShortestPathTree(args);
+                }
                 args.Queue.Remove(node);
                 (var startIndex, var endIndex) = args.Graph.GetLeavingArcs(node);
                 for (int i = startIndex; i < endIndex; i++)

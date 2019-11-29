@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DotnetGraphTest
 {
-    public static class GraphGenerator
+    public static class DirectedGraphGenerator
     {
         /// <summary>
         /// The graph contains 6 nodes and 7 edges resulting in 14 arcs, since each edge is represented by two arcs.
@@ -72,6 +72,28 @@ namespace DotnetGraphTest
                 }
             }
             return arcs.ToArray();
+        }
+
+        /// <summary>
+        /// The graph contains 6 nodes and 7 edges resulting in 14 arcs, since each edge is represented by two arcs.
+        /// 
+        /// +-+  1   +-+
+        /// |A+----->+B+
+        /// +++      +++
+        /// 
+        /// +++      +++
+        /// |C+----->+D+
+        /// +-+  1   +-+
+        /// </summary>
+
+        public static Arc<string>[] GetUnconnectedGraph()
+        {
+            var arcs = new Arc<string>[]
+            {
+                new Arc<string>("A", "B", 1),
+                new Arc<string>("C", "D", 1),
+            };
+            return arcs;
         }
     }
 }

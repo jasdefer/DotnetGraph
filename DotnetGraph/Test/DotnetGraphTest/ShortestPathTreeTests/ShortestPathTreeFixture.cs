@@ -14,7 +14,7 @@ namespace DotnetGraphTest.ShortestPathTreeTests
         [TestMethod]
         public void SmallGraphShortestPathTree()
         {
-            var graph = GraphGenerator.GetSmallGraph();
+            var graph = DirectedGraphGenerator.GetSmallGraph();
             var algorithm = GetShortestPathTreeAlgorithm();
             var shortestPath = algorithm.GetShortestPathTree(graph, graph[0].Origin);
             Assert.IsNotNull(shortestPath);
@@ -42,7 +42,7 @@ namespace DotnetGraphTest.ShortestPathTreeTests
         [TestMethod]
         public void SmallGraphShortestPathTreeWithDoubleArcs()
         {
-            var graph = GraphGenerator.GetSmallGraph().ToList();
+            var graph = DirectedGraphGenerator.GetSmallGraph().ToList();
             graph.Add(new Arc<string>("A", "B", 4));
             graph.Add(new Arc<string>("A", "B", 3));
             graph.Add(new Arc<string>("A", "B", 6));
@@ -65,6 +65,16 @@ namespace DotnetGraphTest.ShortestPathTreeTests
             Assert.AreEqual("A", shortestPath["B"][0].Origin);
             Assert.AreEqual("B", shortestPath["B"][0].Destination);
             Assert.AreEqual(3, shortestPath["B"].TotalWeight());
+        }
+
+        [TestMethod]
+        public void UnconnectedGraph()
+        {
+            var graph = DirectedGraphGenerator.GetUnconnectedGraph();
+            var algorithm = GetShortestPathTreeAlgorithm();
+            var tree = algorithm.GetShortestPathTree(graph, graph[0].Destination);
+            Assert.IsNotNull(tree);
+            Assert.AreEqual(0, tree.Count);
         }
     }
 }

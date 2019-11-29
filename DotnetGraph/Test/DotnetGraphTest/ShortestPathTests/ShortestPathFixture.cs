@@ -11,7 +11,7 @@ namespace DotnetGraphTest.ShortestPathTests
         [TestMethod]
         public void SmallGraphShortestPathAtoF()
         {
-            var graph = GraphGenerator.GetSmallGraph();
+            var graph = DirectedGraphGenerator.GetSmallGraph();
             var algorithm = GetShortestPathAlgorithm();
             var shortestPath = algorithm.GetShortestPath(graph, graph[0].Origin, graph[1].Destination);
             Assert.IsNotNull(shortestPath);

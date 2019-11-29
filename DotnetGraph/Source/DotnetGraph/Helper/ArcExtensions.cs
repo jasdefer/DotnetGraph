@@ -24,7 +24,10 @@ namespace DotnetGraph.Helper
 
         public static double TotalWeight<T>(this IEnumerable<Arc<T>> arcs)
         {
-            if (arcs is null) throw new ArgumentNullException(nameof(arcs));
+            if (arcs is null)
+            {
+                return 0;
+            }
             var weight = 0d;
             foreach (var arc in arcs)
             {
