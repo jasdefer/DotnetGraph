@@ -6,6 +6,14 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
 {
     public class Fifo : IShortestPathTreeAlgorithm
     {
+        /// <summary>
+        /// Create the shortest path tree from an origin to all other reachable nodes in a graph.
+        /// The fifo algorithm can handle negative weights on arcs as long as the graph do not contain negative cycles.
+        /// </summary>
+        /// <typeparam name="T">The type of the nodes in the graph.</typeparam>
+        /// <param name="arcs">The collection of arcs in the graph.</param>
+        /// <param name="origin">The origin node of the shortest path tree.</param>
+        /// <returns>Returns a dictionary with a list of arcs as the shortest path (value) for a given destination node (key).</returns>
         public Dictionary<T, Arc<T>[]> GetShortestPathTree<T>(IEnumerable<Arc<T>> arcs, T origin)
         {
             var args = new FifoArguments<T>(arcs, origin);
@@ -34,7 +42,7 @@ namespace DotnetGraph.Algorithms.ShortestPathTree
         }
 
         /// <summary>
-        /// Convert the result of the Dijkstra algorithm to a shortest path tree.
+        /// Convert the result of the FIFO algorithm to a shortest path tree.
         /// </summary>
         /// <returns>Returns a dictionary with a list of arcs as the shortest path (value) for a given destination node (key).</returns>
         private static Dictionary<T, Arc<T>[]> ExtractShortestPathTree<T>(FifoArguments<T> args)
