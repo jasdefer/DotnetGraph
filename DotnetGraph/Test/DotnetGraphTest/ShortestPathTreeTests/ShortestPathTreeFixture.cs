@@ -1,5 +1,6 @@
 ﻿using DotnetGraph.Algorithms.Contracts;
 using DotnetGraph.Model;
+using DotnetGraph.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
@@ -26,6 +27,7 @@ namespace DotnetGraphTest.ShortestPathTreeTests
             Assert.AreEqual("F", shortestPath["C"][2].Destination);
             Assert.AreEqual("F", shortestPath["C"][3].Origin);
             Assert.AreEqual("C", shortestPath["C"][3].Destination);
+            Assert.AreEqual(4, shortestPath["C"].TotalWeight());
 
             Assert.AreEqual(3, shortestPath["B"].Length);
             Assert.AreEqual("A", shortestPath["B"][0].Origin);
@@ -34,6 +36,7 @@ namespace DotnetGraphTest.ShortestPathTreeTests
             Assert.AreEqual("E", shortestPath["B"][1].Destination);
             Assert.AreEqual("E", shortestPath["B"][2].Origin);
             Assert.AreEqual("B", shortestPath["B"][2].Destination);
+            Assert.AreEqual(4, shortestPath["B"].TotalWeight());
         }
 
         [TestMethod]
@@ -56,10 +59,12 @@ namespace DotnetGraphTest.ShortestPathTreeTests
             Assert.AreEqual("F", shortestPath["C"][2].Destination);
             Assert.AreEqual("F", shortestPath["C"][3].Origin);
             Assert.AreEqual("C", shortestPath["C"][3].Destination);
+            Assert.AreEqual(4, shortestPath["C"].TotalWeight());
 
             Assert.AreEqual(1, shortestPath["B"].Length);
             Assert.AreEqual("A", shortestPath["B"][0].Origin);
             Assert.AreEqual("B", shortestPath["B"][0].Destination);
+            Assert.AreEqual(3, shortestPath["B"].TotalWeight());
         }
     }
 }

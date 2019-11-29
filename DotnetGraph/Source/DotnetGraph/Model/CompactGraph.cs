@@ -10,11 +10,12 @@ namespace DotnetGraph.Model
         private readonly Dictionary<T, int> nodeMap;
         private readonly T[] nodes;
         private readonly Arc<T>[] baseArcs;
-        public int[] Successors { get; }
-        public CompactArc[] Arcs { get; }
-        public int[] DestinationSortedArcs { get; }
-        public int[] Predecessors { get; }
-        public CompactGraph(IEnumerable<Arc<T>> arcs)
+        internal int[] Successors { get; }
+        internal CompactArc[] Arcs { get; }
+        internal int[] DestinationSortedArcs { get; }
+        internal int[] Predecessors { get; }
+        internal int NodeCount => nodes.Length;
+        internal CompactGraph(IEnumerable<Arc<T>> arcs)
         {
             var arcArray = arcs.ToArray();
             nodeMap = arcArray.ExtractNodes().ToDictionary();
