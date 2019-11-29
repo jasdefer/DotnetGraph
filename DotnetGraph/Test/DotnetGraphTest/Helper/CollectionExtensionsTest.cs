@@ -10,7 +10,7 @@ namespace DotnetGraphTest.Helper
         [TestMethod]
         public void ToDictionary()
         {
-            var graph = GraphGenerator.GetSmallGraph();
+            var graph = DirectedGraphGenerator.GetSmallGraph();
             var nodes = graph.ExtractNodes();
             var dict = nodes.ToDictionary();
             Assert.IsNotNull(dict);

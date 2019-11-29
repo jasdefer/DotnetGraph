@@ -6,7 +6,7 @@ namespace DotnetGraphTest.ModelTests
     [TestClass]
     public class CompactGraphTest
     {
-        private static readonly Arc<string>[] smallGraph = GraphGenerator.GetSmallGraph();
+        private static readonly Arc<string>[] smallGraph = DirectedGraphGenerator.GetSmallGraph();
         private static readonly CompactGraph<string> smallCompactGraph = new CompactGraph<string>(smallGraph);
         
         [TestMethod]
@@ -31,8 +31,22 @@ namespace DotnetGraphTest.ModelTests
         }
 
         [TestMethod]
-        public void BaseArcs()
+        public void UndirectedGraph()
         {
+            var arcs = DirectedGraphGenerator.GetUnconnectedGraph();
+            var graph = new CompactGraph<string>(arcs);
+            var a = graph.GetIndex("A");
+            var b = graph.GetIndex("B");
+            var c = graph.GetIndex("C");
+            var d = graph.GetIndex("D");
+            Assert.AreEqual(1, graph.CountSuccessors(a));
+            Assert.AreEqual(0, graph.CountSuccessors(b));
+            Assert.AreEqual(1, graph.CountSuccessors(c));
+            Assert.AreEqual(0, graph.CountSuccessors(d));
+            Assert.AreEqual(0, graph.CountPredecessors(a));
+            Assert.AreEqual(1, graph.CountPredecessors(b));
+            Assert.AreEqual(0, graph.CountPredecessors(c));
+            Assert.AreEqual(1, graph.CountPredecessors(d));
         }
     }
 }
