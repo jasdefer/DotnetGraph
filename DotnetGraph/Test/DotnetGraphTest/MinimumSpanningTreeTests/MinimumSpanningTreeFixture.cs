@@ -1,6 +1,5 @@
 ﻿using DotnetGraph.Algorithms.Contracts;
 using DotnetGraph.Helper;
-using DotnetGraph.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotnetGraphTest.MinimumSpanningTreeTests
@@ -19,6 +18,17 @@ namespace DotnetGraphTest.MinimumSpanningTreeTests
             Assert.IsNotNull(tree);
             Assert.AreEqual(5, tree.Length);
             Assert.AreEqual(6, tree.TotalWeight());
+        }
+
+        [TestMethod]
+        public void GraphWithNegativeEdge()
+        {
+            var graph = UndirectedGraphGenerator.GetSmallGraphWithNegativeEdge();
+            var algorithm = GetAlgorithm();
+            var tree = algorithm.GetMinimumSpanningTree(graph);
+            Assert.IsNotNull(tree);
+            Assert.AreEqual(5, tree.Length);
+            Assert.AreEqual(4, tree.TotalWeight());
         }
     }
 }
