@@ -25,7 +25,5 @@ jobs:
       run:
         dotnet pack DotnetGraph/Source/DotnetGraph/ --configuration Release -o out
     - name: Publish the Nuget package
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run:
-        dotnet nuget push out/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+        dotnet nuget push out/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
