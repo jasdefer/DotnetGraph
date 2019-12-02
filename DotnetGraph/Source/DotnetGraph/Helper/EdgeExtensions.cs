@@ -1,7 +1,9 @@
 ﻿using DotnetGraph.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace DotnetGraph.Helper
 {
@@ -49,6 +51,34 @@ namespace DotnetGraph.Helper
                 weight += edge.Weight;
             }
             return weight;
+        }
+        public static string Print<T>(this IEnumerable<Edge<T>> edges)
+        {
+            return edges.Print(CultureInfo.InvariantCulture);
+        }
+
+        public static string Print<T>(this IEnumerable<Edge<T>> edges, IFormatProvider provider)
+        {
+            if(edges is null)
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            var format = "{0}\t{1}\t{2}";
+            sb.AppendLine(string.Format(provider: provider, format: format, 
+                "Node 1", 
+                "Node 2", 
+                "Weight"));
+            foreach (var edge in edges)
+            {
+                var line = string.Format(provider: provider, format: format, 
+                    edge.Node1.ToString(), 
+                    edge.Node2.ToString(), 
+                    edge.Weight);
+                sb.AppendLine(line);
+            }
+            return sb.ToString();
         }
     }
 }
