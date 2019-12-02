@@ -123,12 +123,11 @@ namespace DotnetGraphTest.ComponentsTests
             {
                 var rnd = new Random(i);
                 generator.Random = rnd;
-                var nodes = Enumerable.Range(0, rnd.Next(10, 100)).ToArray();
+                var nodes = Enumerable.Range(0, rnd.Next(10, 200)).ToArray();
                 generator.P = rnd.NextDouble();
                 var graph = generator.GenerateGraph(nodes);
                 nodes = graph.ExtractNodes();
                 var components = generator.ComponentAlgorithm.GetComponents(graph);
-                File.WriteAllText($"ComponentsFixutreMonkeyTestIteration{i}.csv",graph.Print());
                 Assert.IsNotNull(components, $"Iteration {i} returns null.");
                 Assert.AreEqual(1, components.Length, $"Iteration {i} returns not exactly one component.");
                 Assert.AreEqual(nodes.Length, components[0].Length, $"Iteration {i} returns a single component with {components[0].Length} nodes instead of {nodes.Length}.");
