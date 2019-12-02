@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using DotnetGraph.Algorithms.GraphGeneration;
 using System;
-using System.IO;
 
 namespace DotnetGraphTest.ShortestPathTreeTests
 {
