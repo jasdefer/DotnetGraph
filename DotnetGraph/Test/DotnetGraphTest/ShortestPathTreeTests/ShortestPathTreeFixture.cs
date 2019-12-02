@@ -3,6 +3,8 @@ using DotnetGraph.Model;
 using DotnetGraph.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using DotnetGraph.Algorithms.GraphGeneration;
+using System;
 
 namespace DotnetGraphTest.ShortestPathTreeTests
 {
@@ -75,6 +77,22 @@ namespace DotnetGraphTest.ShortestPathTreeTests
             var tree = algorithm.GetShortestPathTree(graph, graph[0].Destination);
             Assert.IsNotNull(tree);
             Assert.AreEqual(0, tree.Count);
+        }
+
+        [TestMethod]
+        public void MonkeyTest()
+        {
+            var generator = new CornerFlowGenerator();
+            var algorithm = GetShortestPathTreeAlgorithm();
+            for (int i = 0; i < 100; i++)
+            {
+                generator.Random = new Random(i);
+                generator.Dimensions = generator.Random.Next(1, 5);
+                var nodes = Enumerable.Range(0, generator.Random.Next(10, 100)).ToArray();
+                var arcs = generator.GenerateGraph(nodes);
+                var shortestPathTree = algorithm.GetShortestPathTree(arcs, 0);
+                Assert.IsNotNull(shortestPathTree, $"Instance {i} returns null.");
+            }
         }
     }
 }

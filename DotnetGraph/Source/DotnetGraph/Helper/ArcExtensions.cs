@@ -1,6 +1,8 @@
 ﻿using DotnetGraph.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 
 namespace DotnetGraph.Helper
 {
@@ -34,6 +36,35 @@ namespace DotnetGraph.Helper
                 weight += arc.Weight;
             }
             return weight;
+        }
+
+        public static string Print<T>(this IEnumerable<Arc<T>> arcs)
+        {
+            return arcs.Print(CultureInfo.InvariantCulture);
+        }
+
+        public static string Print<T>(this IEnumerable<Arc<T>> arcs, IFormatProvider provider)
+        {
+            if (arcs is null)
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            var format = "{0}\t{1}\t{2}";
+            sb.AppendLine(string.Format(provider: provider, format: format,
+                "Origin",
+                "Destination",
+                "Weight"));
+            foreach (var arc in arcs)
+            {
+                var line = string.Format(provider: provider, format: format,
+                    arc.Origin.ToString(),
+                    arc.Destination.ToString(),
+                    arc.Weight);
+                sb.AppendLine(line);
+            }
+            return sb.ToString();
         }
     }
 }

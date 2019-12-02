@@ -20,7 +20,5 @@ namespace DotnetGraph.Helper
             }
             return dict;
         }
-
-        
     }
 }
