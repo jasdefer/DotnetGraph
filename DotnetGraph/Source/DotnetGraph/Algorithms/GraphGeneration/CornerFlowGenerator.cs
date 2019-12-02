@@ -6,6 +6,10 @@ using System.Linq;
 
 namespace DotnetGraph.Algorithms.GraphGeneration
 {
+    /// <summary>
+    /// Distribute the nodes in a n-dimensional space and connect each node to each nearest node in each dimension.
+    /// So the number of leaving arcs is not greater than the number of dimensions.
+    /// </summary>
     public class CornerFlowGenerator : IDirectedGraphGeneration
     {
         private int dimensions = 2;
@@ -33,6 +37,10 @@ namespace DotnetGraph.Algorithms.GraphGeneration
             return arcs.ToArray();
         }
 
+        /// <summary>
+        /// Connect each node the clostest node for each dimension.
+        /// The arc connects the nodes in one direction only.
+        /// </summary>
         private Arc<T>[] GenerateArcs<T>(T[,] sortedNodes)
         {
             var arcs = new List<Arc<T>>();
@@ -55,6 +63,10 @@ namespace DotnetGraph.Algorithms.GraphGeneration
             return arcs.ToArray();
         }
 
+        /// <summary>
+        /// Check if <paramref name="arcs"/> already contains a connection with the same origin and destination as <paramref name="arc"/>.
+        /// </summary>
+        /// <returns>True, if <paramref name="arcs"/> does not contain an arc with the same origin and destination as <paramref name="arc"/></returns>
         private bool IsNewArc<T>(Arc<T> arc, List<Arc<T>> arcs)
         {
             for (int i = 0; i < arcs.Count; i++)
@@ -68,6 +80,13 @@ namespace DotnetGraph.Algorithms.GraphGeneration
             return true;
         }
 
+        /// <summary>
+        /// Sort the node in each dimension.
+        /// </summary>
+        /// <returns>
+        /// Each element of the 2d array represents a node.
+        /// Each column represents the order of nodes for each dimension.
+        /// </returns>
         private T[,] GetSortedNodes<T>(Dictionary<T, int[]> coordinates)
         {
             var order = new T[coordinates.Count, Dimensions];
@@ -83,6 +102,10 @@ namespace DotnetGraph.Algorithms.GraphGeneration
             return order;
         }
 
+        /// <summary>
+        /// Generate random coordinates for each node in each dimension
+        /// </summary>
+        /// <returns>Key: node, Value: Set of coordinates.</returns>
         private Dictionary<T, int[]> GenerateCoordinates<T>(IEnumerable<T> nodes)
         {
             var dict = new Dictionary<T, int[]>();

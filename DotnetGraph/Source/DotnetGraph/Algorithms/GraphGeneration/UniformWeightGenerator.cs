@@ -11,6 +11,9 @@ namespace DotnetGraph.Algorithms.GraphGeneration
 
         public int Digits { get; set; } = 0;
 
+        /// <summary>
+        /// Create a random weight uniformly distributed between the minimum and maximum rounded to the number of provided digits.
+        /// </summary>
         public double Create()
         {
             var weight = Random.NextDouble() * (Max - Min) + Min;

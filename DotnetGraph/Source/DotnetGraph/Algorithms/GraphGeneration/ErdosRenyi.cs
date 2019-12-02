@@ -12,6 +12,9 @@ namespace DotnetGraph.Algorithms.GraphGeneration
     {
         private double p;
 
+        /// <summary>
+        /// The independent probability, that an edge between two nodes is generated.
+        /// </summary>
         public double P
         {
             get { return p; }
@@ -25,20 +28,6 @@ namespace DotnetGraph.Algorithms.GraphGeneration
             }
         }
 
-        private int nodeCount;
-
-        public int NodeCount
-        {
-            get { return nodeCount; }
-            set 
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-                nodeCount = value; 
-            }
-        }
         public Random Random { get; set; } = new Random(1);
         public IWeightGenerator WeightGenerator { get; set; } = new UniformWeightGenerator();
         public IComponentAlgorithm ComponentAlgorithm { get; set; } = new BreadthFirstComponent();
@@ -50,6 +39,9 @@ namespace DotnetGraph.Algorithms.GraphGeneration
             return edges.ToArray();
         }
 
+        /// <summary>
+        /// Create an endge between each pair of nodes with a probability of p
+        /// </summary>
         private List<Edge<T>> CreateEdges<T>(IEnumerable<T> nodes)
         {
             var nodeArray = nodes.ToArray();
@@ -70,15 +62,20 @@ namespace DotnetGraph.Algorithms.GraphGeneration
                 }
             }
 
+            //It may happen that some nodes have no connection at all
+            //Connect each of those isolated nodes to a random node in the graph
             for (int i = 0; i < connectionCount.Length; i++)
             {
                 if (connectionCount[i] == 0)
                 {
                     var weight = WeightGenerator.Create();
+                    //Connect the isolated node to any other node of the graph
                     var candidates = Enumerable.Range(0, nodeArray.Length).ToList();
                     candidates.Remove(i);
                     var node2 = candidates[Random.Next(0, candidates.Count)];
                     var edge = new Edge<T>(nodeArray[i], nodeArray[node2], weight);
+                    connectionCount[i]++;
+                    connectionCount[node2]++;
                     edges.Add(edge);
                 }
             }
@@ -86,9 +83,12 @@ namespace DotnetGraph.Algorithms.GraphGeneration
             return edges;
         }
 
+        /// <summary>
+        /// Connect each component of the graph to another component
+        /// </summary>
         private void ConnectComponents<T>(List<Edge<T>> edges)
         {
-            var components = ComponentAlgorithm.GetComponents<T>(edges);
+            var components = ComponentAlgorithm.GetComponents(edges);
             for (int i = 1; i < components.Length; i++)
             {
                 var node1 = components[i - 1][0];
