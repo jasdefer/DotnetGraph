@@ -1,4 +1,4 @@
-﻿using DotnetGraph.Algorithms.Contracts;
+using DotnetGraph.Algorithms.Contracts;
 using DotnetGraph.Model;
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace DotnetGraph.Algorithms.ShortestPathTree
 {
+    [Obsolete(message:"Please use the SpDijkstra class instead",error:false)]
     public class Dijkstra : IShortestPathTreeAlgorithm
     {
         /// <summary>
