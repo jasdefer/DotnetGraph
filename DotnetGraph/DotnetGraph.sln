@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{BF7174
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9AFDD359-A29F-4C3A-A2C6-5D0812196F0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetGraph", "Source\DotnetGraph\DotnetGraph.csproj", "{F884766F-7E63-4641-B6A7-AEC49ED62003}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetGraph", "Source\DotnetGraph\DotnetGraph.csproj", "{F884766F-7E63-4641-B6A7-AEC49ED62003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetGraphTest", "Test\DotnetGraphTest\DotnetGraphTest.csproj", "{AF370304-B01F-4732-991E-A86E7A884842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetGraphTest", "Test\DotnetGraphTest\DotnetGraphTest.csproj", "{AF370304-B01F-4732-991E-A86E7A884842}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{67998D68-4943-4B30-AFF6-1CC53BA6AE94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{AF370304-B01F-4732-991E-A86E7A884842}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF370304-B01F-4732-991E-A86E7A884842}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF370304-B01F-4732-991E-A86E7A884842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67998D68-4943-4B30-AFF6-1CC53BA6AE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67998D68-4943-4B30-AFF6-1CC53BA6AE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67998D68-4943-4B30-AFF6-1CC53BA6AE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67998D68-4943-4B30-AFF6-1CC53BA6AE94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
