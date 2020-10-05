@@ -9,7 +9,8 @@ namespace DotnetGraphTest.ShortestPathTreeTests
     {
         public override IShortestPathTreeAlgorithm GetShortestPathTreeAlgorithm()
         {
-            return new Dijkstra();
+            //return new Dijkstra();
+            return new SpDijkstra();
         }
     }
 }
