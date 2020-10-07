@@ -1,6 +1,7 @@
 ﻿using DotnetGraph.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -24,19 +25,19 @@ namespace DotnetGraph.Helper
             return nodes.Count;
         }
 
-        public static T[] ExtractNodes<T>(this IEnumerable<Edge<T>> edges)
+        public static HashSet<T> ExtractNodes<T>(this IEnumerable<Edge<T>> edges)
         {
+            var nodes = new HashSet<T>();
             if (edges is null)
             {
-                return Array.Empty<T>();
+                return nodes;
             }
-            var nodes = new HashSet<T>();
             foreach (var edge in edges)
             {
                 nodes.Add(edge.Node1);
                 nodes.Add(edge.Node2);
             }
-            return nodes.ToArray();
+            return nodes;
         }
 
         public static double TotalWeight<T>(this IEnumerable<Edge<T>> edges)
@@ -52,6 +53,24 @@ namespace DotnetGraph.Helper
             }
             return weight;
         }
+
+        public static ReadOnlyDictionary<T, ReadOnlyCollection<Edge<T>>> GetEdgesPerNode<T>(this IEnumerable<Edge<T>> edges)
+        {
+            edges ??= Array.Empty<Edge<T>>();
+
+            var nodes = edges.ExtractNodes();
+
+            var edgesPerNode = nodes.ToDictionary(x => x, x => new List<Edge<T>>());
+            foreach (var edge in edges)
+            {
+                edgesPerNode[edge.Node1].Add(edge);
+                edgesPerNode[edge.Node2].Add(edge);
+            }
+            var readonlyValues = edgesPerNode.ToDictionary(x => x.Key, x => x.Value.AsReadOnly());
+            var readonlyDictionary = new ReadOnlyDictionary<T, ReadOnlyCollection<Edge<T>>>(readonlyValues);
+            return readonlyDictionary;
+        }
+
         public static string Print<T>(this IEnumerable<Edge<T>> edges)
         {
             return edges.Print(CultureInfo.InvariantCulture);

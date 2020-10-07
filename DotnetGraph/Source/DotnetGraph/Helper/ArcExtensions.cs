@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace DotnetGraph.Helper
@@ -22,6 +23,16 @@ namespace DotnetGraph.Helper
                 nodes.Add(arc.Destination);
             }
             return nodes;
+        }
+
+        public static Dictionary<T, Arc<T>> GetOutgoingArcsPerNode<T>(IList<Arc<T>> arcs)
+        {
+            var dictionary = arcs.ExtractNodes().ToDictionary(x => x,x => new List<Arc<T>>());
+            foreach (var arc in arcs)
+            {
+                dictionary[arc.Origin].Add(arc);
+            }
+
         }
 
         public static double TotalWeight<T>(this IEnumerable<Arc<T>> arcs)
