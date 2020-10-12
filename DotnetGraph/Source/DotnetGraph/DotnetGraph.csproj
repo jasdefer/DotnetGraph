@@ -20,7 +20,6 @@ It is very easy to create the graph before running many differnt algorithms.</De
   <ItemGroup>
     <Compile Include="Algorithms\ShortestPath\Dijkstra\DijkstraAlgorithm.cs" />
     <Compile Include="Algorithms\ShortestPath\Dijkstra\DijkstraNode.cs" />
-    <Compile Include="Algorithms\ShortestPath\Fifo\FifoAlgorithm.cs" />
     <Compile Include="Algorithms\ShortestPath\IShortestPathAlgorithm.cs" />
     <Compile Include="Algorithms\ShortestPath\ShortestPathResult.cs" />
   </ItemGroup>
@@ -32,11 +31,6 @@ It is very easy to create the graph before running many differnt algorithms.</De
     </PackageReference>
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Algorithms\GraphGeneration\AddWeightGeneration\" />
-    <Folder Include="Helper\" />
   </ItemGroup>
 
 </Project>

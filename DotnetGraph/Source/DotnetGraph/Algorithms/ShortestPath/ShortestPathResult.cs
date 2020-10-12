@@ -1,19 +1,11 @@
-﻿using DotnetGraph.Model;
-using System;
+﻿using DotnetGraph.Model.Graphs.WeightedDirectedGraph;
 using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.ShortestPath
 {
     public class ShortestPathResult
     {
-        public ShortestPathResult(IReadOnlyCollection<IWeightedArc> arcs,
-            double totalWeight)
-        {
-            Arcs = arcs ?? throw new ArgumentNullException(nameof(arcs));
-            TotalWeight = totalWeight;
-        }
-
-        IReadOnlyCollection<IWeightedArc> Arcs { get; }
-        double TotalWeight { get; }
+        public IList<IWeightedDirectedGraphArc> Arcs { get; }
+        public double TotalWeight { get; }
     }
 }

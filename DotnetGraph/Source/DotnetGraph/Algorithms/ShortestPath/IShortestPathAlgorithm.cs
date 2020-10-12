@@ -1,12 +1,12 @@
-﻿using DotnetGraph.Model;
+﻿using DotnetGraph.Model.Graphs.WeightedDirectedGraph;
 using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.ShortestPath
 {
     public interface IShortestPathAlgorithm
     {
-        ShortestPathResult GetShortestPath(IEnumerable<INode<IWeightedArc>> nodes,
-            INode<IWeightedArc> origin,
-            INode<IWeightedArc> destination);
+        ShortestPathResult GetShortestPath(IList<IWeightedDirectedGraphNode> nodes,
+            int originIndex,
+            int destinationIndex);
     }
 }
