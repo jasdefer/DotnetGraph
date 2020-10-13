@@ -1,7 +1,10 @@
-﻿using DotnetGraph.Algorithms.ShortestPath;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectGraphGeneration.ErdosRenyi;
+using DotnetGraph.Algorithms.ShortestPath;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
+using DotnetGraphTest.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.ShortestPath
@@ -12,39 +15,10 @@ namespace DotnetGraphTest.Algorithms.ShortestPath
         protected abstract IShortestPathAlgorithm GetShortestPathAlgorithm();
 
         [TestMethod]
-        public void Test()
+        public void SmallGraph()
         {
             //Data preparation
-            var nodes = new List<WeightedDirectedGraphNode>()
-            {
-                new WeightedDirectedGraphNode(1),
-                new WeightedDirectedGraphNode(2),
-                new WeightedDirectedGraphNode(3),
-                new WeightedDirectedGraphNode(4),
-                new WeightedDirectedGraphNode(5),
-                new WeightedDirectedGraphNode(6)
-            };
-
-            nodes[0].AddArc(new WeightedDirectedGraphArc(1, nodes[1], 5));
-            nodes[1].AddArc(new WeightedDirectedGraphArc(2, nodes[0], 5));
-
-            nodes[0].AddArc(new WeightedDirectedGraphArc(3, nodes[3], 1));
-            nodes[3].AddArc(new WeightedDirectedGraphArc(4, nodes[0], 1));
-
-            nodes[1].AddArc(new WeightedDirectedGraphArc(5, nodes[2], 3));
-            nodes[2].AddArc(new WeightedDirectedGraphArc(6, nodes[1], 3));
-
-            nodes[1].AddArc(new WeightedDirectedGraphArc(7, nodes[4], 2));
-            nodes[4].AddArc(new WeightedDirectedGraphArc(8, nodes[1], 2));
-
-            nodes[2].AddArc(new WeightedDirectedGraphArc(9, nodes[5], 1));
-            nodes[5].AddArc(new WeightedDirectedGraphArc(10, nodes[2], 1));
-
-            nodes[3].AddArc(new WeightedDirectedGraphArc(11, nodes[4], 1));
-            nodes[4].AddArc(new WeightedDirectedGraphArc(12, nodes[3], 1));
-
-            nodes[4].AddArc(new WeightedDirectedGraphArc(13, nodes[5], 1));
-            nodes[5].AddArc(new WeightedDirectedGraphArc(14, nodes[4], 1));
+            var nodes = GraphLibrary.SmallWeightedDirectedGraph();
 
             //Run test method
             var algorithm = GetShortestPathAlgorithm();
@@ -62,6 +36,26 @@ namespace DotnetGraphTest.Algorithms.ShortestPath
             Assert.AreEqual(nodes[0].OutgoingArcs.ElementAt(1), result.Arcs[0]);
             Assert.AreEqual(nodes[3].OutgoingArcs.ElementAt(1), result.Arcs[1]);
             Assert.AreEqual(nodes[4].OutgoingArcs.ElementAt(2), result.Arcs[2]);
+        }
+
+        [TestMethod]
+        public void Monkey()
+        {
+            var algorithm = GetShortestPathAlgorithm();
+            var generator = new ErdosRenyiGenerator();
+            var weightGenerator = new UniformWeightGenerator();
+            var random = new Random(1);
+            for (int i = 0; i < 10; i++)
+            {
+                var numberOfNodes = random.Next(100, 1000);
+                var density = random.NextDouble();
+                var nodes = generator.Generate(numberOfNodes, density, weightGenerator);
+                var shortestPathResult = algorithm.GetShortestPath<WeightedDirectedGraphArc, WeightedDirectedGraphNode>(nodes, 1, nodes.Length - 1);
+                Assert.IsNotNull(shortestPathResult);
+                Assert.IsTrue(shortestPathResult.TotalWeight >= 0);
+                Assert.AreEqual(shortestPathResult.Arcs.Sum(x => x.Weight), shortestPathResult.TotalWeight);
+                Assert.IsTrue(shortestPathResult.Arcs.Count > 0);
+            }
         }
     }
 }

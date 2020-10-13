@@ -11,7 +11,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             where TArc : IHasDestination<TNode>, IHasWeight, IHasId
             where TNode : IHasOutgoingArcs<TArc>, IHasId
         {
-            var dijkstraNodes = Convert<TNode,TArc>(nodes);
+            var dijkstraNodes = Convert<TNode, TArc>(nodes);
             var dijkstraResult = GetShortestPath(dijkstraNodes, originNodeId, destinationNodeId);
             var shortestPathResult = ConvertResult<TNode, TArc>(nodes, dijkstraResult);
             return shortestPathResult;
@@ -40,7 +40,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             }
             return dict.Values.ToList();
         }
-        
+
         public static ShortestPathResult<TArc> ConvertResult<TNode, TArc>(IList<TNode> nodes, ShortestPathResult<DijkstraArc> dijkstraResult)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasWeight, IHasId
@@ -60,7 +60,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             var result = new ShortestPathResult<TArc>(arcs.AsReadOnly(), dijkstraResult.TotalWeight);
             return result;
         }
-        
+
         public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> nodes, int originNodeId, int destinationNodeId)
         {
             if (nodes is null)
@@ -72,7 +72,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             while (nodes.Count > 0)
             {
                 var node = GetClosestNode(nodes);
-                if(destinationNodeId == node.Id)
+                if (destinationNodeId == node.Id)
                 {
                     var result = BuildResult(node);
                     return result;
