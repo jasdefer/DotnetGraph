@@ -1,19 +1,17 @@
-﻿using DotnetGraph.Model.Graphs.WeightedDirectedGraph;
-using System.Collections.Generic;
+﻿using DotnetGraph.Model.Implementations;
+using DotnetGraph.Model.Properties;
 
 namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 {
-    public class DijkstraNode : IWeightedDirectedGraphNode
+    public class DijkstraNode : IdNode<DijkstraArc>,
+        IHasOutgoingArcs<DijkstraArc>,
+        IHasId
     {
-        public DijkstraNode()
+        public DijkstraNode(int id) : base(id)
         {
-            OutgoingArcs = new List<IWeightedDirectedGraphArc>();
         }
 
-        public DijkstraNode(IList<IWeightedDirectedGraphArc> outgoingArcs)
-        {
-            OutgoingArcs = outgoingArcs ?? new List<IWeightedDirectedGraphArc>();
-        }
-        public IList<IWeightedDirectedGraphArc> OutgoingArcs { get; }
+        public DijkstraArc BestPredecessor { get; set; }
+        public double? DistanceFromOrigin { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DotnetGraph.Model.Properties
 {
-    public interface IHasDestination<TNode>
+    public interface IHasDestination<out TNode>
     {
         TNode Destination { get; }
     }
