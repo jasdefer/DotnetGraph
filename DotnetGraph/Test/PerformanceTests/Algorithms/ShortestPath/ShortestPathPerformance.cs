@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectGraphGeneration.ErdosRenyi;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.ErdosRenyi;
 using DotnetGraph.Algorithms.ShortestPath.Dijkstra;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using System.Collections.Generic;

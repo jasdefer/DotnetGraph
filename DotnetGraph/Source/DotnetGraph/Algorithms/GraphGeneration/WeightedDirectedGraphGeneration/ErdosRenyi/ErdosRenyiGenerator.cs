@@ -3,7 +3,7 @@ using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using System;
 
-namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectGraphGeneration.ErdosRenyi
+namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.ErdosRenyi
 {
     public class ErdosRenyiGenerator : IWeightedDirectGraphGenerator
     {

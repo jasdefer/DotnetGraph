@@ -1,7 +1,7 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 
-namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectGraphGeneration
+namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
 {
     public interface IWeightedDirectGraphGenerator
     {

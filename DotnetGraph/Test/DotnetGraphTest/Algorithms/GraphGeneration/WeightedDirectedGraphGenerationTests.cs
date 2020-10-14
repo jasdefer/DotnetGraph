@@ -1,5 +1,5 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectGraphGeneration;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -21,7 +21,8 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration
             for (int i = 0; i < instances; i++)
             {
                 var numberOfNodes = random.Next(100, 1000);
-                var density = (double)i / (instances - 1);
+                var density = 5d / (numberOfNodes + 1);
+                density *= 1 + random.Next(0, 10) / 100d;
                 var nodes = generator.Generate(numberOfNodes, density, weightGenerator);
                 Assert.AreEqual(numberOfNodes, nodes.Length);
                 Assert.AreEqual(numberOfNodes, nodes.Select(x => x.Id).Distinct().Count());
