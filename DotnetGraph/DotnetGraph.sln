@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetGraph", "Source\Dotne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetGraphTest", "Test\DotnetGraphTest\DotnetGraphTest.csproj", "{AF370304-B01F-4732-991E-A86E7A884842}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceTests", "Test\PerformanceTests\PerformanceTests.csproj", "{DA4FBE77-913F-463F-93BF-D8219AD2B16D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{AF370304-B01F-4732-991E-A86E7A884842}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF370304-B01F-4732-991E-A86E7A884842}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF370304-B01F-4732-991E-A86E7A884842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA4FBE77-913F-463F-93BF-D8219AD2B16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA4FBE77-913F-463F-93BF-D8219AD2B16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA4FBE77-913F-463F-93BF-D8219AD2B16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA4FBE77-913F-463F-93BF-D8219AD2B16D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F884766F-7E63-4641-B6A7-AEC49ED62003} = {BF71746C-0CEF-4E95-B04A-9C7FA0B6C234}
 		{AF370304-B01F-4732-991E-A86E7A884842} = {9AFDD359-A29F-4C3A-A2C6-5D0812196F0C}
+		{DA4FBE77-913F-463F-93BF-D8219AD2B16D} = {9AFDD359-A29F-4C3A-A2C6-5D0812196F0C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0246F81-0294-43F3-902D-6B472F2291C1}

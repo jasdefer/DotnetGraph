@@ -61,14 +61,11 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             return result;
         }
 
-        public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> nodes, int originNodeId, int destinationNodeId)
+        public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> inputNodes, int originNodeId, int destinationNodeId)
         {
-            if (nodes is null)
-            {
-                throw new ArgumentNullException(nameof(nodes));
-            }
+            var nodes = new List<DijkstraNode>(inputNodes);
+            PrepareInput(nodes, originNodeId, destinationNodeId);
 
-            nodes.Single(x => x.Id == originNodeId).DistanceFromOrigin = 0;
             while (nodes.Count > 0)
             {
                 var node = GetClosestNode(nodes);
@@ -96,6 +93,63 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                 nodes.Remove(node);
             }
             throw new Exception($"The destination ({destinationNodeId}) is not included in the given nodes.");
+        }
+
+        /// <summary>
+        /// Validates the input. Reset all Dijkstra algorithm specific properties and initialise the origin node.
+        /// </summary>
+        public static void PrepareInput(List<DijkstraNode> nodes, int originNodeId, int destinationNodeId)
+        {
+            if (nodes == null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            var foundOriginNode = false;
+            var foundDestinationNode = false;
+            var nodeIds = new HashSet<int>();
+            var arcIds = new HashSet<int>();
+            var arcCount = 0;
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                nodeIds.Add(nodes[i].Id);
+                nodes[i].DistanceFromOrigin = null;
+                nodes[i].BestPredecessor = null;
+
+                if (nodes[i].Id == originNodeId)
+                {
+                    foundOriginNode = true;
+                    nodes[i].DistanceFromOrigin = 0;
+                }
+                if (nodes[i].Id == destinationNodeId)
+                {
+                    foundDestinationNode = true;
+                }
+                foreach (var arc in nodes[i].OutgoingArcs)
+                {
+                    if (arc.Origin != nodes[i])
+                    {
+                        throw new Exception("Invalid Dijkstra arc which does not start at its origin.");
+                    }
+                    arcIds.Add(arc.Id);
+                    arcCount++;
+                }
+            }
+
+            if (!foundOriginNode || !foundDestinationNode)
+            {
+                throw new Exception($"Invalid origin ({originNodeId}) or destination id ({destinationNodeId}).");
+            }
+
+            if (nodeIds.Count != nodes.Count)
+            {
+                throw new Exception("Invalid node ids.");
+            }
+
+            if (arcIds.Count != arcCount)
+            {
+                throw new Exception("Invalid arc ids.");
+            }
         }
 
         public static DijkstraNode GetClosestNode(IList<DijkstraNode> nodes)
