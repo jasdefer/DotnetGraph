@@ -1,6 +1,5 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.ErdosRenyi;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.LineGraph;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
 using DotnetGraph.Algorithms.ShortestPath;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraphTest.Helper;
@@ -43,7 +42,7 @@ namespace DotnetGraphTest.Algorithms.ShortestPath
         public void Monkey()
         {
             var algorithm = GetShortestPathAlgorithm();
-            var generator = new LineGraphGenerator();
+            var generator = new UndirectedToDirectedGraphGenerator();
             var weightGenerator = new UniformWeightGenerator();
             var random = new Random(1);
             for (int i = 0; i < 10; i++)

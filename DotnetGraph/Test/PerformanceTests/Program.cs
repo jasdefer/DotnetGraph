@@ -9,7 +9,7 @@ namespace PerformanceTests
         static void Main(string[] args)
         {
             var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
-            var graphGenerationSummary = BenchmarkRunner.Run<WeightedDirectedGraphGenerationPerformance>();
+            var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
         }
     }
 }

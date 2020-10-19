@@ -1,5 +1,6 @@
 ﻿using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
+using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 
 namespace DotnetGraphTest.Helper
 {
@@ -71,6 +72,36 @@ namespace DotnetGraphTest.Helper
             nodes[5].AddArc(new DirectedGraphArc(13, nodes[6]));
             nodes[6].AddArc(new DirectedGraphArc(14, nodes[5]));
 
+            return nodes;
+        }
+
+        public static WeightedUndirectedGraphNode[] SmallWeightedUndirectedGraph()
+        {
+            var nodes = new WeightedUndirectedGraphNode[7];
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                nodes[i] = new WeightedUndirectedGraphNode(i + 1);
+            }
+            var edges = new WeightedUndirectedGraphEdge[]
+            {
+                new WeightedUndirectedGraphEdge(1, 7, nodes[0], nodes[1]),
+                new WeightedUndirectedGraphEdge(2, 5, nodes[0], nodes[3]),
+                new WeightedUndirectedGraphEdge(3, 8, nodes[1], nodes[2]),
+                new WeightedUndirectedGraphEdge(4, 9, nodes[1], nodes[3]),
+                new WeightedUndirectedGraphEdge(5, 7, nodes[1], nodes[4]),
+                new WeightedUndirectedGraphEdge(6, 5, nodes[2], nodes[4]),
+                new WeightedUndirectedGraphEdge(7, 15, nodes[3], nodes[4]),
+                new WeightedUndirectedGraphEdge(8, 6, nodes[3], nodes[5]),
+                new WeightedUndirectedGraphEdge(9, 8, nodes[4], nodes[5]),
+                new WeightedUndirectedGraphEdge(10, 9, nodes[4], nodes[6]),
+                new WeightedUndirectedGraphEdge(11, 11, nodes[5],nodes[6])
+            };
+
+            for (int i = 0; i < edges.Length; i++)
+            {
+                edges[i].Node1.AddEdge(edges[i]);
+                edges[i].Node2.AddEdge(edges[i]);
+            }
             return nodes;
         }
     }

@@ -7,7 +7,9 @@ namespace DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph
         IHasDestination<WeightedDirectedGraphNode>,
         IHasId
     {
-        public WeightedDirectedGraphArc(int id, WeightedDirectedGraphNode destination, double weight) : base(destination, weight)
+        public WeightedDirectedGraphArc(int id,
+            WeightedDirectedGraphNode destination,
+            double weight) : base(destination, weight)
         {
             Id = id;
         }

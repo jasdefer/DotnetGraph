@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.ErdosRenyi;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
 using DotnetGraph.Algorithms.ShortestPath.Dijkstra;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace PerformanceTests.Algorithms.ShortestPath
         [GlobalSetup]
         public void Setup()
         {
-            var generator = new ErdosRenyiGenerator();
+            var generator = new UndirectedToDirectedGraphGenerator();
             var weightGenerator = new UniformWeightGenerator();
             baseNodes = generator.Generate(10000, 0.0004, weightGenerator);
             originNodeId = 1;

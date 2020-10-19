@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace DotnetGraph.Model.Implementations
 {
-    public class Node<TArc> : IHasOutgoingArcs<TArc> where TArc : IHasDestination<Node<TArc>>
+    public class Node<TArc> : IHasOutgoingArcs<TArc>
+        where TArc : IHasDestination<Node<TArc>>
     {
         private readonly List<TArc> outgoingArcs = new List<TArc>();
         public Node()
