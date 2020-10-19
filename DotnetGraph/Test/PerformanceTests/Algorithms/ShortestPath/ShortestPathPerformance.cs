@@ -19,7 +19,7 @@ namespace PerformanceTests.Algorithms.ShortestPath
         {
             var generator = new UndirectedToDirectedGraphGenerator();
             var weightGenerator = new UniformWeightGenerator();
-            baseNodes = generator.Generate(10000, 0.0004, weightGenerator);
+            baseNodes = generator.Generate(30000, 0.0004, weightGenerator);
             originNodeId = 1;
             destinationNodeId = 2;
 
@@ -37,7 +37,7 @@ namespace PerformanceTests.Algorithms.ShortestPath
         public double DijkstraWithConversion()
         {
             var algorithm = new DijkstraAlgorithm();
-            var shortestPathResult = algorithm.GetShortestPath<WeightedDirectedGraphArc, WeightedDirectedGraphNode>(baseNodes, originNodeId, destinationNodeId);
+            var shortestPathResult = algorithm.GetShortestPath<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(baseNodes, originNodeId, destinationNodeId);
             return shortestPathResult.TotalWeight;
         }
     }

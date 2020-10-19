@@ -7,7 +7,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 {
     public class DijkstraAlgorithm : IShortestPathAlgorithm
     {
-        public ShortestPathResult<TArc> GetShortestPath<TArc, TNode>(IList<TNode> nodes, int originNodeId, int destinationNodeId)
+        public ShortestPathResult<TArc> GetShortestPath<TNode, TArc>(IList<TNode> nodes, int originNodeId, int destinationNodeId)
             where TArc : IHasDestination<TNode>, IHasWeight, IHasId
             where TNode : IHasOutgoingArcs<TArc>, IHasId
         {

@@ -22,7 +22,7 @@ namespace DotnetGraphTest.Algorithms.ShortestPath
 
             //Run test method
             var algorithm = GetShortestPathAlgorithm();
-            var result = algorithm.GetShortestPath<WeightedDirectedGraphArc, WeightedDirectedGraphNode>(nodes, 1, 6);
+            var result = algorithm.GetShortestPath<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes, 1, 6);
 
             //Validate results
             Assert.IsNotNull(result);
@@ -50,7 +50,7 @@ namespace DotnetGraphTest.Algorithms.ShortestPath
                 var numberOfNodes = random.Next(100, 1000);
                 var density = 4d / (numberOfNodes + 1);
                 var nodes = generator.Generate(numberOfNodes, density, weightGenerator);
-                var shortestPathResult = algorithm.GetShortestPath<WeightedDirectedGraphArc, WeightedDirectedGraphNode>(nodes, 1, nodes.Length - 1);
+                var shortestPathResult = algorithm.GetShortestPath<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes, 1, nodes.Length - 1);
                 Assert.IsNotNull(shortestPathResult);
                 Assert.IsTrue(shortestPathResult.TotalWeight >= 0);
                 Assert.AreEqual(shortestPathResult.Arcs.Sum(x => x.Weight), shortestPathResult.TotalWeight);
