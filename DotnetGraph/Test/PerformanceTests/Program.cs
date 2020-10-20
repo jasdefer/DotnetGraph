@@ -11,6 +11,11 @@ namespace PerformanceTests
     {
         static void Main(string[] args)
         {
+            RunBenchmarkDotNet();
+        }
+
+        private static void RunBenchmarkDotNet()
+        {
             var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
             var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
             var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
