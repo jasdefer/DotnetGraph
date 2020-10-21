@@ -64,12 +64,11 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 
         public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> inputNodes, int originNodeId, int destinationNodeId)
         {
-            var nodes = new List<DijkstraNode>(inputNodes);
-            PrepareInput(nodes, originNodeId);
-
-            while (nodes.Count > 0)
+            var originNode = GetOrigin(inputNodes, originNodeId);
+            var queue = new DijkstraQueue(originNode);
+            while (queue.Count > 0)
             {
-                var node = GetClosestNode(nodes);
+                var node = queue.ExctractNext();
                 if (destinationNodeId == node.Id)
                 {
                     var result = BuildResult(node);
@@ -89,12 +88,12 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                     {
                         arc.Destination.DistanceFromOrigin = newDistance;
                         arc.Destination.BestPredecessor = arc;
+                        queue.Add(arc.Destination);
                     }
                 }
-                nodes.Remove(node);
             }
-            ValidateInput(nodes, originNodeId, destinationNodeId);
-            throw new Exception($"The destination ({destinationNodeId}) is not included in the given nodes.");
+            ValidateInput(inputNodes, originNodeId, destinationNodeId);
+            throw new Exception($"Could not reach the destination.");
         }
 
         public static void ValidateInput(List<DijkstraNode> nodes, int originNodeId, int destinationNodeId)
@@ -105,51 +104,31 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             GraphValidation.ValidateOnlyPositiveWeights<DijkstraNode, DijkstraArc>(nodes);
         }
 
-        /// <summary>
-        /// Validates the input. Reset all Dijkstra algorithm specific properties and initialise the origin node.
-        /// </summary>
-        public static void PrepareInput(List<DijkstraNode> nodes, int originNodeId)
+        public static DijkstraNode GetOrigin(List<DijkstraNode> nodes, int originNodeId)
         {
             if (nodes is null)
             {
                 throw new ArgumentNullException(nameof(nodes));
             }
 
+            var originIndex = -1;
             for (int i = 0; i < nodes.Count; i++)
             {
                 nodes[i].DistanceFromOrigin = null;
                 nodes[i].BestPredecessor = null;
-
                 if (nodes[i].Id == originNodeId)
                 {
                     nodes[i].DistanceFromOrigin = 0;
+                    originIndex = i;
                 }
             }
-        }
 
-        public static DijkstraNode GetClosestNode(IList<DijkstraNode> nodes)
-        {
-            if (nodes is null)
+            if (originIndex == -1)
             {
-                throw new ArgumentNullException(nameof(nodes));
+                throw new Exception($"Cannot find the origin node id {originNodeId}");
             }
 
-            var min = double.MaxValue;
-            var index = (int?)null;
-            for (int i = 0; i < nodes.Count; i++)
-            {
-                if (nodes[i].DistanceFromOrigin < min)
-                {
-                    min = nodes[i].DistanceFromOrigin.Value;
-                    index = i;
-                }
-            }
-            if (index.HasValue)
-            {
-                return nodes[index.Value];
-            }
-
-            throw new Exception("The destination is not connected to the origin.");
+            return nodes[originIndex];
         }
 
         public static ShortestPathResult<DijkstraArc> BuildResult(DijkstraNode destination)

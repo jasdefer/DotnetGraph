@@ -26,7 +26,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
                 nodes[i + 1].AddEdge(edge);
             }
 
-            var numberOfEdges = (int)Math.Round((density * GraphPropertyHelper.NumberOfPossibleEdges(numberOfNodes)));
+            var numberOfEdges = GraphPropertyHelper.NumberOfEdges(nodes.Length, density);
             var dict = new Dictionary<int, List<int>>();
             for (int i = 0; i < nodes.Length - 1; i++)
             {

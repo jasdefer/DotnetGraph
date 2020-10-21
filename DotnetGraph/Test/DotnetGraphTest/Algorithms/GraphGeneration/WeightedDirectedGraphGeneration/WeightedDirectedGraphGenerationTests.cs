@@ -28,7 +28,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGenera
                 Assert.IsNotNull(nodes);
                 Assert.AreEqual(numberOfNodes, nodes.Length);
                 var directedEdgeIds = nodes.SelectMany(x => x.OutgoingArcs.Select(y => y.Id)).Distinct().ToArray();
-                Assert.AreEqual(expectedNumberOfArcs, directedEdgeIds.Length, Math.Ceiling(expectedNumberOfArcs * 0.02));
+                Assert.AreEqual(expectedNumberOfArcs, directedEdgeIds.Length, Math.Ceiling(expectedNumberOfArcs * 0.1));
             }
         }
     }

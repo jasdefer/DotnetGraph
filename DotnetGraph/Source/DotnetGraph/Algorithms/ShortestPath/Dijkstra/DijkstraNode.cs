@@ -11,7 +11,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
         {
         }
 
-        public DijkstraArc BestPredecessor { get; set; }
-        public double? DistanceFromOrigin { get; set; }
+        public DijkstraArc BestPredecessor { get; internal set; }
+        public double? DistanceFromOrigin { get; internal set; }
     }
 }

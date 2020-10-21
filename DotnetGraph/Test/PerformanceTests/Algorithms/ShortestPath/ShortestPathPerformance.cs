@@ -19,11 +19,11 @@ namespace PerformanceTests.Algorithms.ShortestPath
         {
             var generator = new UndirectedToDirectedGraphGenerator();
             var weightGenerator = new UniformWeightGenerator();
-            baseNodes = generator.Generate(30000, 0.0004, weightGenerator);
+            baseNodes = generator.Generate(50000, 0.0000403, weightGenerator);
             originNodeId = 1;
-            destinationNodeId = 2;
-
+            destinationNodeId = baseNodes.Length;
             dijkstraNodes = DijkstraAlgorithm.Convert<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(baseNodes);
+            DijkstraAlgorithm.ValidateInput(dijkstraNodes, originNodeId, destinationNodeId);
         }
 
         [Benchmark]

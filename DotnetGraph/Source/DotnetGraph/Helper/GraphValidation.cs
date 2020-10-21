@@ -1,9 +1,7 @@
 ﻿using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace DotnetGraph.Helper
 {
@@ -54,7 +52,7 @@ namespace DotnetGraph.Helper
                 }
             }
 
-            if(uniqueArcIds.Count != numberOfArcs)
+            if (uniqueArcIds.Count != numberOfArcs)
             {
                 throw new Exception($"Found {uniqueArcIds.Count} unique arc ids for {numberOfArcs} arcs");
             }
@@ -80,14 +78,14 @@ namespace DotnetGraph.Helper
             {
                 for (int i = 0; i < ids.Length; i++)
                 {
-                    if(entity.Id == ids[i])
+                    if (entity.Id == ids[i])
                     {
                         foundId[i] = true;
                     }
                 }
             }
 
-            if(foundId.Any(x => x == false))
+            if (foundId.Any(x => x == false))
             {
                 throw new Exception($"Not every id exists in the list of entities.");
             }
