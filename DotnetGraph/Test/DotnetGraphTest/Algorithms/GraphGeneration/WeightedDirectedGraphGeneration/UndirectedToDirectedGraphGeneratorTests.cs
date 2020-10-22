@@ -4,7 +4,6 @@ using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.Und
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.LineGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
@@ -48,11 +47,10 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGenera
         {
             var generator = GetGenerator();
             var weightGenerator = new UniformWeightGenerator();
-            var random = new Random(1);
             var undirectedEdgeGenerator = new LineGraphGenerator();
             for (int i = 0; i < 10; i++)
             {
-                var numberOfNodes = random.Next(100, 10000);
+                var numberOfNodes = 10 + 100 * i;
                 var density = 2.5 / numberOfNodes;
                 var undirectedNodes = undirectedEdgeGenerator.Generate(numberOfNodes, density, weightGenerator);
                 var directedNodes = UndirectedToDirectedGraphGenerator.Convert(undirectedNodes);

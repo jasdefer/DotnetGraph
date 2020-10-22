@@ -4,7 +4,6 @@ using DotnetGraph.Algorithms.ShortestPath;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraphTest.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.ShortestPath
@@ -44,10 +43,9 @@ namespace DotnetGraphTest.Algorithms.ShortestPath
             var algorithm = GetShortestPathAlgorithm();
             var generator = new UndirectedToDirectedGraphGenerator();
             var weightGenerator = new UniformWeightGenerator();
-            var random = new Random(1);
             for (int i = 0; i < 10; i++)
             {
-                var numberOfNodes = random.Next(100, 1000);
+                var numberOfNodes = 10 + 100 * i;
                 var density = 4d / (numberOfNodes + 1);
                 var nodes = generator.Generate(numberOfNodes, density, weightGenerator);
                 var shortestPathResult = algorithm.GetShortestPath<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes, 1, nodes.Length - 1);

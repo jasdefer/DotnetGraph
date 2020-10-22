@@ -14,8 +14,10 @@ namespace DotnetGraph.Helper
             {
                 throw new Exception($"The number of possible edges is bigger than the maximum int value for a graph with {numberOfNodes} nodes.");
             }
-            var numberOfPossibleEdges = numberOfNodes / 2 * (numberOfNodes - 1);
-            return numberOfPossibleEdges;
+            //Applying the commutative law help reducing the max number in the calculation
+            //This prevents some interim result bigger than int.MaxValue
+            var numberOfPossibleEdges = numberOfNodes / 2d * (numberOfNodes - 1);
+            return (int)numberOfPossibleEdges;
         }
 
         public static int NumberOfPossibleArcs(int numberOfNodes)
@@ -35,7 +37,7 @@ namespace DotnetGraph.Helper
                 throw new ArgumentOutOfRangeException(nameof(density));
             }
 
-            var numberOfPossibleEdges = (int)Math.Round((numberOfNodes * density) * ((numberOfNodes - 1) / 2));
+            var numberOfPossibleEdges = (int)Math.Round((numberOfNodes * density) * ((numberOfNodes - 1) / 2d));
             return numberOfPossibleEdges;
         }
 
