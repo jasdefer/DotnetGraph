@@ -65,10 +65,10 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
         public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> inputNodes, int originNodeId, int destinationNodeId)
         {
             var originNode = GetOrigin(inputNodes, originNodeId);
-            var queue = new DijkstraQueue(originNode);
-            while (queue.Count > 0)
+            var heap = new DijkstraHeap(originNode);
+            while (heap.Count > 0)
             {
-                var node = queue.ExctractNext();
+                var node = heap.ExtractMinimum();
                 if (destinationNodeId == node.Id)
                 {
                     var result = BuildResult(node);
@@ -82,14 +82,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                     }
 
                     var newDistance = node.DistanceFromOrigin.Value + arc.Weight;
-                    var currentDistance = arc.Destination.DistanceFromOrigin;
-                    var isImprovement = !currentDistance.HasValue || newDistance < arc.Destination.DistanceFromOrigin;
-                    if (isImprovement)
-                    {
-                        arc.Destination.DistanceFromOrigin = newDistance;
-                        arc.Destination.BestPredecessor = arc;
-                        queue.Add(arc.Destination);
-                    }
+                    heap.UpdateArc(arc, newDistance);
                 }
             }
             ValidateInput(inputNodes, originNodeId, destinationNodeId);

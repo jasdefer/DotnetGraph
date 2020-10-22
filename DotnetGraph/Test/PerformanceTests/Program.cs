@@ -14,13 +14,24 @@ namespace PerformanceTests
             RunBenchmarkDotNet();
         }
 
+        private static void ProfileDijkstra()
+        {
+            var performanceTest = new ShortestPathPerformance();
+            performanceTest.Setup();
+            var total = 0d;
+            for (int i = 0; i < 5000; i++)
+            {
+                total += performanceTest.DijkstraRaw();
+            }
+        }
+
         private static void RunBenchmarkDotNet()
         {
             var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
-            var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
-            var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
-            var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
-            var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
+            //var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
+            //var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
+            //var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
+            //var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
         }
     }
 }

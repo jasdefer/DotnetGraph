@@ -21,7 +21,7 @@ It is very easy to create the graph before running many differnt algorithms.</De
     <Compile Include="Algorithms\ShortestPath\Dijkstra\DijkstraAlgorithm.cs" />
     <Compile Include="Algorithms\ShortestPath\Dijkstra\DijkstraArc.cs" />
     <Compile Include="Algorithms\ShortestPath\Dijkstra\DijkstraNode.cs" />
-    <Compile Include="Algorithms\ShortestPath\Dijkstra\DijkstraQueue.cs" />
+    <Compile Include="Algorithms\ShortestPath\Dijkstra\DijkstraHeap.cs" />
     <Compile Include="Algorithms\ShortestPath\IShortestPathAlgorithm.cs" />
     <Compile Include="Algorithms\ShortestPath\ShortestPathResult.cs" />
   </ItemGroup>
