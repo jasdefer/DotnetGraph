@@ -18,7 +18,7 @@ namespace PerformanceTests.Algorithms.Components.ConnectedComponents
                 ConnectComponents = false
             };
             var weightGenerator = new UniformWeightGenerator();
-            nodes = algorithm.Generate(10000, 0.0004, weightGenerator);
+            nodes = algorithm.Generate(5000, 0.001, weightGenerator);
         }
 
         [Benchmark]

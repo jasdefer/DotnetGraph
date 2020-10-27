@@ -7,7 +7,9 @@ namespace PerformanceTests.Algorithms.GraphGeneration
 {
     public class WeightedUndirectedGraphGenerationPerformance
     {
-        [Params(10, 5000)]
+        public const int SmallNumberOfNodes = 20;
+        public const int BigNumberOfNodes = 7500;
+        [Params(SmallNumberOfNodes, BigNumberOfNodes)]
         public int NumberOfNodes { get; set; }
 
         [Benchmark]

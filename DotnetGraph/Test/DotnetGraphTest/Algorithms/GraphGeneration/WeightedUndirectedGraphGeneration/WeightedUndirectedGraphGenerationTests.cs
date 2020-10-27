@@ -29,7 +29,9 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedUndirectedGraphGene
                 Assert.AreEqual(numberOfNodes, nodes.Length);
                 var numberOfEdges = nodes.SelectMany(x => x.Edges.Select(y => y.Id)).Distinct().Count();
                 Assert.AreEqual(expectedNumberOfEdges, numberOfEdges, Math.Ceiling(expectedNumberOfEdges * 0.1));
-                Assert.AreEqual(numberOfEdges, nodes.SelectMany(x => x.Edges.Select(y => y)).Distinct().Count());
+                var edges = nodes.SelectMany(x => x.Edges.Select(y => y));
+                Assert.AreEqual(numberOfEdges, edges.Distinct().Count());
+                Assert.AreEqual(numberOfEdges, edges.Count() / 2);
             }
         }
     }
