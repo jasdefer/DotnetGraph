@@ -9,13 +9,15 @@ namespace PerformanceTests.Algorithms.GraphGeneration
     public class WeightedDirectedGraphGenerationPerformance
     {
         private WeightedUndirectedGraphNode[] weightedUndirectedGraphNodes;
+        public const int SmallNumberOfNodes = 100;
+        public const int BigNumberOfNodes = 5000;
 
-        [Params(100, 5000)]
+        [Params(SmallNumberOfNodes, BigNumberOfNodes)]
         public int NumberOfNodes { get; set; }
 
 
         [GlobalSetup]
-        public void GlobalSetup()
+        public void Setup()
         {
             var generator = new LineGraphGenerator();
             var density = 5d / (NumberOfNodes + 1);
