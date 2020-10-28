@@ -10,8 +10,10 @@ Currently, the following algorithms are implemented:
   - Minimum spanning tree
     - [Kruskal's algorithm](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm)
 - [Directed graph](https://en.wikipedia.org/wiki/Directed_graph)
-  - [Shrotest path tree](https://en.wikipedia.org/wiki/Shortest-path_tree)
+  - [Shrotest path](https://en.wikipedia.org/wiki/Shortest_path_problem)
     - [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+  - [Shrotest path tree](https://en.wikipedia.org/wiki/Shortest-path_tree)
+    - FIFO Algorithm
   - Graph Components
     - [Strongly Connected Components](https://en.wikipedia.org/wiki/Strongly_connected_component)
 	
