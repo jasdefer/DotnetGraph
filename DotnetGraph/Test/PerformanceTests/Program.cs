@@ -4,7 +4,6 @@ using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
 using PerformanceTests.Algorithms.GraphGeneration;
 using PerformanceTests.Algorithms.MinimumSpanningTree;
 using PerformanceTests.Algorithms.ShortestPath;
-using System;
 
 namespace PerformanceTests
 {

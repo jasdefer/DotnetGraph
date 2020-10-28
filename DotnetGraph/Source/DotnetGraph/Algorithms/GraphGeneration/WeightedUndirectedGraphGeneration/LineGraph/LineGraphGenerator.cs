@@ -21,7 +21,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
             ConnectNodesInALine(nodes, weightGenerator);
             var dict = GetPossibleNeighbors(nodes);
             CreateRandomEdges(nodes, dict, weightGenerator, density);
-            
+
             return nodes;
         }
 

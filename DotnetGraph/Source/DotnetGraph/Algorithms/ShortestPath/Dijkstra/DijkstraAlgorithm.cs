@@ -62,7 +62,9 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             return result;
         }
 
-        public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> inputNodes, int originNodeId, int destinationNodeId)
+        public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> inputNodes,
+            int originNodeId,
+            int destinationNodeId)
         {
             var originNode = GetOrigin(inputNodes, originNodeId);
             var heap = new DijkstraHeap(originNode);

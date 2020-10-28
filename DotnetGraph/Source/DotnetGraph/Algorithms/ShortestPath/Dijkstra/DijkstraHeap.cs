@@ -36,7 +36,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             var indexOfLeftChild = GetLeftChildIndex(index);
             var indexOfRightChild = GetRightChildIndex(index);
             var indexOfSmallestValue = index;
-            if(indexOfLeftChild < heap.Count &&
+            if (indexOfLeftChild < heap.Count &&
                 IsSmaller(indexOfLeftChild, index))
             {
                 indexOfSmallestValue = indexOfLeftChild;
@@ -47,7 +47,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                 indexOfSmallestValue = indexOfRightChild;
             }
 
-            if(indexOfSmallestValue != index)
+            if (indexOfSmallestValue != index)
             {
                 SwitchPosition(index, indexOfSmallestValue);
                 UpdateHeap(indexOfSmallestValue);
@@ -95,7 +95,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                 Add(node);
                 return;
             }
-            if(distance >= node.DistanceFromOrigin.Value)
+            if (distance >= node.DistanceFromOrigin.Value)
             {
                 return;
             }
