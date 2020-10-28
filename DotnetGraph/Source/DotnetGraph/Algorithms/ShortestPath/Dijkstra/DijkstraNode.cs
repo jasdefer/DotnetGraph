@@ -14,5 +14,10 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
         public DijkstraArc BestPredecessor { get; internal set; }
         public double? DistanceFromOrigin { get; internal set; }
         internal int IndexInHeap { get; set; } = -1;
+
+        public override string ToString()
+        {
+            return $"Id {Id} ({DistanceFromOrigin ?? double.PositiveInfinity})";
+        }
     }
 }

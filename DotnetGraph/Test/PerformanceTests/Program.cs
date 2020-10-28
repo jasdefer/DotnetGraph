@@ -4,6 +4,7 @@ using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
 using PerformanceTests.Algorithms.GraphGeneration;
 using PerformanceTests.Algorithms.MinimumSpanningTree;
 using PerformanceTests.Algorithms.ShortestPath;
+using PerformanceTests.Algorithms.ShortestPathTree;
 
 namespace PerformanceTests
 {
@@ -11,24 +12,26 @@ namespace PerformanceTests
     {
         static void Main(string[] args)
         {
-            //RunBenchmarkDotNet();
+            RunBenchmarkDotNet();
             //ProfileKruskal();
             //ProfileUndirectedToDirectedGraphConversion();
             //ProfileErdosRenyiGraphGenerator();
             //ProfileLineGraphGenerator();
             //ProfileSimpleConnectedComponentAlgorithm();
-            ProfileRawTarjanAlgorithm();
+            //ProfileRawTarjanAlgorithm();
             //ProfileTarjanAlgorithmWithConversion();
             //ProfileDijkstra();
+            //ProfileFifoRaw();
         }
 
         private static void RunBenchmarkDotNet()
         {
-            //var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
-            //var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
-            //var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
-            //var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
+            var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
+            var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
+            var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
+            var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
             var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
+            var shortestPathTreePerformance = BenchmarkRunner.Run<ShortestPathTreePerformance>();
         }
 
         private static double ProfileKruskal()
@@ -87,6 +90,30 @@ namespace PerformanceTests
             for (int i = 0; i < 5000; i++)
             {
                 total += performanceTest.DijkstraRaw();
+            }
+            return total;
+        }
+
+        private static double ProfileFifoRaw()
+        {
+            var performanceTest = new ShortestPathTreePerformance();
+            performanceTest.Setup();
+            var total = 0;
+            for (int i = 0; i < 40; i++)
+            {
+                total += performanceTest.FifoRaw();
+            }
+            return total;
+        }
+
+        private static double ProfileFifoWithConversion()
+        {
+            var performanceTest = new ShortestPathTreePerformance();
+            performanceTest.Setup();
+            var total = 0;
+            for (int i = 0; i < 20; i++)
+            {
+                total += performanceTest.FifoWithConversion();
             }
             return total;
         }

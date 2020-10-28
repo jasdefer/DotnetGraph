@@ -1,4 +1,6 @@
-﻿using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
+﻿using DotnetGraph.Helper;
+using DotnetGraph.Model.Implementations;
+using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 
@@ -8,7 +10,6 @@ namespace DotnetGraphTest.Helper
     {
         public static WeightedDirectedGraphNode[] SmallWeightedDirectedGraph()
         {
-            //Data preparation
             var nodes = new WeightedDirectedGraphNode[]
             {
                 new WeightedDirectedGraphNode(1),
@@ -42,9 +43,34 @@ namespace DotnetGraphTest.Helper
             return nodes;
         }
 
+        public static WeightedDirectedGraphNode[] SmallComplicatedWeightedDirectedGraph()
+        {
+            var arcs = new ArcData[]
+            {
+                new ArcData(1,2,55),
+                new ArcData(1,3,15),
+                new ArcData(2,5,16),
+                new ArcData(4,2,11),
+                new ArcData(3,4,12),
+                new ArcData(3,6,42),
+                new ArcData(4,5,30),
+                new ArcData(4,7,40),
+                new ArcData(4,6,16),
+                new ArcData(6,9,62),
+                new ArcData(5,8,45),
+                new ArcData(5,7,11),
+                new ArcData(7,8,17),
+                new ArcData(7,9,31),
+                new ArcData(8,9,13)
+            };
+
+            var nodes = GraphConverter.GetNodes(arcs);
+
+            return nodes;
+        }
+
         public static DirectedGraphNode[] SmallDirectedGraph()
         {
-            //Data preparation
             var nodes = new DirectedGraphNode[]
             {
                 new DirectedGraphNode(1),

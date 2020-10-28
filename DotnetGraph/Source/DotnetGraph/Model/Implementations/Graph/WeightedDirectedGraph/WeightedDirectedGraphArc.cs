@@ -18,7 +18,7 @@ namespace DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph
 
         public override string ToString()
         {
-            return $"Arc {Id}";
+            return $"Arc {Id}: to {Destination.Id} ({Weight})";
         }
     }
 }

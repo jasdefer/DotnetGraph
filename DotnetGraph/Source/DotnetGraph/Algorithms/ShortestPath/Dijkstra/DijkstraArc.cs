@@ -17,5 +17,10 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 
         public DijkstraNode Origin { get; }
         public int Id { get; }
+
+        public override string ToString()
+        {
+            return $"{Origin.Id}->{Destination.Id} ({Weight})";
+        }
     }
 }
