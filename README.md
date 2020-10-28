@@ -2,7 +2,7 @@
 
 ## Features
 This library is a collection of algorithms running on directed or undirected graphs.
-You can use build in implementations for nodes, arcs and edges or just pass your own classes to the algorithms.
+You can use build in implementations for nodes, arcs, and edges or just pass your own classes to the algorithms.
 Currently, the following algorithms are implemented:
 - [Undirected graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics))
   - Graph Components
@@ -15,13 +15,13 @@ Currently, the following algorithms are implemented:
   - Graph Components
     - [Strongly Connected Components](https://en.wikipedia.org/wiki/Strongly_connected_component)
 	
-Additionaly, algorithms to create random graphs and some minor graph	helper are implemented.
+Additionally, algorithms to create random graphs and some minor graph	helper are implemented.
 
 ## Get started
 
 ### Installation
 
-Get the library `DotnetGraphCore` from [Nuget](https://www.nuget.org/packages/DotnetGraphCore/):
+Get the library `DotnetGraphCore` from [NuGet](https://www.nuget.org/packages/DotnetGraphCore/):
 
 ```
 Install-Package DotnetGraphCore
@@ -59,13 +59,13 @@ Console.WriteLine(result.Arcs.Count); // 2
 
 ## Custom graph implementations
 
-Dotnet Graph provides various implementations for nodes, arc and edges.
+Dotnet Graph provides various implementations for nodes, arcs, and edges.
 You can use them to create graphs and run all implemented algorithms.
-Let us assume, that you are working on a project with your own classes which represent nodes, arcs or edges.
+Let us assume, that you are working on a project with your own classes which represent nodes, arcs, or edges.
 They can be easily passed to the algorithms of this library without a problem.
 Just add interfaces required by the algorithm you want to run on your classes.
 The shortest path algorithm for example needs a collection of nodes which are connected by arcs.
-The nodes and arcs need a unique id and the arcs must have a weight used for calculating the shortest path.
+The nodes and arcs need a unique id, and the arcs must have a weight used for calculating the shortest path.
 Each arc is stored at its origin node and points to its destination.
 That's it!
 ```c#
@@ -75,8 +75,8 @@ ShortestPathResult<TArc> GetShortestPath<TNode, TArc>(IList<TNode> nodes,
 	where TNode : IHasOutgoingArcs<TArc>, IHasId
 	where TArc : IHasDestination<TNode>, IHasWeight, IHasId;
 ```
-As long as your nodes implement `IHasOutgoingArcs<TArc>` and `IHasId` and your arcs implement `IHasDestination<TNode>`, `IHasWeight` and `IHasId` they can be passed to any shortest path algorithm.
-No worries, this maybe looks like a lot, but each interfaces requires a single property:
+If your nodes implement `IHasOutgoingArcs<TArc>` and `IHasId` and your arcs implement `IHasDestination<TNode>`, `IHasWeight` and `IHasId` they can be passed to any shortest path algorithm.
+No worries, this maybe looks like a lot, but each interface requires a single property:
 
 ```c#
 public interface IHasId
@@ -100,7 +100,7 @@ public interface IHasOutgoingArcs<out TArc>
 }
 ```
 
-These information should already be present in your own implementation if you want to run a shortest path algorithm.
+This information should already be present in your own implementation if you want to run a shortest path algorithm.
 Just add the interfaces to your nodes and arcs and return the required information.
 
 ## High performance
@@ -109,7 +109,7 @@ All algorithms are optimized to run as fast as possible.
 Feel free to submit a pull request if you find any improvements.
 Many algorithms convert the generic input to algorithm specific implementations.
 The shortest path algorithm Dijkstra for example stores algorithm specific information at the nodes to run efficiently.
-You can run the algorithm with any nodes and arcs as long as they implement the correct interfaces as desribed [above](#custom-graph-implementations).
+You can run the algorithm with any nodes and arcs if they implement the correct interfaces as described [above](#custom-graph-implementations).
 But operating with the algorithm specific implementations improves the computational times.
 You could either create the required objects by yourself or let the algorithm itself convert the input.
 
@@ -123,7 +123,7 @@ var shortestPathResult1 = DijkstraAlgorithm.GetShortestPath(dijkstraNodes, 1, 3)
 var shortestPathResult2 = DijkstraAlgorithm.GetShortestPath(dijkstraNodes, 1, 4);
 ```
 
-So you can either chose the convenient but computational slower approach and just let the algorithm convert your input.
+So, you can either chose the convenient but computational slower approach and just let the algorithm convert your input.
 Alternatively, you can pass the algorithm specific implementations and get a solution faster.
 The latter approach is recommended if you need to run an algorithm multiple times on the same set of nodes.
 E.g. finding the shortest paths between many pairs of origin and destination nodes, because the nodes does not need to be converted for every computation of the shortest path.
