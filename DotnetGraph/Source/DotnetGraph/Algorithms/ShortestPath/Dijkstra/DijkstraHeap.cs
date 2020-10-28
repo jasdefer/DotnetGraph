@@ -101,6 +101,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             }
             var index = node.IndexInHeap;
             heap[index].DistanceFromOrigin = distance;
+            heap[index].BestPredecessor = arc;
             SlideUpdwars(index);
         }
 
