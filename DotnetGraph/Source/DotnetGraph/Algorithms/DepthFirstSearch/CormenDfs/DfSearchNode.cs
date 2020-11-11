@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace DotnetGraph.Algorithms.DfSearch
+namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
 {
-    public class DfSearchNode : IHasOutgoingArcs<DfSearchArc>, IHasLabel
+    public class DfSearchNode : IHasOutgoingArcs<DfSearchArc>, IHasLabel, IHasId
     {
-        private List<DfSearchArc> _arcs;
+        private readonly List<DfSearchArc> _arcs;
 
         public DfSearchNode(string label) : this()
         {
@@ -40,6 +40,6 @@ namespace DotnetGraph.Algorithms.DfSearch
         public DfSearchState SearchState { get; set; }
 
         public DfSearchNode PredecessorNode { get; set; }
-
+        public int Id { get; }
     }
 }

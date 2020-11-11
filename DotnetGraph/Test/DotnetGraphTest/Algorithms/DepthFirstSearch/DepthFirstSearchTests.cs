@@ -1,24 +1,22 @@
-﻿using DotnetGraph.Algorithms.DfSearch;
+﻿using DotnetGraph.Algorithms.DepthFirstSearch;
+using DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DotnetGraphTest.Algorithms.DfSearch
 {
     [TestClass]
-    public class DfSearchTests
+    public abstract class DepthFirstSearchTests
     {
-
+        protected abstract IDepthFirstSearchAlgorithm GetAlgorithm();
 
         [TestMethod]
         public void CanReproduceExample()
         {
             var nodes = GetCormenExample();
-            DepthFirstSearch searchAlgorithm = new DepthFirstSearch();
-            searchAlgorithm.Run(nodes);
+            var searchAlgorithm = GetAlgorithm();
+            var result = searchAlgorithm.Run<DfSearchNode, DfSearchArc>(nodes);
             //node - discovery time - finished time            
             var expected = new[]
             {
@@ -35,7 +33,6 @@ namespace DotnetGraphTest.Algorithms.DfSearch
             Assert.IsTrue(expected.SequenceEqual(results));
         }
 
-
         /// <summary>
         /// see Ch. 22.3
         /// </summary>
@@ -51,6 +48,5 @@ namespace DotnetGraphTest.Algorithms.DfSearch
 
             return example.Values.ToArray();
         }
-
     }
 }

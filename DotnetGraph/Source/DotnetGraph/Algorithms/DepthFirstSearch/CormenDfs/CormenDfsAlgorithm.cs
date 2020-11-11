@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using DotnetGraph.Model.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotnetGraph.Algorithms.DfSearch
+namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
 {
-    public class DepthFirstSearch
+    public class CormenDfsAlgorithm : IDepthFirstSearchAlgorithm
     {
         private int _time;
 
@@ -17,12 +17,12 @@ namespace DotnetGraph.Algorithms.DfSearch
             Initialize(nodes);
             foreach (DfSearchNode n in nodes)
             {
-                if(n.SearchState == DfSearchState.Undiscovered)
+                if (n.SearchState == DfSearchState.Undiscovered)
                 {
                     Visit(n);
                 }
             }
-        }        
+        }
 
         private void Visit(DfSearchNode node)
         {
@@ -32,7 +32,7 @@ namespace DotnetGraph.Algorithms.DfSearch
             foreach (DfSearchArc incidentArc in node.OutgoingArcs)
             {
                 DfSearchNode adjacentNode = incidentArc.Node2;
-                if(adjacentNode.SearchState == DfSearchState.Undiscovered)
+                if (adjacentNode.SearchState == DfSearchState.Undiscovered)
                 {
                     adjacentNode.PredecessorNode = node;
                     Visit(adjacentNode);
@@ -53,5 +53,11 @@ namespace DotnetGraph.Algorithms.DfSearch
             }
         }
 
+        public DepthFirstSearchResult Run<TNode, TArc>(IList<TNode> nodes)
+            where TNode : IHasId, IHasOutgoingArcs<TArc>
+            where TArc : IHasId
+        {
+            throw new NotImplementedException();
+        }
     }
 }

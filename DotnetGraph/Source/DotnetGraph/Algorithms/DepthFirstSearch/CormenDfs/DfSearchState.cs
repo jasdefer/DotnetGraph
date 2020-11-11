@@ -1,4 +1,4 @@
-﻿namespace DotnetGraph.Algorithms.DfSearch
+﻿namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
 {
     public enum DfSearchState
     {

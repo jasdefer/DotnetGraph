@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace DotnetGraph.Algorithms.DfSearch
+namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
 {
     public static class DepthFirstSearchValidation
     {

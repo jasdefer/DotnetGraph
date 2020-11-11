@@ -1,9 +1,9 @@
 ﻿using DotnetGraph.Model.Properties;
 using System;
 
-namespace DotnetGraph.Algorithms.DfSearch
+namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
 {
-    public class DfSearchArc : IConnectsNodes<DfSearchNode>
+    public class DfSearchArc : IConnectsNodes<DfSearchNode>, IHasId
     {
 
         public DfSearchArc(DfSearchNode n1, DfSearchNode n2)
@@ -15,5 +15,6 @@ namespace DotnetGraph.Algorithms.DfSearch
         public DfSearchNode Node1 { get; }
 
         public DfSearchNode Node2 { get; }
+        public int Id { get; }
     }
 }
