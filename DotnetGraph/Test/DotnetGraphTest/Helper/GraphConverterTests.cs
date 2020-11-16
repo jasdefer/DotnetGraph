@@ -22,10 +22,10 @@ namespace DotnetGraphTest.Helper
                 new UndirectedGraphEdge(1, nodes[0], nodes[1]),
                 new UndirectedGraphEdge(1, nodes[1], nodes[2]),
             };
-            nodes[0].AddEdge(edges[0]);
-            nodes[1].AddEdge(edges[0]);
-            nodes[1].AddEdge(edges[1]);
-            nodes[2].AddEdge(edges[1]);
+            nodes[0].Add(edges[0]);
+            nodes[1].Add(edges[0]);
+            nodes[1].Add(edges[1]);
+            nodes[2].Add(edges[1]);
 
             //Run method
             var convertedNodes = GraphConverter.GetNodes<UndirectedGraphNode, UndirectedGraphEdge>(edges);

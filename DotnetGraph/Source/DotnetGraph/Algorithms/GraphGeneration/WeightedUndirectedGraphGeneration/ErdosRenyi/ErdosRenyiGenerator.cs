@@ -43,8 +43,8 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
                 var node1 = componentResult.Components[i].Nodes[0];
                 var node2 = componentResult.Components[i + 1].Nodes[0];
                 var edge = new WeightedUndirectedGraphEdge(++numberOfEdges, weight, node1, node2);
-                node1.AddEdge(edge);
-                node2.AddEdge(edge);
+                node1.Add(edge);
+                node2.Add(edge);
             }
         }
 
@@ -69,8 +69,8 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
                     {
                         var weight = weightGenerator.Generate();
                         var edge = new WeightedUndirectedGraphEdge(++edgeId, weight, nodes[i], nodes[j]);
-                        nodes[i].AddEdge(edge);
-                        nodes[j].AddEdge(edge);
+                        nodes[i].Add(edge);
+                        nodes[j].Add(edge);
                     }
                 }
             }

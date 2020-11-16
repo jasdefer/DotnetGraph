@@ -28,14 +28,14 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                 throw new ArgumentNullException(nameof(nodes));
             }
 
-            var dict = nodes.ToDictionary(x => x.Id, x => new DijkstraNode(x.Id));
+            var dict = nodes.ToDictionary(x => x.Id, x => new DijkstraNode(x.Id, new List<DijkstraArc>()));
 
             for (int i = 0; i < nodes.Count; i++)
             {
                 var originId = nodes[i].Id;
                 foreach (var arc in nodes[i].OutgoingArcs)
                 {
-                    var dijkstraArc = new DijkstraArc(arc.Id, dict[originId], dict[arc.Destination.Id], arc.Weight);
+                    var dijkstraArc = new DijkstraArc(arc.Id, arc.Weight, dict[originId], dict[arc.Destination.Id]);
                     dict[nodes[i].Id].AddArc(dijkstraArc);
                 }
             }

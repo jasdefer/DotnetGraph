@@ -44,18 +44,18 @@ namespace DotnetGraph.Helper
             {
                 if (!nodes.ContainsKey(arcDatas[i].OriginNodeId))
                 {
-                    var node = new WeightedDirectedGraphNode(arcDatas[i].OriginNodeId);
+                    var node = new WeightedDirectedGraphNode(arcDatas[i].OriginNodeId, new List<WeightedDirectedGraphArc>());
                     nodes.Add(node.Id, node);
                 }
                 if (!nodes.ContainsKey(arcDatas[i].DestinationNodeId))
                 {
-                    var node = new WeightedDirectedGraphNode(arcDatas[i].DestinationNodeId);
+                    var node = new WeightedDirectedGraphNode(arcDatas[i].DestinationNodeId, new List<WeightedDirectedGraphArc>());
                     nodes.Add(node.Id, node);
                 }
                 var destination = nodes[arcDatas[i].DestinationNodeId];
                 var origin = nodes[arcDatas[i].OriginNodeId];
-                var arc = new WeightedDirectedGraphArc(i + 1, destination, arcDatas[i].Weight);
-                origin.AddArc(arc);
+                var arc = new WeightedDirectedGraphArc(i + 1,  arcDatas[i].Weight, destination);
+                origin.Add(arc);
             }
             return nodes.Values.ToArray();
         }

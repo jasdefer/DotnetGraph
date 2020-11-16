@@ -1,23 +1,26 @@
-﻿using DotnetGraph.Model.Implementations;
-using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Model.Properties;
+using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
 {
-    public class FifoNode : IdNode<FifoArc>,
+    public class FifoNode : 
         IHasOutgoingArcs<FifoArc>,
         IHasId
     {
-        public FifoNode(int id) : base(id)
+        private readonly List<FifoArc> outgoingArcs;
+        public FifoNode(int id, IList<FifoArc> outgoingArcs = null)
         {
+            Id = id;
+            this.outgoingArcs = outgoingArcs == null ? new List<FifoArc>() : new List<FifoArc>(outgoingArcs);
         }
 
         public double? DistanceFromOrigin { get; internal set; }
         public FifoArc BestPredecessor { get; internal set; }
-        internal int IndexInHeap { get; set; } = -1;
-
-        public override string ToString()
+        public IReadOnlyCollection<FifoArc> OutgoingArcs => outgoingArcs;
+        public int Id { get; }
+        public void Add(FifoArc arc)
         {
-            return $"Id {Id}";
+            outgoingArcs.Add(arc);
         }
     }
 }

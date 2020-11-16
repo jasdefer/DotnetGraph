@@ -38,9 +38,9 @@ namespace DotnetGraphTest.Helper
                 new DirectedGraphNode(3),
             };
 
-            nodes[0].AddArc(new DirectedGraphArc(1, nodes[1]));
-            nodes[0].AddArc(new DirectedGraphArc(2, nodes[2]));
-            nodes[1].AddArc(new DirectedGraphArc(3, nodes[2]));
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            nodes[0].Add(new DirectedGraphArc(2, nodes[2]));
+            nodes[1].Add(new DirectedGraphArc(3, nodes[2]));
             GraphValidation.ValidateUniqueArcIds(nodes);
         }
 
@@ -54,9 +54,9 @@ namespace DotnetGraphTest.Helper
                 new DirectedGraphNode(3),
             };
 
-            nodes[0].AddArc(new DirectedGraphArc(1, nodes[1]));
-            nodes[0].AddArc(new DirectedGraphArc(2, nodes[2]));
-            nodes[1].AddArc(new DirectedGraphArc(2, nodes[2]));
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            nodes[0].Add(new DirectedGraphArc(2, nodes[2]));
+            nodes[1].Add(new DirectedGraphArc(2, nodes[2]));
             Assert.ThrowsException<Exception>(() => GraphValidation.ValidateUniqueArcIds(nodes));
         }
 
@@ -83,8 +83,8 @@ namespace DotnetGraphTest.Helper
                 new WeightedDirectedGraphNode(2)
             };
 
-            nodes[0].AddArc(new WeightedDirectedGraphArc(1, nodes[1], 0));
-            nodes[0].AddArc(new WeightedDirectedGraphArc(2, nodes[1], double.MaxValue));
+            nodes[0].Add(new WeightedDirectedGraphArc(1, 0, nodes[1]));
+            nodes[0].Add(new WeightedDirectedGraphArc(2, double.MaxValue, nodes[1]));
             GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes);
         }
 
@@ -97,8 +97,8 @@ namespace DotnetGraphTest.Helper
                 new WeightedDirectedGraphNode(2)
             };
 
-            nodes[0].AddArc(new WeightedDirectedGraphArc(1, nodes[1], 1));
-            nodes[0].AddArc(new WeightedDirectedGraphArc(2, nodes[1], -1));
+            nodes[0].Add(new WeightedDirectedGraphArc(1, 1, nodes[1]));
+            nodes[0].Add(new WeightedDirectedGraphArc(2, -1, nodes[1]));
             Assert.ThrowsException<Exception>(() => GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes));
         }
 

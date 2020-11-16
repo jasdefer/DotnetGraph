@@ -49,8 +49,8 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
                 //Create the edge
                 var weight = weightGenerator.Generate();
                 var edge = new WeightedUndirectedGraphEdge(i + 1, weight, nodes[node1Id - 1], nodes[node2Id - 1]);
-                nodes[node1Id - 1].AddEdge(edge);
-                nodes[node2Id - 1].AddEdge(edge);
+                nodes[node1Id - 1].Add(edge);
+                nodes[node2Id - 1].Add(edge);
 
                 //Remove the connection from the dict
                 dict[node1Id].Remove(node2Id);
@@ -88,8 +88,8 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
             {
                 var weight = weightGenerator.Generate();
                 var edge = new WeightedUndirectedGraphEdge(i + 1, weight, nodes[i], nodes[i + 1]);
-                nodes[i].AddEdge(edge);
-                nodes[i + 1].AddEdge(edge);
+                nodes[i].Add(edge);
+                nodes[i + 1].Add(edge);
             }
         }
 

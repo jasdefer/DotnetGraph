@@ -1,5 +1,4 @@
-﻿using DotnetGraph.Model.Implementations;
-using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,8 +59,8 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             {
                 foreach (var arc in node.OutgoingArcs)
                 {
-                    var tarjanArc = new Arc<TarjanNode>(dict[arc.Destination.Id]);
-                    dict[node.Id].AddArc(tarjanArc);
+                    var tarjanArc = new TarjanArc(1, dict[arc.Destination.Id]);
+                    dict[node.Id].Add(tarjanArc);
                 }
             }
             return dict.Values.ToArray();

@@ -23,8 +23,8 @@ namespace DotnetGraphTest.Algorithms.Components.ConnectedComponents
             };
             for (int i = 0; i < edges.Length; i++)
             {
-                edges[i].Node1.AddEdge(edges[i]);
-                edges[i].Node2.AddEdge(edges[i]);
+                edges[i].Node1.Add(edges[i]);
+                edges[i].Node2.Add(edges[i]);
             }
             var algorithm = GetAlgorithm();
             var componentResult = algorithm.GetComponents<UndirectedGraphNode, UndirectedGraphEdge>(nodes);
@@ -48,8 +48,8 @@ namespace DotnetGraphTest.Algorithms.Components.ConnectedComponents
             };
             for (int i = 0; i < edges.Length; i++)
             {
-                edges[i].Node1.AddEdge(edges[i]);
-                edges[i].Node2.AddEdge(edges[i]);
+                edges[i].Node1.Add(edges[i]);
+                edges[i].Node2.Add(edges[i]);
             }
             var algorithm = GetAlgorithm();
             var componentResult = algorithm.GetComponents<UndirectedGraphNode, UndirectedGraphEdge>(nodes);
@@ -80,8 +80,8 @@ namespace DotnetGraphTest.Algorithms.Components.ConnectedComponents
             };
             for (int i = 0; i < edges.Length; i++)
             {
-                edges[i].Node1.AddEdge(edges[i]);
-                edges[i].Node2.AddEdge(edges[i]);
+                edges[i].Node1.Add(edges[i]);
+                edges[i].Node2.Add(edges[i]);
             }
             var algorithm = GetAlgorithm();
             var componentResult = algorithm.GetComponents<UndirectedGraphNode, UndirectedGraphEdge>(nodes);
@@ -114,8 +114,8 @@ namespace DotnetGraphTest.Algorithms.Components.ConnectedComponents
             };
             for (int i = 0; i < edges.Length; i++)
             {
-                edges[i].Node1.AddEdge(edges[i]);
-                edges[i].Node2.AddEdge(edges[i]);
+                edges[i].Node1.Add(edges[i]);
+                edges[i].Node2.Add(edges[i]);
             }
             var algorithm = GetAlgorithm();
             var componentResult = algorithm.GetComponents<UndirectedGraphNode, UndirectedGraphEdge>(nodes);

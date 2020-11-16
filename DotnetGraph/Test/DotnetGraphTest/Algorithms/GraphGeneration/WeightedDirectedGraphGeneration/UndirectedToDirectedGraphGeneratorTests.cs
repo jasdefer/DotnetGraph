@@ -30,8 +30,8 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGenera
             };
             for (int i = 0; i < undirectedEdges.Length; i++)
             {
-                undirectedEdges[i].Node1.AddEdge(undirectedEdges[i]);
-                undirectedEdges[i].Node2.AddEdge(undirectedEdges[i]);
+                undirectedEdges[i].Node1.Add(undirectedEdges[i]);
+                undirectedEdges[i].Node2.Add(undirectedEdges[i]);
             }
 
             var directedNodes = UndirectedToDirectedGraphGenerator.Convert(nodes);

@@ -58,10 +58,10 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
 
         private static void AddArcInBothDirections(int id, WeightedDirectedGraphNode node1, WeightedDirectedGraphNode node2, double weight)
         {
-            var arc = new WeightedDirectedGraphArc(id, node2, weight);
-            node1.AddArc(arc);
-            arc = new WeightedDirectedGraphArc(id + 1, node1, weight);
-            node2.AddArc(arc);
+            var arc = new WeightedDirectedGraphArc(id, weight, node2);
+            node1.Add(arc);
+            arc = new WeightedDirectedGraphArc(id + 1, weight, node1);
+            node2.Add(arc);
         }
     }
 }
