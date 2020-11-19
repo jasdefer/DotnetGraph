@@ -102,6 +102,33 @@ namespace DotnetGraphTest.Helper
             Assert.ThrowsException<Exception>(() => GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes));
         }
 
+        [TestMethod]
+        public void ValidateNoAntiparallelArcsInvalid()
+        {
+            var nodes = new DirectedGraphNode[]
+            {
+                new DirectedGraphNode(1),
+                new DirectedGraphNode(2)
+            };
+
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            nodes[1].Add(new DirectedGraphArc(2, nodes[0]));
+            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateNoAntiparallelArcs<DirectedGraphNode, DirectedGraphArc>(nodes));
+        }
+
+        [TestMethod]
+        public void ValidateNoAntiparallelArcsValid()
+        {
+            var nodes = new DirectedGraphNode[]
+            {
+                new DirectedGraphNode(1),
+                new DirectedGraphNode(2)
+            };
+
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            GraphValidation.ValidateNoAntiparallelArcs<DirectedGraphNode, DirectedGraphArc>(nodes);
+        }
+
         private static Entity[] CreateEntities(int numberOfEntities)
         {
             var entities = new Entity[numberOfEntities];
