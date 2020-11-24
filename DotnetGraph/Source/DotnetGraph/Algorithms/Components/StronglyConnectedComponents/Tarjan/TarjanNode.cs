@@ -1,6 +1,4 @@
-﻿using DotnetGraph.Model.Implementations;
-using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
-using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Model.Properties;
 using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan

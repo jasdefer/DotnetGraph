@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
 {
-    public class FifoNode : 
+    public class FifoNode :
         IHasOutgoingArcs<FifoArc>,
         IHasId
     {

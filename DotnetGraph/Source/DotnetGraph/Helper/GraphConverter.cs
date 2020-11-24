@@ -54,7 +54,7 @@ namespace DotnetGraph.Helper
                 }
                 var destination = nodes[arcDatas[i].DestinationNodeId];
                 var origin = nodes[arcDatas[i].OriginNodeId];
-                var arc = new WeightedDirectedGraphArc(i + 1,  arcDatas[i].Weight, destination);
+                var arc = new WeightedDirectedGraphArc(i + 1, arcDatas[i].Weight, destination);
                 origin.Add(arc);
             }
             return nodes.Values.ToArray();
