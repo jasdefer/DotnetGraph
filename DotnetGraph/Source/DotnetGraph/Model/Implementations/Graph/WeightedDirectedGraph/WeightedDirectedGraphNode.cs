@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph
 {
-    public class WeightedDirectedGraphNode : 
+    public class WeightedDirectedGraphNode :
         IHasOutgoingArcs<WeightedDirectedGraphArc>,
-        IHasId 
+        IHasId
     {
         private readonly List<WeightedDirectedGraphArc> outgoingArcs;
         public WeightedDirectedGraphNode(int id, IReadOnlyCollection<WeightedDirectedGraphArc> outgoingArcs = null)

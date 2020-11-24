@@ -143,8 +143,8 @@ namespace DotnetGraph.Helper
         /// Check, if any node has antiparallel arcs. Two arcs are antiparallel, if the first connects node 2 from node 1 and the second node 1 from node 2.
         /// </summary>
         public static void ValidateNoAntiparallelArcs<TNode, TArc>(IList<TNode> nodes)
-            where TNode: IHasId, IHasOutgoingArcs<TArc>
-            where TArc: IHasDestination<TNode>
+            where TNode : IHasId, IHasOutgoingArcs<TArc>
+            where TArc : IHasDestination<TNode>
         {
             if (nodes is null)
             {
