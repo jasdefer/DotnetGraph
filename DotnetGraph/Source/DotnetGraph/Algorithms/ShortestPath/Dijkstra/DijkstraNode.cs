@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 {
-    public class DijkstraNode : 
+    public class DijkstraNode :
         IHasOutgoingArcs<DijkstraArc>,
         IHasId
     {

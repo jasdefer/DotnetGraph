@@ -6,7 +6,7 @@ namespace DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph
         int Id,
         double Weight,
         WeightedUndirectedGraphNode Node1,
-        WeightedUndirectedGraphNode Node2) 
+        WeightedUndirectedGraphNode Node2)
             :
         IHasId,
         IHasWeight,
