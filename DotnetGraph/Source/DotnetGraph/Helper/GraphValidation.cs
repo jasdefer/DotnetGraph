@@ -1,4 +1,5 @@
-﻿using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Helper.Exceptions;
+using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace DotnetGraph.Helper
             }
             if (uniqueIds.Count != numberOfEntities)
             {
-                throw new Exception($"Found {uniqueIds.Count} unique ids in {numberOfEntities} elements.");
+                throw new IdsNotUniqueException($"Found {uniqueIds.Count} unique ids in {numberOfEntities} elements.");
             }
         }
 
@@ -54,7 +55,7 @@ namespace DotnetGraph.Helper
 
             if (uniqueArcIds.Count != numberOfArcs)
             {
-                throw new Exception($"Found {uniqueArcIds.Count} unique arc ids for {numberOfArcs} arcs");
+                throw new IdsNotUniqueException($"Found {uniqueArcIds.Count} unique arc ids for {numberOfArcs} arcs");
             }
         }
 
@@ -66,11 +67,6 @@ namespace DotnetGraph.Helper
             if (entities is null)
             {
                 throw new ArgumentNullException(nameof(entities));
-            }
-
-            if (ids is null)
-            {
-                return;
             }
 
             var foundId = new bool[ids.Length];
@@ -87,7 +83,7 @@ namespace DotnetGraph.Helper
 
             if (foundId.Any(x => x == false))
             {
-                throw new Exception($"Not every id exists in the list of entities.");
+                throw new InvalidIdException($"Not every id exists in the list of entities.");
             }
         }
 
@@ -109,7 +105,7 @@ namespace DotnetGraph.Helper
                 {
                     if (arc.Weight < 0)
                     {
-                        throw new Exception($"At least one arc has a negative weight of {arc.Weight}");
+                        throw new NegativeWeightException($"At least one arc has a negative weight of {arc.Weight}");
                     }
                 }
             }

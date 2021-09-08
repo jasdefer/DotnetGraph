@@ -1,4 +1,5 @@
 ﻿using DotnetGraph.Helper;
+using DotnetGraph.Helper.Exceptions;
 using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 {
     public class DijkstraAlgorithm : IShortestPathAlgorithm
     {
-        public ShortestPathResult<TArc> GetShortestPath<TNode, TArc>(IList<TNode> nodes, int originNodeId, int destinationNodeId)
+        public ShortestPathResult<TArc> GetShortestPath<TNode, TArc>(IReadOnlyList<TNode> nodes, int originNodeId, int destinationNodeId)
             where TArc : IHasDestination<TNode>, IHasWeight, IHasId
             where TNode : IHasOutgoingArcs<TArc>, IHasId
         {
@@ -18,8 +19,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             return shortestPathResult;
         }
 
-
-        public static List<DijkstraNode> Convert<TNode, TArc>(IList<TNode> nodes)
+        public static IReadOnlyList<DijkstraNode> Convert<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasWeight, IHasId
         {
@@ -42,7 +42,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             return dict.Values.ToList();
         }
 
-        public static ShortestPathResult<TArc> ConvertResult<TNode, TArc>(IList<TNode> nodes, ShortestPathResult<DijkstraArc> dijkstraResult)
+        public static ShortestPathResult<TArc> ConvertResult<TNode, TArc>(IReadOnlyList<TNode> nodes, ShortestPathResult<DijkstraArc> dijkstraResult)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasWeight, IHasId
         {
@@ -62,7 +62,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             return result;
         }
 
-        public static ShortestPathResult<DijkstraArc> GetShortestPath(List<DijkstraNode> inputNodes,
+        public static ShortestPathResult<DijkstraArc> GetShortestPath(IReadOnlyList<DijkstraNode> inputNodes,
             int originNodeId,
             int destinationNodeId)
         {
@@ -80,7 +80,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                 {
                     if (arc.Weight < 0)
                     {
-                        throw new Exception("Dijkstra cannot handle arcs with negative weights.");
+                        throw new NegativeWeightException("Dijkstra cannot handle arcs with negative weights.");
                     }
 
                     var newDistance = node.DistanceFromOrigin.Value + arc.Weight;
@@ -88,10 +88,10 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                 }
             }
             ValidateInput(inputNodes, originNodeId, destinationNodeId);
-            throw new Exception($"Could not reach the destination.");
+            throw new InvalidDestinationException("Could not reach the destination.");
         }
 
-        public static void ValidateInput(List<DijkstraNode> nodes, int originNodeId, int destinationNodeId)
+        public static void ValidateInput(IReadOnlyList<DijkstraNode> nodes, int originNodeId, int destinationNodeId)
         {
             GraphValidation.ValidateUniqueIds(nodes);
             GraphValidation.ValidateUniqueArcIds(nodes);
@@ -99,7 +99,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
             GraphValidation.ValidateOnlyPositiveWeights<DijkstraNode, DijkstraArc>(nodes);
         }
 
-        public static DijkstraNode GetOrigin(List<DijkstraNode> nodes, int originNodeId)
+        public static DijkstraNode GetOrigin(IReadOnlyList<DijkstraNode> nodes, int originNodeId)
         {
             if (nodes is null)
             {
@@ -120,7 +120,7 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 
             if (originIndex == -1)
             {
-                throw new Exception($"Cannot find the origin node id {originNodeId}");
+                throw new KeyNotFoundException($"Cannot find the origin node id {originNodeId}");
             }
 
             return nodes[originIndex];

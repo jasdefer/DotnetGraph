@@ -1,9 +1,9 @@
 ﻿using DotnetGraph.Helper;
+using DotnetGraph.Helper.Exceptions;
 using DotnetGraph.Model.Implementations;
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace DotnetGraphTest.Helper
 {
@@ -25,7 +25,7 @@ namespace DotnetGraphTest.Helper
                 new Entity(1),
                 new Entity(1)
             };
-            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateUniqueIds(entites));
+            Assert.ThrowsException<IdsNotUniqueException>(() => GraphValidation.ValidateUniqueIds(entites));
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace DotnetGraphTest.Helper
             nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
             nodes[0].Add(new DirectedGraphArc(2, nodes[2]));
             nodes[1].Add(new DirectedGraphArc(2, nodes[2]));
-            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateUniqueArcIds(nodes));
+            Assert.ThrowsException<IdsNotUniqueException>(() => GraphValidation.ValidateUniqueArcIds(nodes));
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace DotnetGraphTest.Helper
         public void IdExistsInvalid()
         {
             var entites = CreateEntities(4);
-            Assert.ThrowsException<Exception>(() => GraphValidation.IdExists(entites, 1, 5, 2));
+            Assert.ThrowsException<InvalidIdException>(() => GraphValidation.IdExists(entites, 1, 5, 2));
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace DotnetGraphTest.Helper
 
             nodes[0].Add(new WeightedDirectedGraphArc(1, 1, nodes[1]));
             nodes[0].Add(new WeightedDirectedGraphArc(2, -1, nodes[1]));
-            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes));
+            Assert.ThrowsException<NegativeWeightException>(() => GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes));
         }
 
         private static Entity[] CreateEntities(int numberOfEntities)

@@ -12,7 +12,7 @@ namespace DotnetGraph.Helper
             }
             if (numberOfNodes > 65000)
             {
-                throw new Exception($"The number of possible edges is bigger than the maximum int value for a graph with {numberOfNodes} nodes.");
+                throw new ArgumentOutOfRangeException($"The number of possible edges is bigger than the maximum int value for a graph with {numberOfNodes} nodes.");
             }
             //Applying the commutative law help reducing the max number in the calculation
             //This prevents some interim result bigger than int.MaxValue
