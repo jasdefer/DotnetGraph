@@ -32,11 +32,11 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 
             for (int i = 0; i < nodes.Count; i++)
             {
-                var originId = nodes[i].Id;
+                var origin = dict[nodes[i].Id];
                 foreach (var arc in nodes[i].OutgoingArcs)
                 {
-                    var dijkstraArc = new DijkstraArc(arc.Id, arc.Weight, dict[originId], dict[arc.Destination.Id]);
-                    dict[nodes[i].Id].AddArc(dijkstraArc);
+                    var dijkstraArc = new DijkstraArc(arc.Id, arc.Weight, origin, dict[arc.Destination.Id]);
+                    origin.AddArc(dijkstraArc);
                 }
             }
             return dict.Values.ToList();
