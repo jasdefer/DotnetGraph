@@ -156,7 +156,7 @@ namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
 
             if (originIndex == -1)
             {
-                throw new Exception($"Cannot find the origin node id {originNodeId}");
+                throw new KeyNotFoundException($"Cannot find the origin node id {originNodeId}");
             }
 
             return nodes[originIndex];

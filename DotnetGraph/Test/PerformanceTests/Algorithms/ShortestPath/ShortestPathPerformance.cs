@@ -10,7 +10,7 @@ namespace PerformanceTests.Algorithms.ShortestPath
     public class ShortestPathPerformance
     {
         private WeightedDirectedGraphNode[] baseNodes;
-        private List<DijkstraNode> dijkstraNodes;
+        private IReadOnlyList<DijkstraNode> dijkstraNodes;
         private int originNodeId;
         private int destinationNodeId;
 
