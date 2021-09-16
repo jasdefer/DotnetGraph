@@ -1,6 +1,7 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.LineGraph;
 using DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
         public FlowDirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator capacityGenerator)
         {
             var lineGraphGenerator = new LineGraphGenerator();
-            var nodes = lineGraphGenerator.Generate(numberOfNodes, 2 * density, capacityGenerator);
+            var nodes = lineGraphGenerator.Generate(numberOfNodes, Math.Min(1,2 * density), capacityGenerator);
             var dict = nodes.ToDictionary(
                 x => x.Id,
                 x => new FlowDirectedGraphNode(x.Id, new List<FlowDirectedGraphArc>()));
