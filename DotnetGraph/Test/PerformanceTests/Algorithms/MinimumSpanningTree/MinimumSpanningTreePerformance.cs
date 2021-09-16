@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.ErdosRenyi;
 using DotnetGraph.Algorithms.MinimumSpanningTree.Kruskal;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
@@ -14,7 +14,7 @@ namespace PerformanceTests.Algorithms.MinimumSpanningTree
         public void Setup()
         {
             var generator = new ErdosRenyiGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             nodes = generator.Generate(10000, 0.004, weightGenerator);
         }
 

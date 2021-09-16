@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.ErdosRenyi;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
@@ -19,7 +19,7 @@ namespace PerformanceTests.Algorithms.Components.StronglyConnectedComponents
             {
                 WeightedUndirectedGraphGenerator = new ErdosRenyiGenerator()
             };
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             nodes = algorithm.Generate(10000, 0.0004, weightGenerator);
             tarjanNodes = TarjanAlgorithm.Convert<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes);
         }

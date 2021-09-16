@@ -1,6 +1,6 @@
 ﻿using DotnetGraph.Algorithms.Components.ConnectedComponents;
 using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 using System;
 
@@ -12,7 +12,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
         public bool ConnectComponents { get; set; } = true;
         public IConnectedComponentsAlgorithm ComponentsAlgorithm { get; set; } = new SimpleConnectedComponentAlgorithm();
 
-        public WeightedUndirectedGraphNode[] Generate(int numberOfNodes, double density, IWeightGenerator weightGenerator)
+        public WeightedUndirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator weightGenerator)
         {
             ValidateInput(numberOfNodes, density, weightGenerator);
             var nodes = GenerateNodes(numberOfNodes);
@@ -24,7 +24,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
             return nodes;
         }
 
-        public void ConnectAllComponents(WeightedUndirectedGraphNode[] nodes, IWeightGenerator weightGenerator, int numberOfEdges)
+        public void ConnectAllComponents(WeightedUndirectedGraphNode[] nodes, INumberGenerator weightGenerator, int numberOfEdges)
         {
             if (nodes is null)
             {
@@ -48,7 +48,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
             }
         }
 
-        public int CreateUniformLikelyEdges(WeightedUndirectedGraphNode[] nodes, double density, IWeightGenerator weightGenerator)
+        public int CreateUniformLikelyEdges(WeightedUndirectedGraphNode[] nodes, double density, INumberGenerator weightGenerator)
         {
             if (nodes is null)
             {
@@ -87,7 +87,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
             return nodes;
         }
 
-        public static void ValidateInput(int numberOfNodes, double density, IWeightGenerator weightGenerator)
+        public static void ValidateInput(int numberOfNodes, double density, INumberGenerator weightGenerator)
         {
             if (numberOfNodes < 0)
             {

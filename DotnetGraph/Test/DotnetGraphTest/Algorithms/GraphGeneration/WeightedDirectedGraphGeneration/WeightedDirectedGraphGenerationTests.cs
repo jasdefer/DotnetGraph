@@ -1,6 +1,7 @@
-﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration;
 using DotnetGraph.Helper;
+using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGenera
         public void Monkey()
         {
             var generator = GetGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             for (int i = 0; i < 10; i++)
             {
                 var numberOfNodes = 4 + 100 * i;

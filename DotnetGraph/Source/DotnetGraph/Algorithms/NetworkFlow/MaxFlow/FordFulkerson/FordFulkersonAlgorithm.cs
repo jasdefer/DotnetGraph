@@ -1,4 +1,5 @@
 ﻿using DotnetGraph.Helper;
+using DotnetGraph.Helper.Exceptions;
 using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
@@ -8,21 +9,28 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
 {
     public class FordFulkersonAlgorithm : IMaxFlowAlgorithm
     {
-        public void SetFlow<TNode, TArc>(IList<TNode> nodes, int originNodeId, int destinationNodeId)
+        public void SetFlow<TNode, TArc>(IReadOnlyList<TNode> nodes, int originNodeId, int destinationNodeId)
             where TNode : IHasId, IHasOutgoingArcs<TArc>
             where TArc : IHasId, IHasDestination<TNode>, IHasCapacity, IHasFlow
         {
             var fordFulkersonNodes = Convert<TNode, TArc>(nodes);
-            //Remove antiparallel arcs
+            // Remove antiparallel arcs
             SetFlow(fordFulkersonNodes, originNodeId, destinationNodeId);
-            //Run algorithm
-            //reconvert
-            //set flows
+
+            // Copy the resulting flows to the arcs of the given input nodes
+            var dict = fordFulkersonNodes.SelectMany(x => x.OutgoingArcs).ToDictionary(x => x.Id, x => x.Flow);
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                foreach (var arc in nodes[i].OutgoingArcs)
+                {
+                    arc.Flow = dict[arc.Id];
+                }
+            }
         }
 
         #region SetFlow
 
-        public static void SetFlow(IList<FordFulkersonNode> nodes, int originNodeId, int destinationNodeId)
+        public static void SetFlow(IReadOnlyList<FordFulkersonNode> nodes, int originNodeId, int destinationNodeId)
         {
             if (nodes is null)
             {
@@ -39,7 +47,7 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
             var augmentingPath = GetAugmentingPath(nodes, originNodeId, destinationNodeId);
             if (augmentingPath == null)
             {
-                throw new Exception($"There is no flow possible between the origin {originNodeId} to {destinationNodeId}.");
+                throw new InvalidDestinationException($"There is no flow possible between the origin {originNodeId} to {destinationNodeId}.");
             }
             while (augmentingPath != null)
             {
@@ -87,7 +95,7 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
                 }
                 else
                 {
-                    throw new Exception("Invalid path");
+                    throw new ArgumentException("Invalid path", nameof(path));
                 }
 
                 //Update the minimum residual capacity
@@ -100,9 +108,8 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
         }
         #endregion
 
-
         #region Augmenting Path
-        private static List<FordFulkersonArc> GetAugmentingPath(IList<FordFulkersonNode> nodes, int originNodeId, int destinationNodeId)
+        private static List<FordFulkersonArc> GetAugmentingPath(IReadOnlyList<FordFulkersonNode> nodes, int originNodeId, int destinationNodeId)
         {
             //Breadth-First-Search to find the shortest path from the origin to the destination
             //The shortest path is the path with the fewest arcs
@@ -153,7 +160,7 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
             return null;
         }
 
-        private static Queue<FordFulkersonNode> InitializeAugmentingPathSearch(IList<FordFulkersonNode> nodes, int originNodeId)
+        private static Queue<FordFulkersonNode> InitializeAugmentingPathSearch(IReadOnlyList<FordFulkersonNode> nodes, int originNodeId)
         {
             var queue = new Queue<FordFulkersonNode>();
             for (int i = 0; i < nodes.Count; i++)
@@ -168,10 +175,11 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
             }
             if (queue.Count != 1)
             {
-                throw new Exception($"Origin node {originNodeId} not found.");
+                throw new KeyNotFoundException($"Origin node {originNodeId} not found.");
             }
             return queue;
         }
+
         private static List<FordFulkersonArc> GetPath(FordFulkersonNode node, int originNodeId)
         {
             var path = new List<FordFulkersonArc>();
@@ -186,7 +194,7 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
         #endregion
 
         #region Conversion And Validation
-        public static List<FordFulkersonNode> Convert<TNode, TArc>(IList<TNode> nodes)
+        public static IReadOnlyList<FordFulkersonNode> Convert<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasId, IHasOutgoingArcs<TArc>
             where TArc : IHasId, IHasDestination<TNode>, IHasCapacity, IHasFlow
         {
@@ -205,7 +213,7 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
                     node.AddOutgoingArc(fordFulkersonArc);
                     if (arc.Destination.OutgoingArcs.Any(x => x.Destination.Id == nodes[i].Id))
                     {
-                        throw new Exception("This algorithm does not support graphs with antiparallel arcs.");
+                        throw new HasAntiparallelArcException("This algorithm does not support graphs with antiparallel arcs.");
                     }
                 }
             }

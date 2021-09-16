@@ -49,7 +49,7 @@ namespace DotnetGraph.Helper
                 {
                     if (arc.Capacity < 0)
                     {
-                        throw new Exception($"At least one arc has a negative capacity of {arc.Capacity}");
+                        throw new NegativeWeightException($"At least one arc has a negative capacity of {arc.Capacity}");
                     }
                 }
             }
@@ -152,7 +152,7 @@ namespace DotnetGraph.Helper
                 var hasAntiparallelArcs = nodes[i].OutgoingArcs.Any(x => x.Destination.OutgoingArcs.Any(y => y.Destination.Id == nodes[i].Id));
                 if (hasAntiparallelArcs)
                 {
-                    throw new Exception($"Node {nodes[i].Id} has antiparallel arcs.");
+                    throw new HasAntiparallelArcException($"Node {nodes[i].Id} has antiparallel arcs.");
                 }
             }
         }

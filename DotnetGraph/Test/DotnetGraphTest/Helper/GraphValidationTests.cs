@@ -113,7 +113,7 @@ namespace DotnetGraphTest.Helper
 
             nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
             nodes[1].Add(new DirectedGraphArc(2, nodes[0]));
-            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateNoAntiparallelArcs<DirectedGraphNode, DirectedGraphArc>(nodes));
+            Assert.ThrowsException<HasAntiparallelArcException>(() => GraphValidation.ValidateNoAntiparallelArcs<DirectedGraphNode, DirectedGraphArc>(nodes));
         }
 
         [TestMethod]
