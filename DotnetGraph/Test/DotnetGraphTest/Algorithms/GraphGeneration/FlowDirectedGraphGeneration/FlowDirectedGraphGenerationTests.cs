@@ -1,6 +1,6 @@
-﻿using DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan;
-using DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration;
+﻿using DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration;
 using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
+using DotnetGraph.Helper;
 using DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -26,7 +26,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
                 var numberOfNodes = (i + 1) * 10;
                 var density = 2.5 / (numberOfNodes);
                 var nodes = generator.Generate(numberOfNodes, density, capacityGenerator);
-
+                PrintGraph.PrintFlowDirectedGraph<FlowDirectedGraphNode, FlowDirectedGraphArc>($"i_{i}.csv", nodes);
                 // Assert
                 Assert.IsNotNull(nodes);
                 Assert.AreEqual(numberOfNodes, nodes.Length);
@@ -34,9 +34,6 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
                 var numberOfExpectedArcs = numberOfNodes * numberOfNodes * density;
                 var delta = Math.Max(3, numberOfExpectedArcs * 0.2);
                 Assert.AreEqual(numberOfExpectedArcs, numberOfArcs, delta);
-                var componentAlgorithm = new TarjanAlgorithm();
-                var components = componentAlgorithm.GetCompontents<FlowDirectedGraphNode, FlowDirectedGraphArc>(nodes);
-                Assert.AreEqual(1, components.NumberOfComponents);
             }
         }
     }

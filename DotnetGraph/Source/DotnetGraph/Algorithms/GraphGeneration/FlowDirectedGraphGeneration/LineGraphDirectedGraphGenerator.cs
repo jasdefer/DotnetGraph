@@ -1,27 +1,31 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.CornerFlow;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.LineGraph;
 using DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
 {
-    public class CornerFlowFlowDirectedGraphGenerator : IFlowDirectedGraphGenerator
+    public class LineGraphDirectedGraphGenerator : IFlowDirectedGraphGenerator
     {
         public FlowDirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator capacityGenerator)
         {
-            var flowGenerator = new CornerFlowAlgorithm();
-            var nodes = flowGenerator.Generate(numberOfNodes, density, capacityGenerator);
+            var lineGraphGenerator = new LineGraphGenerator();
+            var nodes = lineGraphGenerator.Generate(numberOfNodes, 2 * density, capacityGenerator);
             var dict = nodes.ToDictionary(
                 x => x.Id,
                 x => new FlowDirectedGraphNode(x.Id, new List<FlowDirectedGraphArc>()));
             for (int i = 0; i < nodes.Length; i++)
             {
                 var origin = dict[nodes[i].Id];
-                foreach (var arc in nodes[i].OutgoingArcs)
+                foreach (var edge in nodes[i].Edges)
                 {
-                    var flowDirectedGraphArc = new FlowDirectedGraphArc(arc.Id, arc.Weight, dict[arc.Destination.Id]);
-                    origin.Add(flowDirectedGraphArc);
+                    if (edge.Node2.Id > origin.Id)
+                    {
+                        var flowDirectedGraphArc = new FlowDirectedGraphArc(edge.Id, edge.Weight, dict[edge.Node2.Id]);
+                        origin.Add(flowDirectedGraphArc);
+                    }
+
                 }
             }
             return dict.Values.ToArray();

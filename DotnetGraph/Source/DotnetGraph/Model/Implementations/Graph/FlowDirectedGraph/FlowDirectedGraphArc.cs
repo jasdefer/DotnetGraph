@@ -19,5 +19,10 @@ namespace DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph
         public double Capacity { get; }
         public FlowDirectedGraphNode Destination { get; }
         public double Flow { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Id}: to {Destination.Id} ({Flow}/{Capacity})";
+        }
     }
 }

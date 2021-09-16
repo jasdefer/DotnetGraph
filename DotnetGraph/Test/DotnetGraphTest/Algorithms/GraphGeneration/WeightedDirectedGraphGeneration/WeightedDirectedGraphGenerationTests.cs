@@ -1,7 +1,6 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration;
 using DotnetGraph.Helper;
-using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;

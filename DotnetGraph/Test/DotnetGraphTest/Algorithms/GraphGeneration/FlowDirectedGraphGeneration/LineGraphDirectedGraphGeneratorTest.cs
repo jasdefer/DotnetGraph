@@ -4,11 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DotnetGraphTest.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
 {
     [TestClass]
-    public class CornerFlowFlowDirectedGraphGeneratorTest : FlowDirectedGraphGenerationTests
+    public class LineGraphDirectedGraphGeneratorTest : FlowDirectedGraphGenerationTests
     {
         protected override IFlowDirectedGraphGenerator GetGenerator()
         {
-            return new CornerFlowFlowDirectedGraphGenerator();
+            return new LineGraphDirectedGraphGenerator();
         }
     }
 }

@@ -3,6 +3,8 @@ using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 
 namespace DotnetGraph.Helper
@@ -58,6 +60,47 @@ namespace DotnetGraph.Helper
                 origin.Add(arc);
             }
             return nodes.Values.ToArray();
+        }
+
+        /// <summary>
+        /// Convert a well known string to a graph.
+        /// </summary>
+        /// <param name="wkn">The string contains a line for each arc. Each lines has the structure: {OriginId}{<paramref name="separator"/>}{DestinationId}{<paramref name="separator"/>}{Weight}</param>
+        public static WeightedDirectedGraphNode[] GetNodes(string wkn, string separator = "\t")
+        {
+            if (wkn is null)
+            {
+                throw new ArgumentNullException(nameof(wkn));
+            }
+            var dict = new Dictionary<int, WeightedDirectedGraphNode>(wkn.Length / 10);
+            var arcId = 0;
+            using (var reader = new StringReader(wkn))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var args = line.Split(separator);
+                    if (args.Length < 3)
+                    {
+                        throw new ArgumentException($"Invalid input string.");
+                    }
+                    var originId = int.Parse(args[0], CultureInfo.InvariantCulture);
+                    var destinationId = int.Parse(args[1], CultureInfo.InvariantCulture);
+                    var weight = double.Parse(args[2], CultureInfo.InvariantCulture);
+                    if (!dict.ContainsKey(originId))
+                    {
+                        dict.Add(originId, new WeightedDirectedGraphNode(originId));
+                    }
+
+                    if (!dict.ContainsKey(destinationId))
+                    {
+                        dict.Add(destinationId, new WeightedDirectedGraphNode(destinationId));
+                    }
+                    var arc = new WeightedDirectedGraphArc(++arcId, weight, dict[destinationId]);
+                    dict[originId].Add(arc);
+                }
+            }
+            return dict.Values.ToArray();
         }
     }
 }

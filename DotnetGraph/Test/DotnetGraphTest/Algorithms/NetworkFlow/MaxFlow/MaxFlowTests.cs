@@ -70,13 +70,13 @@ namespace DotnetGraphTest.Algorithms.NetworkFlow.MaxFlow
         [TestMethod]
         public void Monkey()
         {
-            var generator = new CornerFlowFlowDirectedGraphGenerator();
-            var capacityGenerator = new UniformNumberGenerator(1,10);
+            var generator = new LineGraphDirectedGraphGenerator();
+            var capacityGenerator = new UniformNumberGenerator(1, 10);
             var algorithm = GetAlgorithm();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 15; i++)
             {
-                var numberOfNodes = (i + 1) * 10;
-                var density = 2.5 / numberOfNodes;
+                var numberOfNodes = (i + 1) * 100;
+                var density = (2.5 + i % 3 == 0 ? 2 : 0) / numberOfNodes;
                 var nodes = generator.Generate(numberOfNodes, density, capacityGenerator);
                 PrintGraph.PrintFlowDirectedGraph<FlowDirectedGraphNode, FlowDirectedGraphArc>("flow.csv", nodes);
                 algorithm.SetFlow<FlowDirectedGraphNode, FlowDirectedGraphArc>(nodes, 1, numberOfNodes);
