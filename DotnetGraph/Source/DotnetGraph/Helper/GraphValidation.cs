@@ -34,7 +34,7 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check, if all arcs leaving the given nodes have non negative capacities.
         /// </summary>
-        public static void ValidateOnlyPositiveCapacities<TNode, TArc>(IList<TNode> nodes)
+        public static void ValidateOnlyPositiveCapacities<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>
             where TArc : IHasCapacity
         {
@@ -138,7 +138,7 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check, if any node has antiparallel arcs. Two arcs are antiparallel, if the first connects node 2 from node 1 and the second node 1 from node 2.
         /// </summary>
-        public static void ValidateNoAntiparallelArcs<TNode, TArc>(IList<TNode> nodes)
+        public static void ValidateNoAntiparallelArcs<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
             where TNode : IHasId, IHasOutgoingArcs<TArc>
             where TArc : IHasDestination<TNode>
         {
@@ -147,12 +147,12 @@ namespace DotnetGraph.Helper
                 throw new ArgumentNullException(nameof(nodes));
             }
 
-            for (int i = 0; i < nodes.Count; i++)
+            foreach (var node in nodes)
             {
-                var hasAntiparallelArcs = nodes[i].OutgoingArcs.Any(x => x.Destination.OutgoingArcs.Any(y => y.Destination.Id == nodes[i].Id));
+                var hasAntiparallelArcs = node.OutgoingArcs.Any(x => x.Destination.OutgoingArcs.Any(y => y.Destination.Id == node.Id));
                 if (hasAntiparallelArcs)
                 {
-                    throw new HasAntiparallelArcException($"Node {nodes[i].Id} has antiparallel arcs.");
+                    throw new HasAntiparallelArcException($"Node {node.Id} has antiparallel arcs.");
                 }
             }
         }

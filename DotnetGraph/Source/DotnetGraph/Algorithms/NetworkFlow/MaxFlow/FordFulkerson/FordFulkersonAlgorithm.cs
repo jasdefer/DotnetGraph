@@ -36,9 +36,9 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
             {
                 throw new ArgumentNullException(nameof(nodes));
             }
-            foreach (var node in nodes)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                foreach (var arc in node.OutgoingArcs)
+                foreach (var arc in nodes[i].OutgoingArcs)
                 {
                     arc.Flow = 0;
                 }
@@ -220,8 +220,7 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
             return dict.Values.ToList();
         }
 
-        public static void ValidateInput<TNode, TArc>(IList<FordFulkersonNode> nodes, int originNodeId, int destinationNodeId)
-            where TNode : IHasId
+        public static void ValidateInput(IReadOnlyCollection<FordFulkersonNode> nodes, int originNodeId, int destinationNodeId)
         {
             GraphValidation.IdExists(nodes, originNodeId, destinationNodeId);
             GraphValidation.ValidateUniqueIds(nodes);

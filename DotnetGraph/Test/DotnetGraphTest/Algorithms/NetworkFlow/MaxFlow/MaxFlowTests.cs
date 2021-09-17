@@ -1,7 +1,6 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration;
 using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.NetworkFlow.MaxFlow;
-using DotnetGraph.Helper;
 using DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph;
 using DotnetGraph.Model.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

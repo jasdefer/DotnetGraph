@@ -3,6 +3,7 @@ using PerformanceTests.Algorithms.Components.ConnectedComponents;
 using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
 using PerformanceTests.Algorithms.GraphGeneration;
 using PerformanceTests.Algorithms.MinimumSpanningTree;
+using PerformanceTests.Algorithms.NetworkFlow.MaxFlow;
 using PerformanceTests.Algorithms.ShortestPath;
 using PerformanceTests.Algorithms.ShortestPathTree;
 
@@ -22,6 +23,7 @@ namespace PerformanceTests
             //ProfileTarjanAlgorithmWithConversion();
             //ProfileDijkstra();
             //ProfileFifoRaw();
+            //ProfileFordFulkerson();
         }
 
         private static void RunBenchmarkDotNet()
@@ -32,6 +34,7 @@ namespace PerformanceTests
             var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
             var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
             var shortestPathTreePerformance = BenchmarkRunner.Run<ShortestPathTreePerformance>();
+            var forderFulkersonPerformance = BenchmarkRunner.Run<FordFulkersonPerformance>();
         }
 
         private static double ProfileKruskal()
@@ -150,6 +153,19 @@ namespace PerformanceTests
             for (int i = 0; i < 1000000; i++)
             {
                 total += performanceTest.RawTarjanAlgorithm();
+            }
+            return total;
+        }
+
+        private static double ProfileFordFulkerson()
+        {
+            var performanceTest = new FordFulkersonPerformance();
+            performanceTest.Setup();
+            var total = 0d;
+            for (int i = 0; i < 100000; i++)
+            {
+                //total += performanceTest.FordFulkersonWithConversion();
+                total += performanceTest.FordFulkersonRaw();
             }
             return total;
         }
