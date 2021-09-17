@@ -12,7 +12,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
         public FlowDirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator capacityGenerator)
         {
             var lineGraphGenerator = new LineGraphGenerator();
-            var nodes = lineGraphGenerator.Generate(numberOfNodes, Math.Min(1,2 * density), capacityGenerator);
+            var nodes = lineGraphGenerator.Generate(numberOfNodes, Math.Min(1, 2 * density), capacityGenerator);
             var dict = nodes.ToDictionary(
                 x => x.Id,
                 x => new FlowDirectedGraphNode(x.Id, new List<FlowDirectedGraphArc>()));

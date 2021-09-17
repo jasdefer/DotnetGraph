@@ -24,7 +24,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
             {
                 // Act
                 var numberOfNodes = (i + 1) * 10;
-                var density = (2.5 + (i%3==0?2:0)) / (double)(numberOfNodes);
+                var density = (2.5 + (i % 3 == 0 ? 2 : 0)) / (double)(numberOfNodes);
                 var nodes = generator.Generate(numberOfNodes, density, capacityGenerator);
                 PrintGraph.PrintFlowDirectedGraph<FlowDirectedGraphNode, FlowDirectedGraphArc>($"i_{i}.csv", nodes);
                 // Assert

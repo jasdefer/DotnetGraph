@@ -78,12 +78,10 @@ namespace DotnetGraphTest.Algorithms.NetworkFlow.MaxFlow
                 var numberOfNodes = (i + 1) * 2;
                 var density = (1.5 + (i % 3 == 0 ? 1 : 0)) / numberOfNodes;
                 var nodes = generator.Generate(numberOfNodes, density, capacityGenerator);
-                PrintGraph.PrintFlowDirectedGraph<FlowDirectedGraphNode, FlowDirectedGraphArc>("flow.csv", nodes);
                 algorithm.SetFlow<FlowDirectedGraphNode, FlowDirectedGraphArc>(nodes, 1, numberOfNodes);
                 Assert.IsNotNull(nodes);
                 Assert.AreEqual(numberOfNodes, nodes.Length);
                 AssertFlow<FlowDirectedGraphNode, FlowDirectedGraphArc>(nodes, 1, numberOfNodes);
-                PrintGraph.PrintFlowDirectedGraph<FlowDirectedGraphNode, FlowDirectedGraphArc>($"i_{i}.csv",nodes);
             }
         }
     }

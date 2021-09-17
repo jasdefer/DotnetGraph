@@ -113,15 +113,15 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
                 stack.Count > 0)
             {
                 var component = new List<TarjanNode>();
-                TarjanNode jo;
+                TarjanNode node;
                 do
                 {
-                    jo = stack[^1];
-                    jo.IsOnStack = false;
+                    node = stack[^1];
+                    node.IsOnStack = false;
                     stack.RemoveAt(stack.Count - 1);
-                    component.Add(jo);
+                    component.Add(node);
                 }
-                while (jo != tarjanNode);
+                while (node != tarjanNode);
                 components.Add(component.AsReadOnly());
             }
         }
