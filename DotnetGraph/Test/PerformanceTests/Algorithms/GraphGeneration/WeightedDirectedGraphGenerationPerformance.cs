@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.LineGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
@@ -21,7 +21,7 @@ namespace PerformanceTests.Algorithms.GraphGeneration
         {
             var generator = new LineGraphGenerator();
             var density = 5d / (NumberOfNodes + 1);
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             weightedUndirectedGraphNodes = generator.Generate(NumberOfNodes, density, weightGenerator);
         }
 

@@ -1,4 +1,4 @@
-﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Helper;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using System;
@@ -10,7 +10,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
     public class CornerFlowAlgorithm : IWeightedDirectedGraphGenerator
     {
         public Random Random { get; set; } = new Random(1);
-        public WeightedDirectedGraphNode[] Generate(int numberOfNodes, double density, IWeightGenerator weightGenerator)
+        public WeightedDirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator weightGenerator)
         {
             var expectedNumberOfArcs = GraphPropertyHelper.NumberOfArcs(numberOfNodes, density);
             var dimensions = (int)Math.Ceiling((double)expectedNumberOfArcs / (numberOfNodes - 1));
@@ -21,12 +21,10 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
             return nodes;
         }
 
-
-
         private static void AddArcs(WeightedDirectedGraphNode[] nodes,
             int[][] orderOfNodesPerDimension,
             int dimensions,
-            IWeightGenerator weightGenerator,
+            INumberGenerator weightGenerator,
             int maxNumberOfArcs)
         {
             if (weightGenerator is null)
@@ -38,9 +36,10 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
             var dict = nodes.ToDictionary(x => x.Id, x => x);
             for (int i = 0; i < dimensions; i++)
             {
-                var origin = dict[orderOfNodesPerDimension[i][0]];
+
                 for (int j = 1; j < orderOfNodesPerDimension[i].Length; j++)
                 {
+                    var origin = dict[orderOfNodesPerDimension[i][j - 1]];
                     var destination = dict[orderOfNodesPerDimension[i][j]];
                     var weight = weightGenerator.Generate();
                     var arc = new WeightedDirectedGraphArc(++arcId, weight, destination);

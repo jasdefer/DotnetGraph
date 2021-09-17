@@ -1,4 +1,4 @@
-﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
 using DotnetGraph.Algorithms.ShortestPath.Dijkstra;
 using DotnetGraph.Algorithms.ShortestPathTree;
@@ -42,7 +42,7 @@ namespace DotnetGraphTest.Algorithms.ShortestPathTree
         {
             var algorithm = GetAlgorithm();
             var generator = new UndirectedToDirectedGraphGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             var dijkstra = new DijkstraAlgorithm();
             for (int i = 0; i < 2; i++)
             {

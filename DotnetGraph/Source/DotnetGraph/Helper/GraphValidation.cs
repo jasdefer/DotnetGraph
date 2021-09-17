@@ -32,6 +32,30 @@ namespace DotnetGraph.Helper
         }
 
         /// <summary>
+        /// Check, if all arcs leaving the given nodes have non negative capacities.
+        /// </summary>
+        public static void ValidateOnlyPositiveCapacities<TNode, TArc>(IList<TNode> nodes)
+            where TNode : IHasOutgoingArcs<TArc>
+            where TArc : IHasCapacity
+        {
+            if (nodes is null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            foreach (var node in nodes)
+            {
+                foreach (var arc in node.OutgoingArcs)
+                {
+                    if (arc.Capacity < 0)
+                    {
+                        throw new NegativeWeightException($"At least one arc has a negative capacity of {arc.Capacity}");
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Check, if all arcs leaving the given nodes have a unique id.
         /// </summary>
         public static void ValidateUniqueArcIds<TArc>(IEnumerable<IHasOutgoingArcs<TArc>> nodes)
@@ -107,6 +131,28 @@ namespace DotnetGraph.Helper
                     {
                         throw new NegativeWeightException($"At least one arc has a negative weight of {arc.Weight}");
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check, if any node has antiparallel arcs. Two arcs are antiparallel, if the first connects node 2 from node 1 and the second node 1 from node 2.
+        /// </summary>
+        public static void ValidateNoAntiparallelArcs<TNode, TArc>(IList<TNode> nodes)
+            where TNode : IHasId, IHasOutgoingArcs<TArc>
+            where TArc : IHasDestination<TNode>
+        {
+            if (nodes is null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                var hasAntiparallelArcs = nodes[i].OutgoingArcs.Any(x => x.Destination.OutgoingArcs.Any(y => y.Destination.Id == nodes[i].Id));
+                if (hasAntiparallelArcs)
+                {
+                    throw new HasAntiparallelArcException($"Node {nodes[i].Id} has antiparallel arcs.");
                 }
             }
         }

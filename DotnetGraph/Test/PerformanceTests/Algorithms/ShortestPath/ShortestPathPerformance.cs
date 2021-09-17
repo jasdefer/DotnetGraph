@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
 using DotnetGraph.Algorithms.ShortestPath.Dijkstra;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
@@ -18,7 +18,7 @@ namespace PerformanceTests.Algorithms.ShortestPath
         public void Setup()
         {
             var generator = new UndirectedToDirectedGraphGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             baseNodes = generator.Generate(50000, 0.0000403, weightGenerator);
             originNodeId = 1;
             destinationNodeId = baseNodes.Length;

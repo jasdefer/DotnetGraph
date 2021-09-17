@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.ErdosRenyi;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 
@@ -17,7 +17,7 @@ namespace PerformanceTests.Algorithms.Components.ConnectedComponents
             {
                 ConnectComponents = false
             };
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             nodes = algorithm.Generate(5000, 0.001, weightGenerator);
         }
 

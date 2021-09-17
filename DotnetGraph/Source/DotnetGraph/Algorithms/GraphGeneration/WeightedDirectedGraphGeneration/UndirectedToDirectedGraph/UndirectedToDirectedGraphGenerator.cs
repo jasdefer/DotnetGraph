@@ -1,4 +1,4 @@
-﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.LineGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
@@ -18,7 +18,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
             WeightedUndirectedGraphGenerator = new LineGraphGenerator();
         }
 
-        public WeightedDirectedGraphNode[] Generate(int numberOfNodes, double density, IWeightGenerator weightGenerator)
+        public WeightedDirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator weightGenerator)
         {
             var undirectedNodes = WeightedUndirectedGraphGenerator.Generate(numberOfNodes, density, weightGenerator);
             var nodes = Convert(undirectedNodes);

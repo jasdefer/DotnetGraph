@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.ErdosRenyi;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.LineGraph;
 
@@ -16,7 +16,7 @@ namespace PerformanceTests.Algorithms.GraphGeneration
         public int ErdosRenyi()
         {
             var algorithm = new ErdosRenyiGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             var density = 5d / (NumberOfNodes + 1);
             var nodes = algorithm.Generate(NumberOfNodes, density, weightGenerator);
             return nodes.Length;
@@ -26,7 +26,7 @@ namespace PerformanceTests.Algorithms.GraphGeneration
         public int LineGraph()
         {
             var algorithm = new LineGraphGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             var density = 5d / (NumberOfNodes + 1);
             var nodes = algorithm.Generate(NumberOfNodes, density, weightGenerator);
             return nodes.Length;

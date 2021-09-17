@@ -109,16 +109,19 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             }
 
             //Build the component
-            if (tarjanNode.LowLink == tarjanNode.Index)
+            if (tarjanNode.LowLink == tarjanNode.Index &&
+                stack.Count > 0)
             {
                 var component = new List<TarjanNode>();
-                while (stack.Count > 0)
+                TarjanNode node;
+                do
                 {
-                    component.Add(stack[^1]);
-                    stack[^1].IsOnStack = false;
+                    node = stack[^1];
+                    node.IsOnStack = false;
                     stack.RemoveAt(stack.Count - 1);
+                    component.Add(node);
                 }
-                stack = new List<TarjanNode>();
+                while (node != tarjanNode);
                 components.Add(component.AsReadOnly());
             }
         }
