@@ -1,14 +1,25 @@
 ﻿using DotnetGraph.Model.Properties;
+using System.Collections.Generic;
 
 namespace DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph
 {
     public class WeightedUndirectedGraphNode :
-        IdNodeWithEdge<WeightedUndirectedGraphEdge>,
         IHasId,
         IHasEdges<WeightedUndirectedGraphEdge>
     {
-        public WeightedUndirectedGraphNode(int id) : base(id)
+        private readonly List<WeightedUndirectedGraphEdge> edges;
+        public WeightedUndirectedGraphNode(int id, IReadOnlyCollection<WeightedUndirectedGraphEdge> edges = null)
         {
+            Id = id;
+            this.edges = edges is null ? new List<WeightedUndirectedGraphEdge>() : new List<WeightedUndirectedGraphEdge>(edges);
+        }
+
+        public int Id { get; }
+        public IReadOnlyCollection<WeightedUndirectedGraphEdge> Edges => edges;
+
+        public void Add(WeightedUndirectedGraphEdge edge)
+        {
+            edges.Add(edge);
         }
     }
 }

@@ -2,15 +2,7 @@
 
 namespace DotnetGraph.Model.Implementations.Graph.DirectedGraph
 {
-    public class DirectedGraphArc : Arc<DirectedGraphNode>,
+    public record DirectedGraphArc(int Id, DirectedGraphNode Destination) :
         IHasDestination<DirectedGraphNode>,
-        IHasId
-    {
-        public DirectedGraphArc(int id, DirectedGraphNode destination) : base(destination)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
-    }
+        IHasId;
 }

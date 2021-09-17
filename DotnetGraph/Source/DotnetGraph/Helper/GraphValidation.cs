@@ -1,4 +1,5 @@
-﻿using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Helper.Exceptions;
+using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,31 @@ namespace DotnetGraph.Helper
             }
             if (uniqueIds.Count != numberOfEntities)
             {
-                throw new Exception($"Found {uniqueIds.Count} unique ids in {numberOfEntities} elements.");
+                throw new IdsNotUniqueException($"Found {uniqueIds.Count} unique ids in {numberOfEntities} elements.");
+            }
+        }
+
+        /// <summary>
+        /// Check, if all arcs leaving the given nodes have non negative capacities.
+        /// </summary>
+        public static void ValidateOnlyPositiveCapacities<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
+            where TNode : IHasOutgoingArcs<TArc>
+            where TArc : IHasCapacity
+        {
+            if (nodes is null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            foreach (var node in nodes)
+            {
+                foreach (var arc in node.OutgoingArcs)
+                {
+                    if (arc.Capacity < 0)
+                    {
+                        throw new NegativeWeightException($"At least one arc has a negative capacity of {arc.Capacity}");
+                    }
+                }
             }
         }
 
@@ -54,7 +79,7 @@ namespace DotnetGraph.Helper
 
             if (uniqueArcIds.Count != numberOfArcs)
             {
-                throw new Exception($"Found {uniqueArcIds.Count} unique arc ids for {numberOfArcs} arcs");
+                throw new IdsNotUniqueException($"Found {uniqueArcIds.Count} unique arc ids for {numberOfArcs} arcs");
             }
         }
 
@@ -66,11 +91,6 @@ namespace DotnetGraph.Helper
             if (entities is null)
             {
                 throw new ArgumentNullException(nameof(entities));
-            }
-
-            if (ids is null)
-            {
-                return;
             }
 
             var foundId = new bool[ids.Length];
@@ -87,7 +107,7 @@ namespace DotnetGraph.Helper
 
             if (foundId.Any(x => x == false))
             {
-                throw new Exception($"Not every id exists in the list of entities.");
+                throw new InvalidIdException($"Not every id exists in the list of entities.");
             }
         }
 
@@ -109,8 +129,30 @@ namespace DotnetGraph.Helper
                 {
                     if (arc.Weight < 0)
                     {
-                        throw new Exception($"At least one arc has a negative weight of {arc.Weight}");
+                        throw new NegativeWeightException($"At least one arc has a negative weight of {arc.Weight}");
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check, if any node has antiparallel arcs. Two arcs are antiparallel, if the first connects node 2 from node 1 and the second node 1 from node 2.
+        /// </summary>
+        public static void ValidateNoAntiparallelArcs<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
+            where TNode : IHasId, IHasOutgoingArcs<TArc>
+            where TArc : IHasDestination<TNode>
+        {
+            if (nodes is null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            foreach (var node in nodes)
+            {
+                var hasAntiparallelArcs = node.OutgoingArcs.Any(x => x.Destination.OutgoingArcs.Any(y => y.Destination.Id == node.Id));
+                if (hasAntiparallelArcs)
+                {
+                    throw new HasAntiparallelArcException($"Node {node.Id} has antiparallel arcs.");
                 }
             }
         }

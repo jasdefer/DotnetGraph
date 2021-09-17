@@ -1,5 +1,4 @@
-﻿using DotnetGraph.Model.Implementations;
-using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,8 +59,8 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             {
                 foreach (var arc in node.OutgoingArcs)
                 {
-                    var tarjanArc = new Arc<TarjanNode>(dict[arc.Destination.Id]);
-                    dict[node.Id].AddArc(tarjanArc);
+                    var tarjanArc = new TarjanArc(1, dict[arc.Destination.Id]);
+                    dict[node.Id].Add(tarjanArc);
                 }
             }
             return dict.Values.ToArray();
@@ -110,16 +109,19 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             }
 
             //Build the component
-            if (tarjanNode.LowLink == tarjanNode.Index)
+            if (tarjanNode.LowLink == tarjanNode.Index &&
+                stack.Count > 0)
             {
                 var component = new List<TarjanNode>();
-                while (stack.Count > 0)
+                TarjanNode node;
+                do
                 {
-                    component.Add(stack[^1]);
-                    stack[^1].IsOnStack = false;
+                    node = stack[^1];
+                    node.IsOnStack = false;
                     stack.RemoveAt(stack.Count - 1);
+                    component.Add(node);
                 }
-                stack = new List<TarjanNode>();
+                while (node != tarjanNode);
                 components.Add(component.AsReadOnly());
             }
         }

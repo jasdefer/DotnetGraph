@@ -1,4 +1,4 @@
-﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Helper;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 using System;
@@ -10,7 +10,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
     public class LineGraphGenerator : IWeightedUndirectedGraphGenerator
     {
         public Random Random { get; set; } = new Random(1);
-        public WeightedUndirectedGraphNode[] Generate(int numberOfNodes, double density, IWeightGenerator weightGenerator)
+        public WeightedUndirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator weightGenerator)
         {
             if (weightGenerator is null)
             {
@@ -27,7 +27,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
 
         private void CreateRandomEdges(WeightedUndirectedGraphNode[] nodes,
             Dictionary<int, List<int>> dict,
-            IWeightGenerator weightGenerator,
+            INumberGenerator weightGenerator,
             double density)
         {
             //Add random edges between random nodes until the required density (number of edges) is reached
@@ -49,8 +49,8 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
                 //Create the edge
                 var weight = weightGenerator.Generate();
                 var edge = new WeightedUndirectedGraphEdge(i + 1, weight, nodes[node1Id - 1], nodes[node2Id - 1]);
-                nodes[node1Id - 1].AddEdge(edge);
-                nodes[node2Id - 1].AddEdge(edge);
+                nodes[node1Id - 1].Add(edge);
+                nodes[node2Id - 1].Add(edge);
 
                 //Remove the connection from the dict
                 dict[node1Id].Remove(node2Id);
@@ -81,15 +81,15 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
         /// <summary>
         /// Connect all nodes in a line: 1-2-3-...-n
         /// </summary>
-        private static void ConnectNodesInALine(WeightedUndirectedGraphNode[] nodes, IWeightGenerator weightGenerator)
+        private static void ConnectNodesInALine(WeightedUndirectedGraphNode[] nodes, INumberGenerator weightGenerator)
         {
             var numberOfConnectingEdges = nodes.Length - 1;
             for (int i = 0; i < numberOfConnectingEdges; i++)
             {
                 var weight = weightGenerator.Generate();
                 var edge = new WeightedUndirectedGraphEdge(i + 1, weight, nodes[i], nodes[i + 1]);
-                nodes[i].AddEdge(edge);
-                nodes[i + 1].AddEdge(edge);
+                nodes[i].Add(edge);
+                nodes[i + 1].Add(edge);
             }
         }
 

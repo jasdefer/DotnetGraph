@@ -1,9 +1,9 @@
 ﻿using DotnetGraph.Helper;
+using DotnetGraph.Helper.Exceptions;
 using DotnetGraph.Model.Implementations;
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace DotnetGraphTest.Helper
 {
@@ -25,7 +25,7 @@ namespace DotnetGraphTest.Helper
                 new Entity(1),
                 new Entity(1)
             };
-            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateUniqueIds(entites));
+            Assert.ThrowsException<IdsNotUniqueException>(() => GraphValidation.ValidateUniqueIds(entites));
         }
 
         [TestMethod]
@@ -38,9 +38,9 @@ namespace DotnetGraphTest.Helper
                 new DirectedGraphNode(3),
             };
 
-            nodes[0].AddArc(new DirectedGraphArc(1, nodes[1]));
-            nodes[0].AddArc(new DirectedGraphArc(2, nodes[2]));
-            nodes[1].AddArc(new DirectedGraphArc(3, nodes[2]));
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            nodes[0].Add(new DirectedGraphArc(2, nodes[2]));
+            nodes[1].Add(new DirectedGraphArc(3, nodes[2]));
             GraphValidation.ValidateUniqueArcIds(nodes);
         }
 
@@ -54,10 +54,10 @@ namespace DotnetGraphTest.Helper
                 new DirectedGraphNode(3),
             };
 
-            nodes[0].AddArc(new DirectedGraphArc(1, nodes[1]));
-            nodes[0].AddArc(new DirectedGraphArc(2, nodes[2]));
-            nodes[1].AddArc(new DirectedGraphArc(2, nodes[2]));
-            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateUniqueArcIds(nodes));
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            nodes[0].Add(new DirectedGraphArc(2, nodes[2]));
+            nodes[1].Add(new DirectedGraphArc(2, nodes[2]));
+            Assert.ThrowsException<IdsNotUniqueException>(() => GraphValidation.ValidateUniqueArcIds(nodes));
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace DotnetGraphTest.Helper
         public void IdExistsInvalid()
         {
             var entites = CreateEntities(4);
-            Assert.ThrowsException<Exception>(() => GraphValidation.IdExists(entites, 1, 5, 2));
+            Assert.ThrowsException<InvalidIdException>(() => GraphValidation.IdExists(entites, 1, 5, 2));
         }
 
         [TestMethod]
@@ -83,8 +83,8 @@ namespace DotnetGraphTest.Helper
                 new WeightedDirectedGraphNode(2)
             };
 
-            nodes[0].AddArc(new WeightedDirectedGraphArc(1, nodes[1], 0));
-            nodes[0].AddArc(new WeightedDirectedGraphArc(2, nodes[1], double.MaxValue));
+            nodes[0].Add(new WeightedDirectedGraphArc(1, 0, nodes[1]));
+            nodes[0].Add(new WeightedDirectedGraphArc(2, double.MaxValue, nodes[1]));
             GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes);
         }
 
@@ -97,9 +97,36 @@ namespace DotnetGraphTest.Helper
                 new WeightedDirectedGraphNode(2)
             };
 
-            nodes[0].AddArc(new WeightedDirectedGraphArc(1, nodes[1], 1));
-            nodes[0].AddArc(new WeightedDirectedGraphArc(2, nodes[1], -1));
-            Assert.ThrowsException<Exception>(() => GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes));
+            nodes[0].Add(new WeightedDirectedGraphArc(1, 1, nodes[1]));
+            nodes[0].Add(new WeightedDirectedGraphArc(2, -1, nodes[1]));
+            Assert.ThrowsException<NegativeWeightException>(() => GraphValidation.ValidateOnlyPositiveWeights<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes));
+        }
+
+        [TestMethod]
+        public void ValidateNoAntiparallelArcsInvalid()
+        {
+            var nodes = new DirectedGraphNode[]
+            {
+                new DirectedGraphNode(1),
+                new DirectedGraphNode(2)
+            };
+
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            nodes[1].Add(new DirectedGraphArc(2, nodes[0]));
+            Assert.ThrowsException<HasAntiparallelArcException>(() => GraphValidation.ValidateNoAntiparallelArcs<DirectedGraphNode, DirectedGraphArc>(nodes));
+        }
+
+        [TestMethod]
+        public void ValidateNoAntiparallelArcsValid()
+        {
+            var nodes = new DirectedGraphNode[]
+            {
+                new DirectedGraphNode(1),
+                new DirectedGraphNode(2)
+            };
+
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            GraphValidation.ValidateNoAntiparallelArcs<DirectedGraphNode, DirectedGraphArc>(nodes);
         }
 
         private static Entity[] CreateEntities(int numberOfEntities)

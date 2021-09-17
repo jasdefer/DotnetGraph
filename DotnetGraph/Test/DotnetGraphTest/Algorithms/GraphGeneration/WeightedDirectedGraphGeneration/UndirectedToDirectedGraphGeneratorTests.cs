@@ -1,4 +1,4 @@
-﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.LineGraph;
@@ -30,8 +30,8 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGenera
             };
             for (int i = 0; i < undirectedEdges.Length; i++)
             {
-                undirectedEdges[i].Node1.AddEdge(undirectedEdges[i]);
-                undirectedEdges[i].Node2.AddEdge(undirectedEdges[i]);
+                undirectedEdges[i].Node1.Add(undirectedEdges[i]);
+                undirectedEdges[i].Node2.Add(undirectedEdges[i]);
             }
 
             var directedNodes = UndirectedToDirectedGraphGenerator.Convert(nodes);
@@ -46,7 +46,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGenera
         public void NumberOfArcsMonkey()
         {
             var generator = GetGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             var undirectedEdgeGenerator = new LineGraphGenerator();
             for (int i = 0; i < 10; i++)
             {

@@ -3,25 +3,24 @@ using System.Collections.Generic;
 
 namespace DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph
 {
-    public class WeightedDirectedGraphNode : Node<WeightedDirectedGraphArc>,
+    public class WeightedDirectedGraphNode :
         IHasOutgoingArcs<WeightedDirectedGraphArc>,
         IHasId
     {
-        public WeightedDirectedGraphNode(int id)
+        private readonly List<WeightedDirectedGraphArc> outgoingArcs;
+        public WeightedDirectedGraphNode(int id, IReadOnlyCollection<WeightedDirectedGraphArc> outgoingArcs = null)
         {
             Id = id;
+            this.outgoingArcs = outgoingArcs is null ? new List<WeightedDirectedGraphArc>() : new List<WeightedDirectedGraphArc>(outgoingArcs);
         }
 
-        public WeightedDirectedGraphNode(int id, IEnumerable<WeightedDirectedGraphArc> outgoingArcs) : base(outgoingArcs)
-        {
-            Id = id;
-        }
+        public IReadOnlyCollection<WeightedDirectedGraphArc> OutgoingArcs => outgoingArcs;
 
         public int Id { get; }
 
-        public override string ToString()
+        public void Add(WeightedDirectedGraphArc arc)
         {
-            return $"Node {Id}";
+            outgoingArcs.Add(arc);
         }
-    }
+    };
 }

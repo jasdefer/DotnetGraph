@@ -1,6 +1,6 @@
 ﻿using DotnetGraph.Algorithms.Components.ConnectedComponents;
 using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 using System;
 
@@ -12,7 +12,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
         public bool ConnectComponents { get; set; } = true;
         public IConnectedComponentsAlgorithm ComponentsAlgorithm { get; set; } = new SimpleConnectedComponentAlgorithm();
 
-        public WeightedUndirectedGraphNode[] Generate(int numberOfNodes, double density, IWeightGenerator weightGenerator)
+        public WeightedUndirectedGraphNode[] Generate(int numberOfNodes, double density, INumberGenerator weightGenerator)
         {
             ValidateInput(numberOfNodes, density, weightGenerator);
             var nodes = GenerateNodes(numberOfNodes);
@@ -24,7 +24,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
             return nodes;
         }
 
-        public void ConnectAllComponents(WeightedUndirectedGraphNode[] nodes, IWeightGenerator weightGenerator, int numberOfEdges)
+        public void ConnectAllComponents(WeightedUndirectedGraphNode[] nodes, INumberGenerator weightGenerator, int numberOfEdges)
         {
             if (nodes is null)
             {
@@ -43,12 +43,12 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
                 var node1 = componentResult.Components[i].Nodes[0];
                 var node2 = componentResult.Components[i + 1].Nodes[0];
                 var edge = new WeightedUndirectedGraphEdge(++numberOfEdges, weight, node1, node2);
-                node1.AddEdge(edge);
-                node2.AddEdge(edge);
+                node1.Add(edge);
+                node2.Add(edge);
             }
         }
 
-        public int CreateUniformLikelyEdges(WeightedUndirectedGraphNode[] nodes, double density, IWeightGenerator weightGenerator)
+        public int CreateUniformLikelyEdges(WeightedUndirectedGraphNode[] nodes, double density, INumberGenerator weightGenerator)
         {
             if (nodes is null)
             {
@@ -69,8 +69,8 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
                     {
                         var weight = weightGenerator.Generate();
                         var edge = new WeightedUndirectedGraphEdge(++edgeId, weight, nodes[i], nodes[j]);
-                        nodes[i].AddEdge(edge);
-                        nodes[j].AddEdge(edge);
+                        nodes[i].Add(edge);
+                        nodes[j].Add(edge);
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGenerati
             return nodes;
         }
 
-        public static void ValidateInput(int numberOfNodes, double density, IWeightGenerator weightGenerator)
+        public static void ValidateInput(int numberOfNodes, double density, INumberGenerator weightGenerator)
         {
             if (numberOfNodes < 0)
             {

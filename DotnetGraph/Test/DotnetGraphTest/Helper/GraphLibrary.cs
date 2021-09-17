@@ -20,26 +20,26 @@ namespace DotnetGraphTest.Helper
                 new WeightedDirectedGraphNode(6)
             };
 
-            nodes[0].AddArc(new WeightedDirectedGraphArc(1, nodes[1], 5));
-            nodes[1].AddArc(new WeightedDirectedGraphArc(2, nodes[0], 5));
+            nodes[0].Add(new WeightedDirectedGraphArc(1, 5, nodes[1]));
+            nodes[1].Add(new WeightedDirectedGraphArc(2, 5, nodes[0]));
 
-            nodes[0].AddArc(new WeightedDirectedGraphArc(3, nodes[3], 1));
-            nodes[3].AddArc(new WeightedDirectedGraphArc(4, nodes[0], 1));
+            nodes[0].Add(new WeightedDirectedGraphArc(3, 1, nodes[3]));
+            nodes[3].Add(new WeightedDirectedGraphArc(4, 1, nodes[0]));
 
-            nodes[1].AddArc(new WeightedDirectedGraphArc(5, nodes[2], 3));
-            nodes[2].AddArc(new WeightedDirectedGraphArc(6, nodes[1], 3));
+            nodes[1].Add(new WeightedDirectedGraphArc(5, 3, nodes[2]));
+            nodes[2].Add(new WeightedDirectedGraphArc(6, 3, nodes[1]));
 
-            nodes[1].AddArc(new WeightedDirectedGraphArc(7, nodes[4], 2));
-            nodes[4].AddArc(new WeightedDirectedGraphArc(8, nodes[1], 2));
+            nodes[1].Add(new WeightedDirectedGraphArc(7, 2, nodes[4]));
+            nodes[4].Add(new WeightedDirectedGraphArc(8, 2, nodes[1]));
 
-            nodes[2].AddArc(new WeightedDirectedGraphArc(9, nodes[5], 1));
-            nodes[5].AddArc(new WeightedDirectedGraphArc(10, nodes[2], 1));
+            nodes[2].Add(new WeightedDirectedGraphArc(9, 1, nodes[5]));
+            nodes[5].Add(new WeightedDirectedGraphArc(10, 1, nodes[2]));
 
-            nodes[3].AddArc(new WeightedDirectedGraphArc(11, nodes[4], 1));
-            nodes[4].AddArc(new WeightedDirectedGraphArc(12, nodes[3], 1));
+            nodes[3].Add(new WeightedDirectedGraphArc(11, 1, nodes[4]));
+            nodes[4].Add(new WeightedDirectedGraphArc(12, 1, nodes[3]));
 
-            nodes[4].AddArc(new WeightedDirectedGraphArc(13, nodes[5], 1));
-            nodes[5].AddArc(new WeightedDirectedGraphArc(14, nodes[4], 1));
+            nodes[4].Add(new WeightedDirectedGraphArc(13, 1, nodes[5]));
+            nodes[5].Add(new WeightedDirectedGraphArc(14, 1, nodes[4]));
             return nodes;
         }
 
@@ -83,20 +83,20 @@ namespace DotnetGraphTest.Helper
                 new DirectedGraphNode(8),
             };
 
-            nodes[0].AddArc(new DirectedGraphArc(1, nodes[1]));
-            nodes[1].AddArc(new DirectedGraphArc(2, nodes[4]));
-            nodes[4].AddArc(new DirectedGraphArc(3, nodes[0]));
-            nodes[1].AddArc(new DirectedGraphArc(4, nodes[5]));
-            nodes[4].AddArc(new DirectedGraphArc(5, nodes[5]));
-            nodes[1].AddArc(new DirectedGraphArc(6, nodes[2]));
-            nodes[2].AddArc(new DirectedGraphArc(7, nodes[3]));
-            nodes[3].AddArc(new DirectedGraphArc(8, nodes[2]));
-            nodes[2].AddArc(new DirectedGraphArc(9, nodes[6]));
-            nodes[3].AddArc(new DirectedGraphArc(10, nodes[7]));
-            nodes[7].AddArc(new DirectedGraphArc(11, nodes[3]));
-            nodes[7].AddArc(new DirectedGraphArc(12, nodes[6]));
-            nodes[5].AddArc(new DirectedGraphArc(13, nodes[6]));
-            nodes[6].AddArc(new DirectedGraphArc(14, nodes[5]));
+            nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
+            nodes[1].Add(new DirectedGraphArc(2, nodes[4]));
+            nodes[4].Add(new DirectedGraphArc(3, nodes[0]));
+            nodes[1].Add(new DirectedGraphArc(4, nodes[5]));
+            nodes[4].Add(new DirectedGraphArc(5, nodes[5]));
+            nodes[1].Add(new DirectedGraphArc(6, nodes[2]));
+            nodes[2].Add(new DirectedGraphArc(7, nodes[3]));
+            nodes[3].Add(new DirectedGraphArc(8, nodes[2]));
+            nodes[2].Add(new DirectedGraphArc(9, nodes[6]));
+            nodes[3].Add(new DirectedGraphArc(10, nodes[7]));
+            nodes[7].Add(new DirectedGraphArc(11, nodes[3]));
+            nodes[7].Add(new DirectedGraphArc(12, nodes[6]));
+            nodes[5].Add(new DirectedGraphArc(13, nodes[6]));
+            nodes[6].Add(new DirectedGraphArc(14, nodes[5]));
 
             return nodes;
         }
@@ -125,8 +125,8 @@ namespace DotnetGraphTest.Helper
 
             for (int i = 0; i < edges.Length; i++)
             {
-                edges[i].Node1.AddEdge(edges[i]);
-                edges[i].Node2.AddEdge(edges[i]);
+                edges[i].Node1.Add(edges[i]);
+                edges[i].Node2.Add(edges[i]);
             }
             return nodes;
         }
