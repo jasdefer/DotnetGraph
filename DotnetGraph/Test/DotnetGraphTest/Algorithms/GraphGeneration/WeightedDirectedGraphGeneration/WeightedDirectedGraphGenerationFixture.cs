@@ -1,6 +1,7 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration;
 using DotnetGraph.Helper;
+using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -8,9 +9,10 @@ using System.Linq;
 namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration
 {
     [TestClass]
-    public abstract class WeightedDirectedGraphGenerationTests
+    public abstract class WeightedDirectedGraphGenerationFixture
     {
         protected abstract IWeightedDirectedGraphGenerator GetGenerator();
+        protected virtual void AssertNodes(WeightedDirectedGraphNode[] nodes) { }
 
         [TestMethod]
         public void Monkey()
@@ -29,6 +31,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.WeightedDirectedGraphGenera
                 Assert.AreEqual(numberOfNodes, nodes.Length);
                 var directedEdgeIds = nodes.SelectMany(x => x.OutgoingArcs.Select(y => y.Id)).Distinct().ToArray();
                 Assert.AreEqual(expectedNumberOfArcs, directedEdgeIds.Length, Math.Ceiling(expectedNumberOfArcs * 0.1));
+                AssertNodes(nodes);
             }
         }
     }

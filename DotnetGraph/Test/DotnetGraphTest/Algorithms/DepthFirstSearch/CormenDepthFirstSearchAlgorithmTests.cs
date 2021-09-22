@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DotnetGraphTest.Algorithms.DepthFirstSearch
 {
     [TestClass]
-    public class CormenDfsAlgorithmTests : DepthFirstSearchTests
+    public class CormenDepthFirstSearchAlgorithmTests : DepthFirstSearchTests
     {
         protected override IDepthFirstSearchAlgorithm GetAlgorithm()
         {
