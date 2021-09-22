@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
+namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch
 {
     public class CormenDepthFirstSearchAlgorithm : IDepthFirstSearchAlgorithm
     {

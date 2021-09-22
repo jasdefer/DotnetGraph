@@ -1,4 +1,4 @@
-﻿using DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs;
+﻿using DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch;
 using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;

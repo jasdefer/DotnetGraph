@@ -2,7 +2,7 @@
 using DotnetGraph.Model.Properties;
 using System.Collections.Generic;
 
-namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
+namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch
 {
     public class CormenDepthFirstSearchNode :
         IHasOutgoingArcs<CormenDepthFirstSearchArc>,

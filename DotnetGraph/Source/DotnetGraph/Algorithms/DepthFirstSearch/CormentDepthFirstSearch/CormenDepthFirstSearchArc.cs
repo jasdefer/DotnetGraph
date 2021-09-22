@@ -1,7 +1,7 @@
 ﻿using DotnetGraph.Model.Properties;
 using System;
 
-namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs
+namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch
 {
     public class CormenDepthFirstSearchArc :
         IHasDestination<CormenDepthFirstSearchNode>,

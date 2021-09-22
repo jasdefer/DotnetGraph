@@ -1,5 +1,5 @@
 ﻿using DotnetGraph.Algorithms.DepthFirstSearch;
-using DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs;
+using DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch;
 using DotnetGraphTest.Algorithms.DfSearch;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
