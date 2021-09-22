@@ -1,4 +1,5 @@
-﻿using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Model.Enums;
+using DotnetGraph.Model.Properties;
 using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
@@ -36,7 +37,7 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
         /// The status during the breadth-first-search
         /// 0: Not 
         /// </summary>
-        internal SearchState SearchStatus { get; set; }
+        internal SearchState SearchState { get; set; }
         #endregion
 
         public void AddOutgoingArc(FordFulkersonArc arc)

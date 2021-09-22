@@ -10,7 +10,7 @@ namespace DotnetGraphTest.Algorithms.DepthFirstSearch
     {
         protected override IDepthFirstSearchAlgorithm GetAlgorithm()
         {
-            return new CormenDfsAlgorithm();
+            return new CormenDepthFirstSearchAlgorithm();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DotnetGraph.Algorithms.DepthFirstSearch;
-using DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs;
+using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
+using DotnetGraph.Model.Implementations.Graph.DiscoverableDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -10,43 +11,63 @@ namespace DotnetGraphTest.Algorithms.DfSearch
     public abstract class DepthFirstSearchTests
     {
         protected abstract IDepthFirstSearchAlgorithm GetAlgorithm();
+        private static DiscoverableDirectedGraphNode[] GetCormenExampleGraph()
+        {
+            var nodes = new DiscoverableDirectedGraphNode[]
+            {
+                new DiscoverableDirectedGraphNode(1), //u
+                new DiscoverableDirectedGraphNode(2), //v
+                new DiscoverableDirectedGraphNode(3), //w
+                new DiscoverableDirectedGraphNode(4), //x
+                new DiscoverableDirectedGraphNode(5), //y
+                new DiscoverableDirectedGraphNode(6), //z
+            };
+            nodes[0].AddArc(new DiscoverableDirectedGraphArc(1, nodes[1]));
+            nodes[0].AddArc(new DiscoverableDirectedGraphArc(2, nodes[3]));
+            nodes[3].AddArc(new DiscoverableDirectedGraphArc(3, nodes[1]));
+            nodes[1].AddArc(new DiscoverableDirectedGraphArc(4, nodes[4]));
+            nodes[4].AddArc(new DiscoverableDirectedGraphArc(5, nodes[3]));
+            nodes[2].AddArc(new DiscoverableDirectedGraphArc(6, nodes[4]));
+            nodes[2].AddArc(new DiscoverableDirectedGraphArc(7, nodes[5]));
+            nodes[5].AddArc(new DiscoverableDirectedGraphArc(8, nodes[5]));
+            return nodes;
+        }
 
         [TestMethod]
         public void CanReproduceExample()
         {
-            var nodes = GetCormenExample();
+            var nodes = GetCormenExampleGraph();
             var searchAlgorithm = GetAlgorithm();
-            var result = searchAlgorithm.Run<DfSearchNode, DfSearchArc>(nodes);
+            var result = searchAlgorithm.Run<DiscoverableDirectedGraphNode, DiscoverableDirectedGraphArc>(nodes);
             //node - discovery time - finished time            
             var expected = new[]
             {
-                new { l = "u", d = 1, f = 8 },
-                new { l = "v", d = 2, f = 7 },
-                new { l = "w", d = 9, f = 12},
-                new { l = "x", d = 4, f = 5},
-                new { l = "y", d = 3, f = 6},
-                new { l = "z", d = 10, f = 11},
+                new { l = 1, d = 1, f = 8 },
+                new { l = 2, d = 2, f = 7 },
+                new { l = 3, d = 9, f = 12},
+                new { l = 4, d = 4, f = 5},
+                new { l = 5, d = 3, f = 6},
+                new { l = 6, d = 10, f = 11},
             };
             var results = nodes
-                .Select(n => new { l = n.Label, d = n.DiscoveredAt, f = n.FinishedAt });
+                .Select(n => new { l = n.Id, d = n.DiscoveredTime, f = n.ExploredTime });
 
             Assert.IsTrue(expected.SequenceEqual(results));
         }
 
-        /// <summary>
-        /// see Ch. 22.3
-        /// </summary>
-        /// <returns>Nodes with Arcs</returns>
-        private DfSearchNode[] GetCormenExample()
+        [TestMethod]
+        public void Monkey()
         {
-            string labels = "uvwxyz";
-            var example = labels.Select(l => new DfSearchNode(new string(l, 1)))
-                .ToDictionary(n => n.Label);
-            string cnx = "uv;ux;xv;vy;yx;wy;wz;zz";
-            foreach (var pair in cnx.Split(';'))
-                example[pair[0].ToString()].LinkToNode(example[pair[1].ToString()]);
-
-            return example.Values.ToArray();
+            var algorithm = GetAlgorithm();
+            var weightGenerator = new ConstantNumber();
+            for (int i = 0; i < 100; i++)
+            {
+                var numberOfNodes = 100 + i * 10;
+                var density = 2.5 / (double)numberOfNodes;
+                //var nodes = generator.Generate(numberOfNodes, density, weightGenerator);
+                //algorithm.Run<DiscoverableDirectedGraphNode, DiscoverableDirectedGraphArc>(nodes);
+            }
+            throw new NotImplementedException();
         }
     }
 }

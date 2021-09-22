@@ -1,5 +1,6 @@
 ﻿using DotnetGraph.Helper;
 using DotnetGraph.Helper.Exceptions;
+using DotnetGraph.Model.Enums;
 using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
@@ -126,9 +127,9 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
                     //Only arcs in the forward direction can be taken, if the capacity is not exhausted
                     if (arc.Capacity - arc.Flow > 0)
                     {
-                        if (arc.Destination.SearchStatus == SearchState.Undiscovered)
+                        if (arc.Destination.SearchState == SearchState.Undiscovered)
                         {
-                            arc.Destination.SearchStatus = SearchState.Discovered;
+                            arc.Destination.SearchState = SearchState.Discovered;
                             arc.Destination.Predecessor = arc;
                             queue.Enqueue(arc.Destination);
                         }
@@ -140,15 +141,15 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
                     //Only arc in the backward direction can be taken, if the flow is not zero.
                     if (arc.Flow > 0)
                     {
-                        if (arc.Origin.SearchStatus == SearchState.Undiscovered)
+                        if (arc.Origin.SearchState == SearchState.Undiscovered)
                         {
-                            arc.Origin.SearchStatus = SearchState.Discovered;
+                            arc.Origin.SearchState = SearchState.Discovered;
                             arc.Origin.Predecessor = arc;
                             queue.Enqueue(arc.Origin);
                         }
                     }
                 }
-                node.SearchStatus = SearchState.Visited;
+                node.SearchState = SearchState.Visited;
 
                 //Stop the search, if the destination is reached
                 if (node.Id == destinationNodeId)
@@ -165,11 +166,11 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
             var queue = new Queue<FordFulkersonNode>();
             for (int i = 0; i < nodes.Count; i++)
             {
-                nodes[i].SearchStatus = SearchState.Undiscovered;
+                nodes[i].SearchState = SearchState.Undiscovered;
                 nodes[i].Predecessor = null;
                 if (nodes[i].Id == originNodeId)
                 {
-                    nodes[i].SearchStatus = SearchState.Discovered;
+                    nodes[i].SearchState = SearchState.Discovered;
                     queue.Enqueue(nodes[i]);
                 }
             }
@@ -220,13 +221,15 @@ namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
             return dict.Values.ToList();
         }
 
-        public static void ValidateInput(IReadOnlyCollection<FordFulkersonNode> nodes, int originNodeId, int destinationNodeId)
+        public static void ValidateInput<TNode, TArc>(IReadOnlyCollection<TNode> nodes, int originNodeId, int destinationNodeId)
+            where TNode : IHasId, IHasOutgoingArcs<TArc>
+            where TArc : IHasId, IHasDestination<TNode>, IHasCapacity, IHasFlow
         {
             GraphValidation.IdExists(nodes, originNodeId, destinationNodeId);
             GraphValidation.ValidateUniqueIds(nodes);
-            GraphValidation.ValidateUniqueArcIds(nodes);
-            GraphValidation.ValidateOnlyPositiveCapacities<FordFulkersonNode, FordFulkersonArc>(nodes);
-            GraphValidation.ValidateNoAntiparallelArcs<FordFulkersonNode, FordFulkersonArc>(nodes);
+            GraphValidation.ValidateUniqueArcIds<TNode, TArc>(nodes);
+            GraphValidation.ValidateOnlyPositiveCapacities<TNode, TArc>(nodes);
+            GraphValidation.ValidateNoAntiparallelArcs<TNode, TArc>(nodes);
         }
         #endregion
     }

@@ -23,7 +23,7 @@ namespace PerformanceTests.Algorithms.ShortestPath
             originNodeId = 1;
             destinationNodeId = baseNodes.Length;
             dijkstraNodes = DijkstraAlgorithm.Convert<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(baseNodes);
-            DijkstraAlgorithm.ValidateInput(dijkstraNodes, originNodeId, destinationNodeId);
+            DijkstraAlgorithm.ValidateInput<DijkstraNode, DijkstraArc>(dijkstraNodes, originNodeId, destinationNodeId);
         }
 
         [Benchmark]

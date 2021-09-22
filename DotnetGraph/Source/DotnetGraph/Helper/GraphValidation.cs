@@ -11,7 +11,16 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check, if each id is unique for given entities.
         /// </summary>
-        public static void ValidateUniqueIds(IEnumerable<IHasId> entities)
+        public static void ValidateUniqueIds<TEntity>(IEnumerable<TEntity> entities)
+            where TEntity : IHasId
+        {
+            ValidateUniqueIds(entities);
+        }
+
+        /// <summary>
+        /// Check, if each id is unique for given entities.
+        /// </summary>
+        public static void ValidateUniqueIds(IReadOnlyCollection<IHasId> entities)
         {
             if (entities is null)
             {
@@ -58,7 +67,8 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check, if all arcs leaving the given nodes have a unique id.
         /// </summary>
-        public static void ValidateUniqueArcIds<TArc>(IEnumerable<IHasOutgoingArcs<TArc>> nodes)
+        public static void ValidateUniqueArcIds<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
+            where TNode : IHasOutgoingArcs<TArc>
             where TArc : IHasId
         {
             if (nodes is null)
@@ -86,7 +96,16 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check if all given ids exists at least once in the given entites.
         /// </summary>
-        public static void IdExists(IEnumerable<IHasId> entities, params int[] ids)
+        public static void IdExists<TNode>(IReadOnlyCollection<TNode> nodes, params int[] ids)
+            where TNode : IHasId
+        {
+            IdExists(nodes, ids);
+        }
+
+        /// <summary>
+        /// Check if all given ids exists at least once in the given entites.
+        /// </summary>
+        public static void IdExists(IReadOnlyCollection<IHasId> entities, params int[] ids)
         {
             if (entities is null)
             {
@@ -114,7 +133,7 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check, if all arcs leaving the given nodes have non negative weights.
         /// </summary>
-        public static void ValidateOnlyPositiveWeights<TNode, TArc>(IEnumerable<TNode> nodes)
+        public static void ValidateOnlyPositiveWeights<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>
             where TArc : IHasWeight
         {

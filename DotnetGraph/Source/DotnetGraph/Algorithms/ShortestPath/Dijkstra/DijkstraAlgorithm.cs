@@ -87,16 +87,18 @@ namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
                     heap.UpdateArc(arc, newDistance);
                 }
             }
-            ValidateInput(inputNodes, originNodeId, destinationNodeId);
+            ValidateInput<DijkstraNode, DijkstraArc>(inputNodes, originNodeId, destinationNodeId);
             throw new InvalidDestinationException("Could not reach the destination.");
         }
 
-        public static void ValidateInput(IReadOnlyList<DijkstraNode> nodes, int originNodeId, int destinationNodeId)
+        public static void ValidateInput<TNode, TArc>(IReadOnlyList<TNode> nodes, int originNodeId, int destinationNodeId)
+            where TArc : IHasDestination<TNode>, IHasWeight, IHasId
+            where TNode : IHasOutgoingArcs<TArc>, IHasId
         {
             GraphValidation.ValidateUniqueIds(nodes);
-            GraphValidation.ValidateUniqueArcIds(nodes);
+            GraphValidation.ValidateUniqueArcIds<TNode, TArc>(nodes);
             GraphValidation.IdExists(nodes, originNodeId, destinationNodeId);
-            GraphValidation.ValidateOnlyPositiveWeights<DijkstraNode, DijkstraArc>(nodes);
+            GraphValidation.ValidateOnlyPositiveWeights<TNode, TArc>(nodes);
         }
 
         public static DijkstraNode GetOrigin(IReadOnlyList<DijkstraNode> nodes, int originNodeId)

@@ -1,63 +1,50 @@
-﻿using DotnetGraph.Algorithms.DepthFirstSearch;
-using DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs;
+﻿using DotnetGraph.Algorithms.DepthFirstSearch.CormenDfs;
 using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.DfsBasedConnectedComponent
 {
     public class DfsConnectedComponetAlgorithm : IGetStronglyConnectedComponents
     {
-        private static CultureInfo _ci = new CultureInfo("en-US");
-
         public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IEnumerable<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
-
-            DfSearchNode[] dfsNodes = Convert<TNode, TArc>(nodes);
-            CormenDfsAlgorithm a = new CormenDfsAlgorithm();
+            CormenDepthFirstSearchNode[] dfsNodes = Convert<TNode, TArc>(nodes);
+            CormenDepthFirstSearchAlgorithm a = new CormenDepthFirstSearchAlgorithm();
             a.Run(dfsNodes);
-            DfSearchNode[] orderedNodes = dfsNodes.OrderByDescending(n => n.FinishedAt).ToArray();//müsste man besser ohne kopieren hinkriegen
+            CormenDepthFirstSearchNode[] orderedNodes = dfsNodes.OrderByDescending(n => n.ExploredTime).ToArray();//müsste man besser ohne kopieren hinkriegen
             a.Run(orderedNodes);
-
-
+            throw new NotImplementedException();
         }
 
-
-
-        private static DfSearchNode[] Convert<TNode, TArc>(IEnumerable<TNode> nodes)
+        private static CormenDepthFirstSearchNode[] Convert<TNode, TArc>(IEnumerable<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
             //TArc ist IHasDestination, aber DfSearch hat nur IConnectsNodes <- daher kann man nicht einfach DfSearchNodes benutzen
-            
-            Dictionary<int, DfSearchNode> nodeIdx = new Dictionary<int, DfSearchNode>(nodes.Count());
-            
-            
-            foreach (var nodeInterface in nodes)
-            {
-                DfSearchNode n = GetNode(nodeInterface.Id, nodeIdx);
-                foreach (var e in nodeInterface.OutgoingArcs)
-                {
-                    DfSearchNode target = GetNode(e.Destination.Id, nodeIdx);
-                    n.LinkToNode(target);
-                }
-            }
+
+            Dictionary<int, CormenDepthFirstSearchNode> nodeIdx = new Dictionary<int, CormenDepthFirstSearchNode>(nodes.Count());
+
+            //foreach (var nodeInterface in nodes)
+            //{
+            //    CormenDepthFirstSearchNode n = GetNode(nodeInterface.Id, nodeIdx);
+            //    foreach (var e in nodeInterface.OutgoingArcs)
+            //    {
+            //        CormenDepthFirstSearchNode target = GetNode(e.Destination.Id, nodeIdx);
+            //        n.CreateAndAddArc(target);
+            //    }
+            //}
             return nodeIdx.Values.ToArray();
         }
 
-        private static DfSearchNode GetNode(int id, Dictionary<int, DfSearchNode> nlu)
+        private static CormenDepthFirstSearchNode GetNode(int id, Dictionary<int, CormenDepthFirstSearchNode> nlu)
         {
             if (!nlu.ContainsKey(id))
-                nlu[id] = new DfSearchNode(id.ToString(_ci));
+                nlu[id] = new CormenDepthFirstSearchNode(id);
             return nlu[id];
         }
-
-        
     }
 }

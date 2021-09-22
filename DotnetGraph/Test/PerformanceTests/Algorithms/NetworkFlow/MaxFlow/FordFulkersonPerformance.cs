@@ -23,7 +23,7 @@ namespace PerformanceTests.Algorithms.NetworkFlow.MaxFlow
             originNodeId = 1;
             destinationNodeId = baseNodes.Length;
             fordFulkersonNodes = FordFulkersonAlgorithm.Convert<FlowDirectedGraphNode, FlowDirectedGraphArc>(baseNodes);
-            FordFulkersonAlgorithm.ValidateInput(fordFulkersonNodes, originNodeId, destinationNodeId);
+            FordFulkersonAlgorithm.ValidateInput<FordFulkersonNode, FordFulkersonArc>(fordFulkersonNodes, originNodeId, destinationNodeId);
         }
 
         [Benchmark]
