@@ -8,43 +8,77 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.DfsBased
 {
     public class DfsConnectedComponetAlgorithm : IGetStronglyConnectedComponents
     {
-        public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IEnumerable<TNode> nodes)
+        public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
             CormenDepthFirstSearchNode[] dfsNodes = Convert<TNode, TArc>(nodes);
-            CormenDepthFirstSearchAlgorithm a = new CormenDepthFirstSearchAlgorithm();
-            a.Run(dfsNodes);
-            CormenDepthFirstSearchNode[] orderedNodes = dfsNodes.OrderByDescending(n => n.ExploredTime).ToArray();//müsste man besser ohne kopieren hinkriegen
-            a.Run(orderedNodes);
-            throw new NotImplementedException();
+            var rawResult = GetComponents(dfsNodes);
+            var result = ConvertResult<TNode, TArc>(nodes, rawResult);
+            return result;
         }
 
-        private static CormenDepthFirstSearchNode[] Convert<TNode, TArc>(IEnumerable<TNode> nodes)
+        private static StronglyConnectedComponentsResult<CormenDepthFirstSearchNode> GetComponents(IReadOnlyList<CormenDepthFirstSearchNode> nodes)
+        {
+            CormenDepthFirstSearchAlgorithm algorithm = new();
+            algorithm.Run(nodes);
+            CormenDepthFirstSearchNode[] orderedNodes = nodes
+                .OrderByDescending(n => n.ExploredTime)
+                .ToArray();
+            algorithm.Run(orderedNodes);
+            var result = GetResult(nodes);
+            return result;
+        }
+
+        private static StronglyConnectedComponentsResult<CormenDepthFirstSearchNode> GetResult(IReadOnlyList<CormenDepthFirstSearchNode> nodes)
+        {
+            throw new NotImplementedException($"Implement extracting the components from the depth first search.");
+        }
+
+        private static CormenDepthFirstSearchNode[] Convert<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
-            //TArc ist IHasDestination, aber DfSearch hat nur IConnectsNodes <- daher kann man nicht einfach DfSearchNodes benutzen
+            if (nodes is null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
 
-            Dictionary<int, CormenDepthFirstSearchNode> nodeIdx = new Dictionary<int, CormenDepthFirstSearchNode>(nodes.Count());
+            var dict = nodes.ToDictionary(x => x.Id, x => new CormenDepthFirstSearchNode(x.Id));
 
-            //foreach (var nodeInterface in nodes)
-            //{
-            //    CormenDepthFirstSearchNode n = GetNode(nodeInterface.Id, nodeIdx);
-            //    foreach (var e in nodeInterface.OutgoingArcs)
-            //    {
-            //        CormenDepthFirstSearchNode target = GetNode(e.Destination.Id, nodeIdx);
-            //        n.CreateAndAddArc(target);
-            //    }
-            //}
-            return nodeIdx.Values.ToArray();
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                var origin = dict[nodes[i].Id];
+                foreach (var arc in nodes[i].OutgoingArcs)
+                {
+                    var dijkstraArc = new CormenDepthFirstSearchArc(arc.Id, origin, dict[arc.Destination.Id]);
+                    origin.AddArc(dijkstraArc);
+                }
+            }
+            return dict.Values.ToArray();
         }
 
-        private static CormenDepthFirstSearchNode GetNode(int id, Dictionary<int, CormenDepthFirstSearchNode> nlu)
+        private static StronglyConnectedComponentsResult<TNode> ConvertResult<TNode, TArc>(IReadOnlyList<TNode> nodes, StronglyConnectedComponentsResult<CormenDepthFirstSearchNode> rawResult)
+            where TNode : IHasOutgoingArcs<TArc>, IHasId
+            where TArc : IHasDestination<TNode>, IHasId
         {
-            if (!nlu.ContainsKey(id))
-                nlu[id] = new CormenDepthFirstSearchNode(id);
-            return nlu[id];
+            var components = new TNode[rawResult.NumberOfComponents][];
+            var componentIndex = 0;
+            var dict = nodes.ToDictionary(x => x.Id, x => x);
+            foreach (var rawComponent in rawResult.Components)
+            {
+                var nodeIndex = 0;
+                components[componentIndex] = new TNode[rawComponent.Count];
+                foreach (var rawNode in rawComponent)
+                {
+                    var node = dict[rawNode.Id];
+                    components[componentIndex][nodeIndex] = node;
+                    nodeIndex++;
+                }
+                componentIndex++;
+            }
+            var result = new StronglyConnectedComponentsResult<TNode>(components);
+            return result;
         }
     }
 }

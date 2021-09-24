@@ -31,11 +31,11 @@ namespace DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration
                     {
                         arc = new DirectedGraphArc(edgeId++, nodes[i]);
                     }
-                    else if(edge.Node1.Id == nodes[i].Id)
+                    else if (edge.Node1.Id == nodes[i].Id)
                     {
                         arc = new DirectedGraphArc(edgeId++, dict[edge.Node2.Id]);
                     }
-                    else if(edge.Node2.Id == nodes[i].Id)
+                    else if (edge.Node2.Id == nodes[i].Id)
                     {
                         arc = new DirectedGraphArc(edgeId++, dict[edge.Node1.Id]);
                     }

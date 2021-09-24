@@ -30,7 +30,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.DirectedGraphGeneration
                 GraphValidation.ValidateUniqueIds(nodes);
                 GraphValidation.ValidateUniqueArcIds<DirectedGraphNode, DirectedGraphArc>(nodes);
                 var directedEdgeIds = nodes.SelectMany(x => x.OutgoingArcs.Select(y => y.Id)).Distinct().ToArray();
-                Assert.AreEqual(expectedNumberOfArcs, directedEdgeIds.Length, Math.Ceiling(expectedNumberOfArcs * 0.1)+2);
+                Assert.AreEqual(expectedNumberOfArcs, directedEdgeIds.Length, Math.Ceiling(expectedNumberOfArcs * 0.1) + 2);
                 AssertNodes(nodes);
             }
         }

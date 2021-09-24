@@ -2,7 +2,6 @@
 using DotnetGraph.Helper;
 using DotnetGraph.Model.Implementations.Graph.UndirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.GraphGeneration.UndirectedGraphGeneration
@@ -46,7 +45,7 @@ namespace DotnetGraphTest.Algorithms.GraphGeneration.UndirectedGraphGeneration
             {
                 var nodes = generator.Generate(numberOfNodes, density).ToArray();
 
-                delta += nodes.Sum(x => x.Edges.Count)/2d;
+                delta += nodes.Sum(x => x.Edges.Count) / 2d;
                 delta -= expectedNumberOfEdges;
             }
 

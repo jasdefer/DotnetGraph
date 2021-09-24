@@ -39,16 +39,16 @@ namespace DotnetGraphTest.Helper
             Assert.AreEqual(0, density);
 
             density = GraphPropertyHelper.GetDensityWithEdges(4, 1);
-            Assert.AreEqual(1/6d, density);
+            Assert.AreEqual(1 / 6d, density);
 
             density = GraphPropertyHelper.GetDensityWithEdges(4, 2);
-            Assert.AreEqual(1/3d, density);
+            Assert.AreEqual(1 / 3d, density);
 
             density = GraphPropertyHelper.GetDensityWithEdges(4, 3);
             Assert.AreEqual(0.5, density);
 
             density = GraphPropertyHelper.GetDensityWithEdges(4, 4);
-            Assert.AreEqual(2/3d, density);
+            Assert.AreEqual(2 / 3d, density);
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace DotnetGraphTest.Helper
             Assert.AreEqual(0.5, density);
 
             density = GraphPropertyHelper.GetDensityByEdgesPerNode(4, 1);
-            Assert.AreEqual(1/3d, density);
+            Assert.AreEqual(1 / 3d, density);
         }
 
         [TestMethod]

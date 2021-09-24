@@ -12,7 +12,7 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
         private List<TarjanNode> stack;
         private List<ReadOnlyCollection<TarjanNode>> components;
 
-        public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IEnumerable<TNode> nodes)
+        public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
@@ -27,7 +27,7 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             return result;
         }
 
-        private static StronglyConnectedComponentsResult<TNode> ConvertResult<TNode>(IEnumerable<TNode> nodes, StronglyConnectedComponentsResult<TarjanNode> tarjanResult)
+        private static StronglyConnectedComponentsResult<TNode> ConvertResult<TNode>(IReadOnlyList<TNode> nodes, StronglyConnectedComponentsResult<TarjanNode> tarjanResult)
             where TNode : IHasId
         {
             var dict = nodes.ToDictionary(x => x.Id);
@@ -45,7 +45,7 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             return result;
         }
 
-        public static TarjanNode[] Convert<TNode, TArc>(IEnumerable<TNode> nodes)
+        public static TarjanNode[] Convert<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
@@ -55,12 +55,12 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             }
 
             var dict = nodes.ToDictionary(x => x.Id, x => new TarjanNode(x.Id));
-            foreach (var node in nodes)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                foreach (var arc in node.OutgoingArcs)
+                foreach (var arc in nodes[i].OutgoingArcs)
                 {
                     var tarjanArc = new TarjanArc(1, dict[arc.Destination.Id]);
-                    dict[node.Id].Add(tarjanArc);
+                    dict[nodes[i].Id].Add(tarjanArc);
                 }
             }
             return dict.Values.ToArray();

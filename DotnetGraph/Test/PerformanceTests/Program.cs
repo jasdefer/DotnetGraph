@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
-using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
 using PerformanceTests.Algorithms.Components.ConnectedComponents;
 using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
 using PerformanceTests.Algorithms.GraphGeneration;

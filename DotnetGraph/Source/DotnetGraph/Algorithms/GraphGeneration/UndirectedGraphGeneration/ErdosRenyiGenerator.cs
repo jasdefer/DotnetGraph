@@ -58,9 +58,9 @@ namespace DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration
                 var index2 = Random.Next(0, nodes.Length);
                 if (index1 == index2)
                 {
-                    if(index2 == nodes.Length - 1)
+                    if (index2 == nodes.Length - 1)
                     {
-                        index2 = Random.Next(0, nodes.Length-1);
+                        index2 = Random.Next(0, nodes.Length - 1);
                     }
                     else
                     {

@@ -64,7 +64,7 @@ namespace DotnetGraph.Helper
 
         public static double GetDensityByArcsPerNode(int numberOfNodes, double averageNumberOfArcsPerNode)
         {
-            return averageNumberOfArcsPerNode/ (numberOfNodes - 1);
+            return averageNumberOfArcsPerNode / (numberOfNodes - 1);
         }
     }
 }
