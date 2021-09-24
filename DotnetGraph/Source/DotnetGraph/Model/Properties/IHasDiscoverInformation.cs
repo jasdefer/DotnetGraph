@@ -2,7 +2,7 @@
 {
     public interface IHasDiscoverInformation
     {
-        int DiscoveredTime { get; }
-        int ExploredTime { get; }
+        int DiscoveredTime { get; set; }
+        int ExploredTime { get; set; }
     }
 }

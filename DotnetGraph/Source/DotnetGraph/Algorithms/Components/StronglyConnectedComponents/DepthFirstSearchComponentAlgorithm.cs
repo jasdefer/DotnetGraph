@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.DfsBasedConnectedComponent
+namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents
 {
-    public class DfsConnectedComponetAlgorithm : IGetStronglyConnectedComponents
+    public class DepthFirstSearchComponentAlgorithm : IGetStronglyConnectedComponents
     {
         public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
@@ -32,7 +32,23 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.DfsBased
 
         private static StronglyConnectedComponentsResult<CormenDepthFirstSearchNode> GetResult(IReadOnlyList<CormenDepthFirstSearchNode> nodes)
         {
-            throw new NotImplementedException($"Implement extracting the components from the depth first search.");
+            var list = new List<CormenDepthFirstSearchNode>(nodes);
+            var components = new List<List<CormenDepthFirstSearchNode>>();
+            while (list.Count > 0)
+            {
+                var component = new List<CormenDepthFirstSearchNode>();
+                var node = list[^1];
+                do
+                {
+                    list.Remove(node);
+                    component.Add(node);
+                    node = node.PredecessorNode;
+                }
+                while (node != null);
+                components.Add(component);
+            }
+            var result = new StronglyConnectedComponentsResult<CormenDepthFirstSearchNode>(components);
+            return result;
         }
 
         private static CormenDepthFirstSearchNode[] Convert<TNode, TArc>(IReadOnlyList<TNode> nodes)

@@ -1,5 +1,7 @@
 ﻿using DotnetGraph.Algorithms.DepthFirstSearch;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration;
+using DotnetGraph.Algorithms.GraphGeneration.DiscoverableDirectedGraphGeneration;
+using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
 using DotnetGraph.Model.Implementations.Graph.DiscoverableDirectedGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -38,7 +40,7 @@ namespace DotnetGraphTest.Algorithms.DfSearch
         {
             var nodes = GetCormenExampleGraph();
             var searchAlgorithm = GetAlgorithm();
-            var result = searchAlgorithm.Run<DiscoverableDirectedGraphNode, DiscoverableDirectedGraphArc>(nodes);
+            searchAlgorithm.Run<DiscoverableDirectedGraphNode, DiscoverableDirectedGraphArc>(nodes);
             //node - discovery time - finished time            
             var expected = new[]
             {
@@ -59,15 +61,24 @@ namespace DotnetGraphTest.Algorithms.DfSearch
         public void Monkey()
         {
             var algorithm = GetAlgorithm();
-            var weightGenerator = new ConstantNumber();
+            var generator = new DiscoverableDirectedGraphGenerator()
+            {
+                DirectedGraphGenerator = new UndirectedToDirectedGraphGenerator()
+                {
+                    UndirectedGraphGenerator = new ErdosRenyiGenerator()
+                    {
+                        ConnectComponents = false
+                    }
+                }
+            };
+
             for (int i = 0; i < 100; i++)
             {
                 var numberOfNodes = 100 + i * 10;
                 var density = 2.5 / (double)numberOfNodes;
-                //var nodes = generator.Generate(numberOfNodes, density, weightGenerator);
-                //algorithm.Run<DiscoverableDirectedGraphNode, DiscoverableDirectedGraphArc>(nodes);
+                var nodes = generator.Generate(numberOfNodes, density);
+                algorithm.Run<DiscoverableDirectedGraphNode, DiscoverableDirectedGraphArc>(nodes);
             }
-            throw new NotImplementedException();
         }
     }
 }

@@ -5,8 +5,8 @@ namespace DotnetGraph.Algorithms.DepthFirstSearch
 {
     public interface IDepthFirstSearchAlgorithm
     {
-        DepthFirstSearchResult Run<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
+        void Run<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasId, IHasDiscoverInformation, IHasOutgoingArcs<TArc>
-            where TArc : IHasId;
+            where TArc : IHasId, IHasDestination<TNode>;
     }
 }
