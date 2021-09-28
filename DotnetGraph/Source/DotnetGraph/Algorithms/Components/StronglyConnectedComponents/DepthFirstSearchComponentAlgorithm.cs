@@ -22,31 +22,48 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents
         {
             CormenDepthFirstSearchAlgorithm algorithm = new();
             algorithm.Run(nodes);
-            CormenDepthFirstSearchNode[] orderedNodes = nodes
+
+            var orderedNodes = nodes
                 .OrderByDescending(n => n.ExploredTime)
                 .ToArray();
+            orderedNodes = Invert(orderedNodes);
             algorithm.Run(orderedNodes);
-            var result = GetResult(nodes);
+            var result = GetResult(orderedNodes);
             return result;
+        }
+
+        private static CormenDepthFirstSearchNode[] Invert(IReadOnlyList<CormenDepthFirstSearchNode> nodes)
+        {
+            var invertedNodes = new Dictionary<int, CormenDepthFirstSearchNode>(nodes.Count);
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                var invertedNode = AddOrGetNode(invertedNodes, nodes[i].Id);
+
+                foreach (var arc in nodes[i].OutgoingArcs)
+                {
+                    var destination = AddOrGetNode(invertedNodes, arc.Destination.Id);
+                    var invertedArc = new CormenDepthFirstSearchArc(arc.Id, destination, invertedNode);
+                    destination.AddArc(invertedArc);
+                }
+            }
+            return invertedNodes.Values.ToArray();
+        }
+
+        private static CormenDepthFirstSearchNode AddOrGetNode(Dictionary<int, CormenDepthFirstSearchNode> dict, int id)
+        {
+            if (!dict.ContainsKey(id))
+            {
+                var node = new CormenDepthFirstSearchNode(id);
+                dict.Add(id, node);
+                return node;
+            }
+            return dict[id];
         }
 
         private static StronglyConnectedComponentsResult<CormenDepthFirstSearchNode> GetResult(IReadOnlyList<CormenDepthFirstSearchNode> nodes)
         {
-            var list = new List<CormenDepthFirstSearchNode>(nodes);
             var components = new List<List<CormenDepthFirstSearchNode>>();
-            while (list.Count > 0)
-            {
-                var component = new List<CormenDepthFirstSearchNode>();
-                var node = list[^1];
-                do
-                {
-                    list.Remove(node);
-                    component.Add(node);
-                    node = node.PredecessorNode;
-                }
-                while (node != null);
-                components.Add(component);
-            }
+            
             var result = new StronglyConnectedComponentsResult<CormenDepthFirstSearchNode>(components);
             return result;
         }

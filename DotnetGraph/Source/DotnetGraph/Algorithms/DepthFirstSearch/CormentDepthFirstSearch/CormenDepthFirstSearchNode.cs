@@ -1,9 +1,11 @@
 ﻿using DotnetGraph.Model.Enums;
 using DotnetGraph.Model.Properties;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch
 {
+    [DebuggerDisplay("Node {Id}. Discover {DiscoveredTime} / {ExploredTime}")]
     public class CormenDepthFirstSearchNode :
         IHasOutgoingArcs<CormenDepthFirstSearchArc>,
         IHasId,

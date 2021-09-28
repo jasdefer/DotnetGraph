@@ -1,8 +1,10 @@
 ﻿using DotnetGraph.Model.Properties;
 using System;
+using System.Diagnostics;
 
 namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch
 {
+    [DebuggerDisplay("Arc {Id}: to {Destination.Id}")]
     public class CormenDepthFirstSearchArc :
         IHasDestination<CormenDepthFirstSearchNode>,
         IHasId

@@ -8,7 +8,28 @@ namespace DotnetGraph.Helper
 {
     public static class PrintGraph
     {
-        public static void Print<TNode, TArc>(string path, IEnumerable<TNode> nodes)
+        public static void PrintDirectedGraph<TNode, TArc>(string path, IEnumerable<TNode> nodes)
+            where TNode : IHasId, IHasOutgoingArcs<TArc>
+            where TArc : IHasDestination<TNode>
+        {
+            if (nodes == null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            var sb = new StringBuilder();
+
+            foreach (var node in nodes)
+            {
+                foreach (var arc in node.OutgoingArcs)
+                {
+                    sb.AppendLine($"{node.Id}\t{arc.Destination.Id}");
+                }
+            }
+            File.WriteAllText(path, sb.ToString());
+        }
+
+        public static void PrintWeightedDirectedGraph<TNode, TArc>(string path, IEnumerable<TNode> nodes)
             where TNode : IHasId, IHasOutgoingArcs<TArc>
             where TArc : IHasWeight, IHasDestination<TNode>
         {
