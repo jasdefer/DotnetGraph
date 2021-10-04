@@ -16,7 +16,12 @@ Currently, the following algorithms are implemented:
     - FIFO Algorithm
   - Graph Components
     - [Strongly Connected Components](https://en.wikipedia.org/wiki/Strongly_connected_component)
-	
+  - [Depth-first search](https://en.wikipedia.org/wiki/Depth-first_search)
+    - Cormen depth first search
+  - [Flow network](https://en.wikipedia.org/wiki/Flow_network)
+    - Max flow
+      - [Ford-Fulkerson algorithm](https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm)
+
 Additionally, algorithms to create random graphs and some minor graph	helper are implemented.
 
 ## Get started
