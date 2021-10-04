@@ -14,7 +14,7 @@ namespace DotnetGraphTest.Helper
         public void ValidateUniqueIdsValid()
         {
             var entites = CreateEntities(2);
-            GraphValidation.ValidateUniqueIds(entites);
+            GraphValidation.ValidateUniqueIds<Entity>(entites);
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace DotnetGraphTest.Helper
                 new Entity(1),
                 new Entity(1)
             };
-            Assert.ThrowsException<IdsNotUniqueException>(() => GraphValidation.ValidateUniqueIds(entites));
+            Assert.ThrowsException<IdsNotUniqueException>(() => GraphValidation.ValidateUniqueIds<Entity>(entites));
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace DotnetGraphTest.Helper
             nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
             nodes[0].Add(new DirectedGraphArc(2, nodes[2]));
             nodes[1].Add(new DirectedGraphArc(3, nodes[2]));
-            GraphValidation.ValidateUniqueArcIds(nodes);
+            GraphValidation.ValidateUniqueArcIds<DirectedGraphNode, DirectedGraphArc>(nodes);
         }
 
         [TestMethod]
@@ -57,7 +57,9 @@ namespace DotnetGraphTest.Helper
             nodes[0].Add(new DirectedGraphArc(1, nodes[1]));
             nodes[0].Add(new DirectedGraphArc(2, nodes[2]));
             nodes[1].Add(new DirectedGraphArc(2, nodes[2]));
-            Assert.ThrowsException<IdsNotUniqueException>(() => GraphValidation.ValidateUniqueArcIds(nodes));
+            Assert.ThrowsException<IdsNotUniqueException>(() =>
+                GraphValidation.ValidateUniqueArcIds<DirectedGraphNode, DirectedGraphArc>(nodes)
+                );
         }
 
         [TestMethod]

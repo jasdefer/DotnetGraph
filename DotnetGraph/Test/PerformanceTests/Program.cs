@@ -29,7 +29,8 @@ namespace PerformanceTests
         private static void RunBenchmarkDotNet()
         {
             var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
-            var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
+            var erdosRenyiGeneratorSummary = BenchmarkRunner.Run<ErdosRenyiGeneratorPerformance>();
+            var lineGraphGeneratorSumary = BenchmarkRunner.Run<LineGraphGeneratorPerformance>();
             var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
             var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
             var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
@@ -49,38 +50,26 @@ namespace PerformanceTests
             return total;
         }
 
-        private static double ProfileUndirectedToDirectedGraphConversion()
-        {
-            var performanceTest = new WeightedDirectedGraphGenerationPerformance();
-            performanceTest.NumberOfNodes = WeightedDirectedGraphGenerationPerformance.BigNumberOfNodes;
-            performanceTest.Setup();
-            var total = 0;
-            for (int i = 0; i < 5000; i++)
-            {
-                total += performanceTest.UndirectedToDirectedGraphConversion();
-            }
-            return total;
-        }
         private static double ProfileLineGraphGenerator()
         {
-            var performanceTest = new WeightedUndirectedGraphGenerationPerformance();
-            performanceTest.NumberOfNodes = WeightedUndirectedGraphGenerationPerformance.BigNumberOfNodes;
+            var performanceTest = new LineGraphGeneratorPerformance();
+            performanceTest.NumberOfNodes = LineGraphGeneratorPerformance.BigNumberOfNodes;
             var total = 0;
             for (int i = 0; i < 500; i++)
             {
-                total += performanceTest.LineGraph();
+                total += performanceTest.CreateGraph();
             }
             return total;
         }
 
         private static double ProfileErdosRenyiGraphGenerator()
         {
-            var performanceTest = new WeightedUndirectedGraphGenerationPerformance();
-            performanceTest.NumberOfNodes = WeightedUndirectedGraphGenerationPerformance.BigNumberOfNodes;
+            var performanceTest = new ErdosRenyiGeneratorPerformance();
+            performanceTest.NumberOfNodes = ErdosRenyiGeneratorPerformance.BigNumberOfNodes;
             var total = 0;
             for (int i = 0; i < 200; i++)
             {
-                total += performanceTest.ErdosRenyi();
+                total += performanceTest.CreateGraph();
             }
             return total;
         }

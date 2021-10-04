@@ -69,7 +69,7 @@ namespace DotnetGraphTest.Algorithms.NetworkFlow.MaxFlow
         [TestMethod]
         public void Monkey()
         {
-            var generator = new LineGraphDirectedGraphGenerator();
+            var generator = new LineFlowDirectedGraphGenerator();
             var capacityGenerator = new UniformNumberGenerator(1, 10);
             var algorithm = GetAlgorithm();
             for (int i = 0; i < 15; i++)

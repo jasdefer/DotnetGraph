@@ -1,5 +1,5 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.ErdosRenyi;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration;
 using DotnetGraph.Algorithms.MinimumSpanningTree;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 using DotnetGraphTest.Helper;
@@ -26,7 +26,7 @@ namespace DotnetGraphTest.Algorithms.MinimumSpanningTree
         [TestMethod]
         public void Monkey()
         {
-            var generator = new ErdosRenyiGenerator();
+            var generator = new WeightedUndirectedGraphGenerator();
             var weightGenerator = new UniformNumberGenerator();
             var algorithm = GetAlgorithm();
             for (int i = 0; i < 10; i++)

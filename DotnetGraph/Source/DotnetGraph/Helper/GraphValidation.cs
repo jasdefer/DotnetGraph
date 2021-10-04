@@ -11,7 +11,8 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check, if each id is unique for given entities.
         /// </summary>
-        public static void ValidateUniqueIds(IEnumerable<IHasId> entities)
+        public static void ValidateUniqueIds<TEntity>(IEnumerable<TEntity> entities)
+            where TEntity : IHasId
         {
             if (entities is null)
             {
@@ -55,10 +56,38 @@ namespace DotnetGraph.Helper
             }
         }
 
+        public static void ValidateUniqueEdgeIds<TNode, TEdge>(IReadOnlyCollection<TNode> nodes)
+            where TNode : IHasEdges<TEdge>
+            where TEdge : IHasId
+        {
+            if (nodes is null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            var uniqueEdgeIds = new HashSet<int>();
+            var numberOfEdges = 0;
+            foreach (var node in nodes)
+            {
+                foreach (var edge in node.Edges)
+                {
+                    uniqueEdgeIds.Add(edge.Id);
+                    numberOfEdges++;
+                }
+            }
+
+            // each edge should be counted double, because it is found once per connected node
+            if (uniqueEdgeIds.Count * 2 != numberOfEdges)
+            {
+                throw new IdsNotUniqueException($"Found {uniqueEdgeIds.Count} unique edges ids for {numberOfEdges} edges");
+            }
+        }
+
         /// <summary>
         /// Check, if all arcs leaving the given nodes have a unique id.
         /// </summary>
-        public static void ValidateUniqueArcIds<TArc>(IEnumerable<IHasOutgoingArcs<TArc>> nodes)
+        public static void ValidateUniqueArcIds<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
+            where TNode : IHasOutgoingArcs<TArc>
             where TArc : IHasId
         {
             if (nodes is null)
@@ -86,7 +115,8 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check if all given ids exists at least once in the given entites.
         /// </summary>
-        public static void IdExists(IEnumerable<IHasId> entities, params int[] ids)
+        public static void IdExists<TEntity>(IReadOnlyCollection<TEntity> entities, params int[] ids)
+            where TEntity : IHasId
         {
             if (entities is null)
             {
@@ -114,7 +144,7 @@ namespace DotnetGraph.Helper
         /// <summary>
         /// Check, if all arcs leaving the given nodes have non negative weights.
         /// </summary>
-        public static void ValidateOnlyPositiveWeights<TNode, TArc>(IEnumerable<TNode> nodes)
+        public static void ValidateOnlyPositiveWeights<TNode, TArc>(IReadOnlyCollection<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>
             where TArc : IHasWeight
         {
@@ -153,6 +183,46 @@ namespace DotnetGraph.Helper
                 if (hasAntiparallelArcs)
                 {
                     throw new HasAntiparallelArcException($"Node {node.Id} has antiparallel arcs.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check, if each edge is in the edge list of both nodes
+        /// </summary>
+        public static void ValidateConsistentEdgeNodes<TNode, TEdge>(IReadOnlyCollection<TNode> nodes)
+            where TNode : IHasId, IHasEdges<TEdge>
+            where TEdge : IHasId, IConnectsNodes<TNode>
+        {
+            if (nodes is null)
+            {
+                throw new ArgumentNullException(nameof(nodes));
+            }
+
+            foreach (var node in nodes)
+            {
+                foreach (var edge in node.Edges)
+                {
+                    if (edge.Node1.Id != edge.Node2.Id)
+                    {
+                        TNode otherNode;
+                        if (edge.Node1.Id == node.Id)
+                        {
+                            otherNode = edge.Node2;
+                        }
+                        else if (edge.Node2.Id == node.Id)
+                        {
+                            otherNode = edge.Node1;
+                        }
+                        else
+                        {
+                            throw new InvalidEdgeException($"The edge {edge.Id} does not connect {node.Id} but is in its edge list.");
+                        }
+                        if (!otherNode.Edges.Any(x => x.Id == edge.Id))
+                        {
+                            throw new InvalidEdgeException($"The edge {edge.Id} is not in the list of node {otherNode.Id}.");
+                        }
+                    }
                 }
             }
         }

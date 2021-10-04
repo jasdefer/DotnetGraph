@@ -1,8 +1,10 @@
 ﻿using DotnetGraph.Model.Properties;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace DotnetGraph.Model.Implementations.Graph.UndirectedGraph
 {
+    [DebuggerDisplay("Node {Id}")]
     public class UndirectedGraphNode :
         IHasId,
         IHasEdges<UndirectedGraphEdge>

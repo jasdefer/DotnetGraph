@@ -17,13 +17,13 @@ namespace PerformanceTests.Algorithms.NetworkFlow.MaxFlow
         [GlobalSetup]
         public void Setup()
         {
-            var generator = new LineGraphDirectedGraphGenerator();
+            var generator = new LineFlowDirectedGraphGenerator();
             var weightGenerator = new UniformNumberGenerator();
             baseNodes = generator.Generate(10000, 0.00025, weightGenerator);
             originNodeId = 1;
             destinationNodeId = baseNodes.Length;
             fordFulkersonNodes = FordFulkersonAlgorithm.Convert<FlowDirectedGraphNode, FlowDirectedGraphArc>(baseNodes);
-            FordFulkersonAlgorithm.ValidateInput(fordFulkersonNodes, originNodeId, destinationNodeId);
+            FordFulkersonAlgorithm.ValidateInput<FordFulkersonNode, FordFulkersonArc>(fordFulkersonNodes, originNodeId, destinationNodeId);
         }
 
         [Benchmark]
