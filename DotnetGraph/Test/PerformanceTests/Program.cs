@@ -3,6 +3,7 @@ using PerformanceTests.Algorithms.Components.ConnectedComponents;
 using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
 using PerformanceTests.Algorithms.GraphGeneration;
 using PerformanceTests.Algorithms.MinimumSpanningTree;
+using PerformanceTests.Algorithms.NetworkFlow.MaxFlow;
 using PerformanceTests.Algorithms.ShortestPath;
 using PerformanceTests.Algorithms.ShortestPathTree;
 
@@ -22,16 +23,19 @@ namespace PerformanceTests
             //ProfileTarjanAlgorithmWithConversion();
             //ProfileDijkstra();
             //ProfileFifoRaw();
+            //ProfileFordFulkerson();
         }
 
         private static void RunBenchmarkDotNet()
         {
             var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
-            var graphGenerationSummary = BenchmarkRunner.Run<WeightedUndirectedGraphGenerationPerformance>();
+            var erdosRenyiGeneratorSummary = BenchmarkRunner.Run<ErdosRenyiGeneratorPerformance>();
+            var lineGraphGeneratorSumary = BenchmarkRunner.Run<LineGraphGeneratorPerformance>();
             var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
             var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
             var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
             var shortestPathTreePerformance = BenchmarkRunner.Run<ShortestPathTreePerformance>();
+            var forderFulkersonPerformance = BenchmarkRunner.Run<FordFulkersonPerformance>();
         }
 
         private static double ProfileKruskal()
@@ -46,38 +50,26 @@ namespace PerformanceTests
             return total;
         }
 
-        private static double ProfileUndirectedToDirectedGraphConversion()
-        {
-            var performanceTest = new WeightedDirectedGraphGenerationPerformance();
-            performanceTest.NumberOfNodes = WeightedDirectedGraphGenerationPerformance.BigNumberOfNodes;
-            performanceTest.Setup();
-            var total = 0;
-            for (int i = 0; i < 5000; i++)
-            {
-                total += performanceTest.UndirectedToDirectedGraphConversion();
-            }
-            return total;
-        }
         private static double ProfileLineGraphGenerator()
         {
-            var performanceTest = new WeightedUndirectedGraphGenerationPerformance();
-            performanceTest.NumberOfNodes = WeightedUndirectedGraphGenerationPerformance.BigNumberOfNodes;
+            var performanceTest = new LineGraphGeneratorPerformance();
+            performanceTest.NumberOfNodes = LineGraphGeneratorPerformance.BigNumberOfNodes;
             var total = 0;
             for (int i = 0; i < 500; i++)
             {
-                total += performanceTest.LineGraph();
+                total += performanceTest.CreateGraph();
             }
             return total;
         }
 
         private static double ProfileErdosRenyiGraphGenerator()
         {
-            var performanceTest = new WeightedUndirectedGraphGenerationPerformance();
-            performanceTest.NumberOfNodes = WeightedUndirectedGraphGenerationPerformance.BigNumberOfNodes;
+            var performanceTest = new ErdosRenyiGeneratorPerformance();
+            performanceTest.NumberOfNodes = ErdosRenyiGeneratorPerformance.BigNumberOfNodes;
             var total = 0;
             for (int i = 0; i < 200; i++)
             {
-                total += performanceTest.ErdosRenyi();
+                total += performanceTest.CreateGraph();
             }
             return total;
         }
@@ -150,6 +142,19 @@ namespace PerformanceTests
             for (int i = 0; i < 1000000; i++)
             {
                 total += performanceTest.RawTarjanAlgorithm();
+            }
+            return total;
+        }
+
+        private static double ProfileFordFulkerson()
+        {
+            var performanceTest = new FordFulkersonPerformance();
+            performanceTest.Setup();
+            var total = 0d;
+            for (int i = 0; i < 100000; i++)
+            {
+                //total += performanceTest.FordFulkersonWithConversion();
+                total += performanceTest.FordFulkersonRaw();
             }
             return total;
         }

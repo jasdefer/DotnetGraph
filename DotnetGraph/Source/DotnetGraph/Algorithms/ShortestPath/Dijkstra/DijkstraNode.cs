@@ -1,23 +1,26 @@
-﻿using DotnetGraph.Model.Implementations;
-using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Model.Properties;
+using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 {
-    public class DijkstraNode : IdNode<DijkstraArc>,
+    public class DijkstraNode :
         IHasOutgoingArcs<DijkstraArc>,
         IHasId
     {
-        public DijkstraNode(int id) : base(id)
+        private readonly List<DijkstraArc> arcs;
+        public DijkstraNode(int id, IList<DijkstraArc> arcs = null)
         {
+            Id = id;
+            this.arcs = arcs is null ? new List<DijkstraArc>() : new List<DijkstraArc>(arcs);
         }
-
+        public int Id { get; }
+        public IReadOnlyCollection<DijkstraArc> OutgoingArcs => arcs;
         public DijkstraArc BestPredecessor { get; internal set; }
         public double? DistanceFromOrigin { get; internal set; }
         internal int IndexInHeap { get; set; } = -1;
-
-        public override string ToString()
+        public void AddArc(DijkstraArc arc)
         {
-            return $"Id {Id} ({DistanceFromOrigin ?? double.PositiveInfinity})";
+            arcs.Add(arc);
         }
     }
 }

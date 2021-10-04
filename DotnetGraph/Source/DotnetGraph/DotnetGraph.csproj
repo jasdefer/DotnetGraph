@@ -1,15 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Authors>Justus Bonz</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Description>This library is a collection of algorithms running on directed or undirected graphs.</Description>
     <PackageProjectUrl>https://github.com/jasdefer/DotnetGraph/</PackageProjectUrl>
     <PackageId>DotnetGraphCore</PackageId>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>Complete rework of the library with breaking changes. See the GitHub project page for the updated descriptions.</PackageReleaseNotes>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>1.2.0
+- Added Ford-Fulkerson algorithm for the max flow
+- Added Cormen depth first search algorithm
+- Reorganized the graph generation algorithms</PackageReleaseNotes>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,12 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="System.Collections" Version="4.3.0" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
+    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Algorithms\NetworkFlow\" />
   </ItemGroup>
 
 </Project>

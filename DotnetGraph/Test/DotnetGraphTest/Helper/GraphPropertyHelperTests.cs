@@ -31,5 +31,69 @@ namespace DotnetGraphTest.Helper
             var numberOfPossiblesArcs = GraphPropertyHelper.NumberOfPossibleArcs(numberOfNodes);
             Assert.AreEqual(numberOfExpectedPossibleArcs, numberOfPossiblesArcs);
         }
+
+        [TestMethod]
+        public void GetDensityWithEdges()
+        {
+            var density = GraphPropertyHelper.GetDensityWithEdges(4, 0);
+            Assert.AreEqual(0, density);
+
+            density = GraphPropertyHelper.GetDensityWithEdges(4, 1);
+            Assert.AreEqual(1 / 6d, density);
+
+            density = GraphPropertyHelper.GetDensityWithEdges(4, 2);
+            Assert.AreEqual(1 / 3d, density);
+
+            density = GraphPropertyHelper.GetDensityWithEdges(4, 3);
+            Assert.AreEqual(0.5, density);
+
+            density = GraphPropertyHelper.GetDensityWithEdges(4, 4);
+            Assert.AreEqual(2 / 3d, density);
+        }
+
+        [TestMethod]
+        public void GetDensityWithArcs()
+        {
+            var density = GraphPropertyHelper.GetDensityWithArcs(2, 2);
+            Assert.AreEqual(1, density);
+
+            density = GraphPropertyHelper.GetDensityWithArcs(2, 1);
+            Assert.AreEqual(0.5, density);
+
+            density = GraphPropertyHelper.GetDensityWithArcs(2, 0);
+            Assert.AreEqual(0, density);
+
+            density = GraphPropertyHelper.GetDensityWithArcs(4, 3);
+            Assert.AreEqual(0.25, density);
+        }
+
+        [TestMethod]
+        public void GetDensityByEdgesPerNode()
+        {
+            var density = GraphPropertyHelper.GetDensityByEdgesPerNode(2, 0);
+            Assert.AreEqual(0, density);
+
+            density = GraphPropertyHelper.GetDensityByEdgesPerNode(3, 1);
+            Assert.AreEqual(0.5, density);
+
+            density = GraphPropertyHelper.GetDensityByEdgesPerNode(4, 1);
+            Assert.AreEqual(1 / 3d, density);
+        }
+
+        [TestMethod]
+        public void GetDensityByArcsPerNode()
+        {
+            var density = GraphPropertyHelper.GetDensityByArcsPerNode(2, 0);
+            Assert.AreEqual(0, density);
+
+            density = GraphPropertyHelper.GetDensityByArcsPerNode(2, 1);
+            Assert.AreEqual(1, density);
+
+            density = GraphPropertyHelper.GetDensityByArcsPerNode(3, 1);
+            Assert.AreEqual(0.5, density);
+
+            density = GraphPropertyHelper.GetDensityByArcsPerNode(4, 1);
+            Assert.AreEqual(1 / 3d, density);
+        }
     }
 }

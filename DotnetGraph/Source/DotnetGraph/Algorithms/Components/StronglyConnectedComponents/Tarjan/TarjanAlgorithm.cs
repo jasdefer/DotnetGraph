@@ -1,5 +1,4 @@
-﻿using DotnetGraph.Model.Implementations;
-using DotnetGraph.Model.Properties;
+﻿using DotnetGraph.Model.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +12,7 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
         private List<TarjanNode> stack;
         private List<ReadOnlyCollection<TarjanNode>> components;
 
-        public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IEnumerable<TNode> nodes)
+        public StronglyConnectedComponentsResult<TNode> GetCompontents<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
@@ -28,7 +27,7 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             return result;
         }
 
-        private static StronglyConnectedComponentsResult<TNode> ConvertResult<TNode>(IEnumerable<TNode> nodes, StronglyConnectedComponentsResult<TarjanNode> tarjanResult)
+        private static StronglyConnectedComponentsResult<TNode> ConvertResult<TNode>(IReadOnlyList<TNode> nodes, StronglyConnectedComponentsResult<TarjanNode> tarjanResult)
             where TNode : IHasId
         {
             var dict = nodes.ToDictionary(x => x.Id);
@@ -46,7 +45,7 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             return result;
         }
 
-        public static TarjanNode[] Convert<TNode, TArc>(IEnumerable<TNode> nodes)
+        public static TarjanNode[] Convert<TNode, TArc>(IReadOnlyList<TNode> nodes)
             where TNode : IHasOutgoingArcs<TArc>, IHasId
             where TArc : IHasDestination<TNode>, IHasId
         {
@@ -56,12 +55,12 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             }
 
             var dict = nodes.ToDictionary(x => x.Id, x => new TarjanNode(x.Id));
-            foreach (var node in nodes)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                foreach (var arc in node.OutgoingArcs)
+                foreach (var arc in nodes[i].OutgoingArcs)
                 {
-                    var tarjanArc = new Arc<TarjanNode>(dict[arc.Destination.Id]);
-                    dict[node.Id].AddArc(tarjanArc);
+                    var tarjanArc = new TarjanArc(1, dict[arc.Destination.Id]);
+                    dict[nodes[i].Id].Add(tarjanArc);
                 }
             }
             return dict.Values.ToArray();
@@ -110,16 +109,19 @@ namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
             }
 
             //Build the component
-            if (tarjanNode.LowLink == tarjanNode.Index)
+            if (tarjanNode.LowLink == tarjanNode.Index &&
+                stack.Count > 0)
             {
                 var component = new List<TarjanNode>();
-                while (stack.Count > 0)
+                TarjanNode node;
+                do
                 {
-                    component.Add(stack[^1]);
-                    stack[^1].IsOnStack = false;
+                    node = stack[^1];
+                    node.IsOnStack = false;
                     stack.RemoveAt(stack.Count - 1);
+                    component.Add(node);
                 }
-                stack = new List<TarjanNode>();
+                while (node != tarjanNode);
                 components.Add(component.AsReadOnly());
             }
         }

@@ -2,17 +2,5 @@
 
 namespace DotnetGraph.Model.Implementations
 {
-    public class Entity : IHasId
-    {
-        public Entity(int id)
-        {
-            Id = id;
-        }
-        public int Id { get; }
-
-        public override string ToString()
-        {
-            return $"Id {Id}";
-        }
-    }
+    public record Entity(int Id) : IHasId;
 }

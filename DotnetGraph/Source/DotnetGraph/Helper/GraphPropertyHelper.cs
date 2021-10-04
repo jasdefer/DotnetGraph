@@ -12,7 +12,7 @@ namespace DotnetGraph.Helper
             }
             if (numberOfNodes > 65000)
             {
-                throw new Exception($"The number of possible edges is bigger than the maximum int value for a graph with {numberOfNodes} nodes.");
+                throw new ArgumentOutOfRangeException($"The number of possible edges is bigger than the maximum int value for a graph with {numberOfNodes} nodes.");
             }
             //Applying the commutative law help reducing the max number in the calculation
             //This prevents some interim result bigger than int.MaxValue
@@ -45,6 +45,26 @@ namespace DotnetGraph.Helper
         {
             var numberOfArcs = 2 * NumberOfEdges(numberOfNodes, density);
             return numberOfArcs;
+        }
+
+        public static double GetDensityWithEdges(int numberOfNodes, int numberOfEdges)
+        {
+            return numberOfEdges / (double)NumberOfPossibleEdges(numberOfNodes);
+        }
+
+        public static double GetDensityWithArcs(int numberOfNodes, int numberOfArcs)
+        {
+            return numberOfArcs / (double)NumberOfPossibleArcs(numberOfNodes);
+        }
+
+        public static double GetDensityByEdgesPerNode(int numberOfNodes, double averageNumberOfEdgesPerNode)
+        {
+            return averageNumberOfEdgesPerNode / (numberOfNodes - 1);
+        }
+
+        public static double GetDensityByArcsPerNode(int numberOfNodes, double averageNumberOfArcsPerNode)
+        {
+            return averageNumberOfArcsPerNode / (numberOfNodes - 1);
         }
     }
 }

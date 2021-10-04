@@ -1,5 +1,5 @@
-﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration.UndirectedToDirectedGraph;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
+using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration;
 using DotnetGraph.Algorithms.ShortestPath.Dijkstra;
 using DotnetGraph.Algorithms.ShortestPathTree;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
@@ -41,8 +41,8 @@ namespace DotnetGraphTest.Algorithms.ShortestPathTree
         public void Monkey()
         {
             var algorithm = GetAlgorithm();
-            var generator = new UndirectedToDirectedGraphGenerator();
-            var weightGenerator = new UniformWeightGenerator();
+            var generator = new LineWeightedDirectedGraphGenerator();
+            var weightGenerator = new UniformNumberGenerator();
             var dijkstra = new DijkstraAlgorithm();
             for (int i = 0; i < 2; i++)
             {

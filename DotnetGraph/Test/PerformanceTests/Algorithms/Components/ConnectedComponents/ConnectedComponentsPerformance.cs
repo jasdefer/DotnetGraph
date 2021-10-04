@@ -1,14 +1,13 @@
 ﻿using BenchmarkDotNet.Attributes;
 using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.WeightGenerator;
-using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration.ErdosRenyi;
-using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
+using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
+using DotnetGraph.Model.Implementations.Graph.UndirectedGraph;
 
 namespace PerformanceTests.Algorithms.Components.ConnectedComponents
 {
     public class ConnectedComponentsPerformance
     {
-        private WeightedUndirectedGraphNode[] nodes;
+        private UndirectedGraphNode[] nodes;
 
         [GlobalSetup]
         public void Setup()
@@ -17,15 +16,14 @@ namespace PerformanceTests.Algorithms.Components.ConnectedComponents
             {
                 ConnectComponents = false
             };
-            var weightGenerator = new UniformWeightGenerator();
-            nodes = algorithm.Generate(5000, 0.001, weightGenerator);
+            nodes = algorithm.Generate(5000, 0.001);
         }
 
         [Benchmark]
         public int SimpleConnectedComponentAlgorithm()
         {
             var algorithm = new SimpleConnectedComponentAlgorithm();
-            var result = algorithm.GetComponents<WeightedUndirectedGraphNode, WeightedUndirectedGraphEdge>(nodes);
+            var result = algorithm.GetComponents<UndirectedGraphNode, UndirectedGraphEdge>(nodes);
             return result.NumberOfComponents;
         }
     }

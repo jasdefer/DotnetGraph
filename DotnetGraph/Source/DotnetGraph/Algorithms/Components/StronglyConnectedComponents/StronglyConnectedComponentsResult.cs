@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents
 {
     public class StronglyConnectedComponentsResult<TNode>
     {
-        public StronglyConnectedComponentsResult(ReadOnlyCollection<ReadOnlyCollection<TNode>> components)
+        public StronglyConnectedComponentsResult(IReadOnlyList<IReadOnlyCollection<TNode>> components)
         {
             Components = components ?? throw new ArgumentNullException(nameof(components));
         }
 
-        public ReadOnlyCollection<ReadOnlyCollection<TNode>> Components { get; }
+        public IReadOnlyList<IReadOnlyCollection<TNode>> Components { get; }
         public int NumberOfComponents => Components.Count;
     }
 }

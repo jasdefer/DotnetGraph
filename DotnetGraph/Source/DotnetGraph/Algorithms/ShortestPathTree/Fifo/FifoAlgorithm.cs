@@ -65,8 +65,8 @@ namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
                 var origin = fifoNodes[node.Id];
                 foreach (var arc in node.OutgoingArcs)
                 {
-                    var fifoArc = new FifoArc(arc.Id, origin, fifoNodes[arc.Destination.Id], arc.Weight);
-                    origin.AddArc(fifoArc);
+                    var fifoArc = new FifoArc(arc.Id, arc.Weight, origin, fifoNodes[arc.Destination.Id]);
+                    origin.Add(fifoArc);
                 }
             }
             return fifoNodes.Values.ToArray();
@@ -156,7 +156,7 @@ namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
 
             if (originIndex == -1)
             {
-                throw new Exception($"Cannot find the origin node id {originNodeId}");
+                throw new KeyNotFoundException($"Cannot find the origin node id {originNodeId}");
             }
 
             return nodes[originIndex];

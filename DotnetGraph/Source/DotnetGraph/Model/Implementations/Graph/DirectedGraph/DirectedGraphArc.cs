@@ -1,16 +1,10 @@
 ﻿using DotnetGraph.Model.Properties;
+using System.Diagnostics;
 
 namespace DotnetGraph.Model.Implementations.Graph.DirectedGraph
 {
-    public class DirectedGraphArc : Arc<DirectedGraphNode>,
+    [DebuggerDisplay("Arc {Id}: to {Destination.Id}")]
+    public record DirectedGraphArc(int Id, DirectedGraphNode Destination) :
         IHasDestination<DirectedGraphNode>,
-        IHasId
-    {
-        public DirectedGraphArc(int id, DirectedGraphNode destination) : base(destination)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
-    }
+        IHasId;
 }
