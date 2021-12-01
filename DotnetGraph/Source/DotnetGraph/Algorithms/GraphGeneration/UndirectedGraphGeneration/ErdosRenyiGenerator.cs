@@ -1,8 +1,6 @@
 ﻿using DotnetGraph.Algorithms.Components.ConnectedComponents;
 using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
-using DotnetGraph.Helper;
 using DotnetGraph.Model.Implementations.Graph.UndirectedGraph;
-using System;
 
 namespace DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration
 {

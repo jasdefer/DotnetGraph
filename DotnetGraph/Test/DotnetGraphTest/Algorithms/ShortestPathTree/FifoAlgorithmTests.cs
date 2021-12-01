@@ -1,6 +1,5 @@
 ﻿using DotnetGraph.Algorithms.ShortestPathTree;
 using DotnetGraph.Algorithms.ShortestPathTree.Fifo;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotnetGraphTest.Algorithms.ShortestPathTree
 {

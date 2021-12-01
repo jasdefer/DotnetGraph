@@ -1,8 +1,6 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration;
 using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph;
-using System;
-using System.Linq;
 
 namespace DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
 {

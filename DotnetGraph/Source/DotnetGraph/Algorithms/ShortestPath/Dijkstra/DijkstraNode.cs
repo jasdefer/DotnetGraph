@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
+﻿namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 {
     public class DijkstraNode :
         IHasOutgoingArcs<DijkstraArc>,

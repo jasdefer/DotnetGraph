@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.ShortestPathTree
+﻿namespace DotnetGraph.Algorithms.ShortestPathTree
 {
     public interface IShortestPathTreeAlgorithm
     {

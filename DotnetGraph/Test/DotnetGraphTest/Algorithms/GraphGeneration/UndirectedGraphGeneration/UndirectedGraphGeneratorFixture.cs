@@ -1,8 +1,6 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
 using DotnetGraph.Helper;
 using DotnetGraph.Model.Implementations.Graph.UndirectedGraph;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.GraphGeneration.UndirectedGraphGeneration
 {

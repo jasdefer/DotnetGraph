@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
+﻿using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration;
 using DotnetGraph.Algorithms.MinimumSpanningTree.Kruskal;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;

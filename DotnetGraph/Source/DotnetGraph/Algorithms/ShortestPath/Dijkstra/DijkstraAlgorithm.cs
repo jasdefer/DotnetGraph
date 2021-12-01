@@ -1,11 +1,4 @@
-﻿using DotnetGraph.Helper;
-using DotnetGraph.Helper.Exceptions;
-using DotnetGraph.Model.Properties;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
+﻿namespace DotnetGraph.Algorithms.ShortestPath.Dijkstra
 {
     public class DijkstraAlgorithm : IShortestPathAlgorithm
     {

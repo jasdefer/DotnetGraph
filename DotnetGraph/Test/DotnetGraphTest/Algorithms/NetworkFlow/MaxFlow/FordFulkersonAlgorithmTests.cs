@@ -1,6 +1,5 @@
 ﻿using DotnetGraph.Algorithms.NetworkFlow.MaxFlow;
 using DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotnetGraphTest.Algorithms.NetworkFlow.MaxFlow
 {

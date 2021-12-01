@@ -1,7 +1,5 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration;
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.GraphGeneration.DirectedGraphGeneration
 {

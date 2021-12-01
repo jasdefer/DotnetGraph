@@ -1,10 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-
-namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
+﻿namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
 {
     public class FifoAlgorithm : IShortestPathTreeAlgorithm
     {

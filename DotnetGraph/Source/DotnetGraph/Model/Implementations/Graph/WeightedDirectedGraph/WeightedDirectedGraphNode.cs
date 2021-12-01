@@ -1,6 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph
 {

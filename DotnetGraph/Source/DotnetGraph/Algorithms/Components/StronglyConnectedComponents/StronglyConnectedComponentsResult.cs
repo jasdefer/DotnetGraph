@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents
+﻿namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents
 {
     public class StronglyConnectedComponentsResult<TNode>
     {

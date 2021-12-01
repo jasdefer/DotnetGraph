@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties
 {
     public interface IHasEdges<out TEdge>
     {

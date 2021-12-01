@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotnetGraph.Helper
+﻿namespace DotnetGraph.Helper
 {
     public static class GraphPropertyHelper
     {

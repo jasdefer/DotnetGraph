@@ -1,8 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent
+﻿namespace DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent
 {
     public class SimpleConnectedComponentAlgorithm : IConnectedComponentsAlgorithm
     {

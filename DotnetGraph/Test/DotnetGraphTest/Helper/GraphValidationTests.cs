@@ -1,9 +1,7 @@
 ﻿using DotnetGraph.Helper;
 using DotnetGraph.Helper.Exceptions;
-using DotnetGraph.Model.Implementations;
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotnetGraphTest.Helper
 {

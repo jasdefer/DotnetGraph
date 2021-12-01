@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator
+﻿namespace DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator
 {
     public class UniformNumberGenerator : INumberGenerator
     {

@@ -1,9 +1,6 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration;
 using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
 {

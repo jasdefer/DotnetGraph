@@ -1,5 +1,4 @@
 ﻿using DotnetGraph.Helper;
-using DotnetGraph.Model.Implementations;
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;

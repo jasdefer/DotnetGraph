@@ -3,7 +3,6 @@ using DotnetGraph.Algorithms.GraphGeneration.WeightedUndirectedGraphGeneration;
 using DotnetGraph.Algorithms.MinimumSpanningTree;
 using DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph;
 using DotnetGraphTest.Helper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotnetGraphTest.Algorithms.MinimumSpanningTree
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotnetGraph.Helper.Exceptions
+﻿namespace DotnetGraph.Helper.Exceptions
 {
     public class InvalidIdException : Exception
     {

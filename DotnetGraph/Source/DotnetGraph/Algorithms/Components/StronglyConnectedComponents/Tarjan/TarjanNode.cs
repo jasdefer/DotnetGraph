@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
+﻿namespace DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan
 {
     public class TarjanNode :
         IHasOutgoingArcs<TarjanArc>,

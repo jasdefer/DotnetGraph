@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
+﻿using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
 
 namespace PerformanceTests.Algorithms.GraphGeneration
 {

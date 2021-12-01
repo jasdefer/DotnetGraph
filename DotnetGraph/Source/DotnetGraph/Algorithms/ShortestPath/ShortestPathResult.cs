@@ -1,8 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System;
-using System.Collections.ObjectModel;
-
-namespace DotnetGraph.Algorithms.ShortestPath
+﻿namespace DotnetGraph.Algorithms.ShortestPath
 {
     public class ShortestPathResult<TArc>
         where TArc : IHasId

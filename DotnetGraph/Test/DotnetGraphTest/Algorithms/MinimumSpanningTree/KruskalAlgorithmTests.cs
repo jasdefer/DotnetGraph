@@ -1,6 +1,5 @@
 ﻿using DotnetGraph.Algorithms.MinimumSpanningTree;
 using DotnetGraph.Algorithms.MinimumSpanningTree.Kruskal;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotnetGraphTest.Algorithms.MinimumSpanningTree
 {

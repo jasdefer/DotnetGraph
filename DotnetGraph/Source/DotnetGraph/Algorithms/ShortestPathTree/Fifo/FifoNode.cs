@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
+﻿namespace DotnetGraph.Algorithms.ShortestPathTree.Fifo
 {
     public class FifoNode :
         IHasOutgoingArcs<FifoArc>,

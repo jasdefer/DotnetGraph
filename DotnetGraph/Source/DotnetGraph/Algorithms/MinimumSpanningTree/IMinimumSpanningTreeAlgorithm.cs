@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.MinimumSpanningTree
+﻿namespace DotnetGraph.Algorithms.MinimumSpanningTree
 {
     public interface IMinimumSpanningTreeAlgorithm
     {

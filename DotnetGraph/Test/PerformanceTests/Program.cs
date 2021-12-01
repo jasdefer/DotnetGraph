@@ -1,11 +1,12 @@
-﻿using BenchmarkDotNet.Running;
-using PerformanceTests.Algorithms.Components.ConnectedComponents;
-using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
-using PerformanceTests.Algorithms.GraphGeneration;
-using PerformanceTests.Algorithms.MinimumSpanningTree;
-using PerformanceTests.Algorithms.NetworkFlow.MaxFlow;
-using PerformanceTests.Algorithms.ShortestPath;
-using PerformanceTests.Algorithms.ShortestPathTree;
+﻿global using BenchmarkDotNet.Attributes;
+global using BenchmarkDotNet.Running;
+global using PerformanceTests.Algorithms.Components.ConnectedComponents;
+global using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
+global using PerformanceTests.Algorithms.GraphGeneration;
+global using PerformanceTests.Algorithms.MinimumSpanningTree;
+global using PerformanceTests.Algorithms.NetworkFlow.MaxFlow;
+global using PerformanceTests.Algorithms.ShortestPath;
+global using PerformanceTests.Algorithms.ShortestPathTree;
 
 namespace PerformanceTests
 {

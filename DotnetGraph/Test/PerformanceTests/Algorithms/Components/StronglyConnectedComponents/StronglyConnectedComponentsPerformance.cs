@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan;
+﻿using DotnetGraph.Algorithms.Components.StronglyConnectedComponents.Tarjan;
 using DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration;
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 

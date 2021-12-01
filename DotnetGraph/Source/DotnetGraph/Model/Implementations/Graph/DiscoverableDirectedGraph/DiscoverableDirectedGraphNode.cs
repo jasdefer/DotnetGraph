@@ -1,8 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Model.Implementations.Graph.DiscoverableDirectedGraph
+﻿namespace DotnetGraph.Model.Implementations.Graph.DiscoverableDirectedGraph
 {
     public class DiscoverableDirectedGraphNode :
         IHasId,

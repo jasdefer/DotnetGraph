@@ -1,11 +1,6 @@
-﻿using DotnetGraph.Model.Implementations;
-using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
-using DotnetGraph.Model.Properties;
-using System;
-using System.Collections.Generic;
+﻿using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 
 namespace DotnetGraph.Helper
 {

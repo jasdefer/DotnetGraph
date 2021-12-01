@@ -1,7 +1,5 @@
 ﻿using DotnetGraph.Algorithms.Components.ConnectedComponents;
 using DotnetGraph.Model.Implementations.Graph.UndirectedGraph;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.Components.ConnectedComponents
 {

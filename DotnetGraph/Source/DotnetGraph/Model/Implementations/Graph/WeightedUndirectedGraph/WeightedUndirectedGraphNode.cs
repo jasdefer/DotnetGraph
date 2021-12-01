@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph
+﻿namespace DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph
 {
     public class WeightedUndirectedGraphNode :
         IHasId,

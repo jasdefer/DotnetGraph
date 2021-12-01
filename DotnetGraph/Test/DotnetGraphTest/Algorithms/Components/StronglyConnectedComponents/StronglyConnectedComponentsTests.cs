@@ -2,8 +2,6 @@
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraphTest.Helper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.Components.StronglyConnectedComponents
 {

@@ -1,8 +1,4 @@
-﻿using DotnetGraph.Model.Enums;
-using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
+﻿namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson
 {
     public class FordFulkersonNode :
         IHasId,

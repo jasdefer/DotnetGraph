@@ -1,6 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch
 {

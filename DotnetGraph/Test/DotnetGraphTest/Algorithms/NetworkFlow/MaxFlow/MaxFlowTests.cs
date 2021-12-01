@@ -2,10 +2,6 @@
 using DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
 using DotnetGraph.Algorithms.NetworkFlow.MaxFlow;
 using DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph;
-using DotnetGraph.Model.Properties;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.NetworkFlow.MaxFlow
 {

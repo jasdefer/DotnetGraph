@@ -1,6 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-
-namespace DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph
+﻿namespace DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph
 {
     public class FlowDirectedGraphArc : IHasId, IHasCapacity, IHasDestination<FlowDirectedGraphNode>, IHasFlow
     {

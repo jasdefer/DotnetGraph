@@ -3,8 +3,6 @@ using DotnetGraph.Algorithms.GraphGeneration.WeightedDirectedGraphGeneration;
 using DotnetGraph.Algorithms.ShortestPath;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraphTest.Helper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.ShortestPath
 {

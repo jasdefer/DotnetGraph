@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
+﻿using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
 using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
 using DotnetGraph.Model.Implementations.Graph.UndirectedGraph;
 

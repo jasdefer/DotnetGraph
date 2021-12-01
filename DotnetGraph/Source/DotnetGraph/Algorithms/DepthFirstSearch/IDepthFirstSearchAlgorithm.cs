@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.DepthFirstSearch
+﻿namespace DotnetGraph.Algorithms.DepthFirstSearch
 {
     public interface IDepthFirstSearchAlgorithm
     {

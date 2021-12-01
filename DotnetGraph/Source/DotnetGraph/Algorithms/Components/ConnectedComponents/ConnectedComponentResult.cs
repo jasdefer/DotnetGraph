@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-
-namespace DotnetGraph.Algorithms.Components.ConnectedComponents
+﻿namespace DotnetGraph.Algorithms.Components.ConnectedComponents
 {
     public class ConnectedComponentResult<TNode>
     {

@@ -1,6 +1,5 @@
 ﻿using DotnetGraph.Algorithms.Components.ConnectedComponents;
 using DotnetGraph.Algorithms.Components.ConnectedComponents.SimpleConnectedComponent;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotnetGraphTest.Algorithms.Components.ConnectedComponents
 {

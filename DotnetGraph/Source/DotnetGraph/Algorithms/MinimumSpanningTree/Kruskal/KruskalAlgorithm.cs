@@ -1,8 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DotnetGraph.Algorithms.MinimumSpanningTree.Kruskal
+﻿namespace DotnetGraph.Algorithms.MinimumSpanningTree.Kruskal
 {
     public class KruskalAlgorithm : IMinimumSpanningTreeAlgorithm
     {

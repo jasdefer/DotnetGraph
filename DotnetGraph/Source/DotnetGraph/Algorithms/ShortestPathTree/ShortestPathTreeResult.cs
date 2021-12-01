@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-
-namespace DotnetGraph.Algorithms.ShortestPathTree
+﻿namespace DotnetGraph.Algorithms.ShortestPathTree
 {
     public class ShortestPathTreeResult<TNode, TArc>
     {

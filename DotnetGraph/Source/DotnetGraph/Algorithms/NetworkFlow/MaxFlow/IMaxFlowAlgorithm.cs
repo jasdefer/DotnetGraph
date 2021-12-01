@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow
+﻿namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow
 {
     public interface IMaxFlowAlgorithm
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotnetGraph.Helper.Exceptions
+﻿namespace DotnetGraph.Helper.Exceptions
 {
     /// <summary>
     /// Is thrown, if a graph has antiparallel arcs.

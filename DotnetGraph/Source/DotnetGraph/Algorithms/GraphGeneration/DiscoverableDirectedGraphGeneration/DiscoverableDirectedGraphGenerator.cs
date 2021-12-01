@@ -1,6 +1,5 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration;
 using DotnetGraph.Model.Implementations.Graph.DiscoverableDirectedGraph;
-using System.Linq;
 
 namespace DotnetGraph.Algorithms.GraphGeneration.DiscoverableDirectedGraphGeneration
 {

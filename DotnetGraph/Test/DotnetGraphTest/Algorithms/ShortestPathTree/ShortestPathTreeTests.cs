@@ -4,8 +4,6 @@ using DotnetGraph.Algorithms.ShortestPath.Dijkstra;
 using DotnetGraph.Algorithms.ShortestPathTree;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 using DotnetGraphTest.Helper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace DotnetGraphTest.Algorithms.ShortestPathTree
 {

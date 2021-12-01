@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Algorithms.MinimumSpanningTree
+﻿namespace DotnetGraph.Algorithms.MinimumSpanningTree
 {
     public class MinimumSpanningTreeResult<TEdge>
     {

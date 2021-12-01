@@ -1,7 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
-
-namespace DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph
+﻿namespace DotnetGraph.Model.Implementations.Graph.FlowDirectedGraph
 {
     public class FlowDirectedGraphNode :
         IHasId,

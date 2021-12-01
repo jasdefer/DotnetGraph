@@ -1,6 +1,4 @@
-﻿using DotnetGraph.Model.Properties;
-
-namespace DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph
+﻿namespace DotnetGraph.Model.Implementations.Graph.WeightedUndirectedGraph
 {
     public record WeightedUndirectedGraphEdge(
         int Id,
