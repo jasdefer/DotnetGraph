@@ -2,14 +2,13 @@
 using DotnetGraph.Algorithms.DepthFirstSearch.CormenDepthFirstSearch;
 using DotnetGraphTest.Algorithms.DfSearch;
 
-namespace DotnetGraphTest.Algorithms.DepthFirstSearch
+namespace DotnetGraphTest.Algorithms.DepthFirstSearch;
+
+[TestClass]
+public class CormenDepthFirstSearchAlgorithmTests : DepthFirstSearchTests
 {
-    [TestClass]
-    public class CormenDepthFirstSearchAlgorithmTests : DepthFirstSearchTests
+    protected override IDepthFirstSearchAlgorithm GetAlgorithm()
     {
-        protected override IDepthFirstSearchAlgorithm GetAlgorithm()
-        {
-            return new CormenDepthFirstSearchAlgorithm();
-        }
+        return new CormenDepthFirstSearchAlgorithm();
     }
 }

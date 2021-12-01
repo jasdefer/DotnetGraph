@@ -1,9 +1,8 @@
-﻿namespace DotnetGraph.Model.Enums
+﻿namespace DotnetGraph.Model.Enums;
+
+public enum SearchState
 {
-    public enum SearchState
-    {
-        Undiscovered,
-        Discovered,
-        Visited
-    }
+    Undiscovered,
+    Discovered,
+    Visited
 }

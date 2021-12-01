@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasWeight
 {
-    public interface IHasWeight
-    {
-        double Weight { get; }
-    }
+    double Weight { get; }
 }

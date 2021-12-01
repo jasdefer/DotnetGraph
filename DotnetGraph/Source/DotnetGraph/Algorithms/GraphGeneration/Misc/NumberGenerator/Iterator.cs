@@ -1,22 +1,21 @@
-﻿namespace DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator
+﻿namespace DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
+
+public class Iterator : INumberGenerator
 {
-    public class Iterator : INumberGenerator
+    public Iterator()
     {
-        public Iterator()
-        {
 
-        }
+    }
 
-        public Iterator(int start = 0)
-        {
-            NextNumber = start;
-        }
+    public Iterator(int start = 0)
+    {
+        NextNumber = start;
+    }
 
-        public int NextNumber { get; private set; }
+    public int NextNumber { get; private set; }
 
-        public double Generate()
-        {
-            return NextNumber++;
-        }
+    public double Generate()
+    {
+        return NextNumber++;
     }
 }

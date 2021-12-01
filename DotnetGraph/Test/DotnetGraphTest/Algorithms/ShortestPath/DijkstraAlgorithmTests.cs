@@ -1,14 +1,13 @@
 ﻿using DotnetGraph.Algorithms.ShortestPath;
 using DotnetGraph.Algorithms.ShortestPath.Dijkstra;
 
-namespace DotnetGraphTest.Algorithms.ShortestPath
+namespace DotnetGraphTest.Algorithms.ShortestPath;
+
+[TestClass]
+public class DijkstraAlgorithmTests : ShortestPathTests
 {
-    [TestClass]
-    public class DijkstraAlgorithmTests : ShortestPathTests
+    protected override IShortestPathAlgorithm GetShortestPathAlgorithm()
     {
-        protected override IShortestPathAlgorithm GetShortestPathAlgorithm()
-        {
-            return new DijkstraAlgorithm();
-        }
+        return new DijkstraAlgorithm();
     }
 }

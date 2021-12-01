@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasEdges<out TEdge>
 {
-    public interface IHasEdges<out TEdge>
-    {
-        IReadOnlyCollection<TEdge> Edges { get; }
-    }
+    IReadOnlyCollection<TEdge> Edges { get; }
 }

@@ -1,14 +1,13 @@
 ﻿using DotnetGraph.Algorithms.MinimumSpanningTree;
 using DotnetGraph.Algorithms.MinimumSpanningTree.Kruskal;
 
-namespace DotnetGraphTest.Algorithms.MinimumSpanningTree
+namespace DotnetGraphTest.Algorithms.MinimumSpanningTree;
+
+[TestClass]
+public class KruskalAlgorithmTests : MinimumSpanningTreeTests
 {
-    [TestClass]
-    public class KruskalAlgorithmTests : MinimumSpanningTreeTests
+    protected override IMinimumSpanningTreeAlgorithm GetAlgorithm()
     {
-        protected override IMinimumSpanningTreeAlgorithm GetAlgorithm()
-        {
-            return new KruskalAlgorithm();
-        }
+        return new KruskalAlgorithm();
     }
 }

@@ -1,22 +1,21 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
 
-namespace PerformanceTests.Algorithms.GraphGeneration
+namespace PerformanceTests.Algorithms.GraphGeneration;
+
+public class ErdosRenyiGeneratorPerformance
 {
-    public class ErdosRenyiGeneratorPerformance
+    public const int SmallNumberOfNodes = 100;
+    public const int BigNumberOfNodes = 5000;
+
+    [Params(SmallNumberOfNodes, BigNumberOfNodes)]
+    public int NumberOfNodes { get; set; }
+
+    [Benchmark]
+    public int CreateGraph()
     {
-        public const int SmallNumberOfNodes = 100;
-        public const int BigNumberOfNodes = 5000;
-
-        [Params(SmallNumberOfNodes, BigNumberOfNodes)]
-        public int NumberOfNodes { get; set; }
-
-        [Benchmark]
-        public int CreateGraph()
-        {
-            var generator = new ErdosRenyiGenerator();
-            var density = 5d / (NumberOfNodes + 1);
-            var undirectedGraphNodes = generator.Generate(NumberOfNodes, density);
-            return undirectedGraphNodes.Length;
-        }
+        var generator = new ErdosRenyiGenerator();
+        var density = 5d / (NumberOfNodes + 1);
+        var undirectedGraphNodes = generator.Generate(NumberOfNodes, density);
+        return undirectedGraphNodes.Length;
     }
 }

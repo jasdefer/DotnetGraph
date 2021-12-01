@@ -1,14 +1,13 @@
 ﻿using DotnetGraph.Algorithms.NetworkFlow.MaxFlow;
 using DotnetGraph.Algorithms.NetworkFlow.MaxFlow.FordFulkerson;
 
-namespace DotnetGraphTest.Algorithms.NetworkFlow.MaxFlow
+namespace DotnetGraphTest.Algorithms.NetworkFlow.MaxFlow;
+
+[TestClass]
+public class FordFulkersonAlgorithmTests : MaxFlowTests
 {
-    [TestClass]
-    public class FordFulkersonAlgorithmTests : MaxFlowTests
+    protected override IMaxFlowAlgorithm GetAlgorithm()
     {
-        protected override IMaxFlowAlgorithm GetAlgorithm()
-        {
-            return new FordFulkersonAlgorithm();
-        }
+        return new FordFulkersonAlgorithm();
     }
 }

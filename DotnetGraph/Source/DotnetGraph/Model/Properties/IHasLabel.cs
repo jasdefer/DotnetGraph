@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasLabel
 {
-    public interface IHasLabel
-    {
-        string Label { get; }
-    }
+    string Label { get; }
 }

@@ -1,9 +1,8 @@
-﻿namespace DotnetGraph.Algorithms.ShortestPathTree
+﻿namespace DotnetGraph.Algorithms.ShortestPathTree;
+
+public interface IShortestPathTreeAlgorithm
 {
-    public interface IShortestPathTreeAlgorithm
-    {
-        ShortestPathTreeResult<TNode, TArc> GetShortestPathTree<TNode, TArc>(IEnumerable<TNode> nodes, int origin)
-            where TNode : IHasId, IHasOutgoingArcs<TArc>
-            where TArc : IHasId, IHasWeight, IHasDestination<TNode>;
-    }
+    ShortestPathTreeResult<TNode, TArc> GetShortestPathTree<TNode, TArc>(IEnumerable<TNode> nodes, int origin)
+        where TNode : IHasId, IHasOutgoingArcs<TArc>
+        where TArc : IHasId, IHasWeight, IHasDestination<TNode>;
 }

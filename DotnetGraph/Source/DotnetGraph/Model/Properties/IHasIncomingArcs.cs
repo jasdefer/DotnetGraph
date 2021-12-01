@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasIncomingArcs<out TArc>
 {
-    public interface IHasIncomingArcs<out TArc>
-    {
-        IReadOnlyCollection<TArc> IncomingArcs { get; }
-    }
+    IReadOnlyCollection<TArc> IncomingArcs { get; }
 }

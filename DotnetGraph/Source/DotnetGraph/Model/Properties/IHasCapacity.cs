@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasCapacity
 {
-    public interface IHasCapacity
-    {
-        double Capacity { get; }
-    }
+    double Capacity { get; }
 }

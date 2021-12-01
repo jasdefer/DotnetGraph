@@ -1,14 +1,13 @@
 ﻿using DotnetGraph.Algorithms.ShortestPathTree;
 using DotnetGraph.Algorithms.ShortestPathTree.Fifo;
 
-namespace DotnetGraphTest.Algorithms.ShortestPathTree
+namespace DotnetGraphTest.Algorithms.ShortestPathTree;
+
+[TestClass]
+public class FifoAlgorithmTests : ShortestPathTreeTests
 {
-    [TestClass]
-    public class FifoAlgorithmTests : ShortestPathTreeTests
+    protected override IShortestPathTreeAlgorithm GetAlgorithm()
     {
-        protected override IShortestPathTreeAlgorithm GetAlgorithm()
-        {
-            return new FifoAlgorithm();
-        }
+        return new FifoAlgorithm();
     }
 }

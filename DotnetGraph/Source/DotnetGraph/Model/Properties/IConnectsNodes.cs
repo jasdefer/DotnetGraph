@@ -1,8 +1,7 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IConnectsNodes<out TNode>
 {
-    public interface IConnectsNodes<out TNode>
-    {
-        TNode Node1 { get; }
-        TNode Node2 { get; }
-    }
+    TNode Node1 { get; }
+    TNode Node2 { get; }
 }
