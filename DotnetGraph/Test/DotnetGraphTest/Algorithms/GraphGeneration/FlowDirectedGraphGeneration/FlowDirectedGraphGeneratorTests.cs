@@ -1,14 +1,12 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.FlowDirectedGraphGeneration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DotnetGraphTest.Algorithms.GraphGeneration.FlowDirectedGraphGeneration
+namespace DotnetGraphTest.Algorithms.GraphGeneration.FlowDirectedGraphGeneration;
+
+[TestClass]
+public class FlowDirectedGraphGeneratorTests : FlowDirectedGraphGeneratorFixture
 {
-    [TestClass]
-    public class FlowDirectedGraphGeneratorTests : FlowDirectedGraphGeneratorFixture
+    protected override IFlowDirectedGraphGenerator GetGenerator()
     {
-        protected override IFlowDirectedGraphGenerator GetGenerator()
-        {
-            return new FlowDirectedGraphGenerator();
-        }
+        return new FlowDirectedGraphGenerator();
     }
 }

@@ -1,12 +1,8 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
+﻿namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow;
 
-namespace DotnetGraph.Algorithms.NetworkFlow.MaxFlow
+public interface IMaxFlowAlgorithm
 {
-    public interface IMaxFlowAlgorithm
-    {
-        void SetFlow<TNode, TArc>(IReadOnlyList<TNode> nodes, int originNodeId, int destinationNodeId)
-            where TNode : IHasId, IHasOutgoingArcs<TArc>
-            where TArc : IHasId, IHasDestination<TNode>, IHasCapacity, IHasFlow;
-    }
+    void SetFlow<TNode, TArc>(IReadOnlyList<TNode> nodes, int originNodeId, int destinationNodeId)
+        where TNode : IHasId, IHasOutgoingArcs<TArc>
+        where TArc : IHasId, IHasDestination<TNode>, IHasCapacity, IHasFlow;
 }

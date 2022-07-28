@@ -1,9 +1,8 @@
 ﻿using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
 
-namespace DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration
+namespace DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration;
+
+public interface IDirectedGraphGenerator
 {
-    public interface IDirectedGraphGenerator
-    {
-        DirectedGraphNode[] Generate(int numberOfNodes, double density);
-    }
+    DirectedGraphNode[] Generate(int numberOfNodes, double density);
 }

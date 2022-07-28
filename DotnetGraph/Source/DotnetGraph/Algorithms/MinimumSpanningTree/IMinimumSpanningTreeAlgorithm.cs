@@ -1,12 +1,8 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
+﻿namespace DotnetGraph.Algorithms.MinimumSpanningTree;
 
-namespace DotnetGraph.Algorithms.MinimumSpanningTree
+public interface IMinimumSpanningTreeAlgorithm
 {
-    public interface IMinimumSpanningTreeAlgorithm
-    {
-        MinimumSpanningTreeResult<TEdge> GetMinimumSpanningTree<TNode, TEdge>(IEnumerable<TNode> nodes)
-            where TNode : IHasId, IHasEdges<TEdge>
-            where TEdge : IConnectsNodes<TNode>, IHasId, IHasWeight;
-    }
+    MinimumSpanningTreeResult<TEdge> GetMinimumSpanningTree<TNode, TEdge>(IEnumerable<TNode> nodes)
+        where TNode : IHasId, IHasEdges<TEdge>
+        where TEdge : IConnectsNodes<TNode>, IHasId, IHasWeight;
 }

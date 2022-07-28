@@ -1,26 +1,23 @@
 ﻿using DotnetGraph.Algorithms.GraphGeneration.DirectedGraphGeneration;
 using DotnetGraph.Model.Implementations.Graph.DirectedGraph;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
-namespace DotnetGraphTest.Algorithms.GraphGeneration.DirectedGraphGeneration
+namespace DotnetGraphTest.Algorithms.GraphGeneration.DirectedGraphGeneration;
+
+[TestClass]
+public class UndirectedToDirectedGraphGeneratorTests : DirectedGraphGenerationFixture
 {
-    [TestClass]
-    public class UndirectedToDirectedGraphGeneratorTests : DirectedGraphGenerationFixture
+    protected override IDirectedGraphGenerator GetGenerator()
     {
-        protected override IDirectedGraphGenerator GetGenerator()
-        {
-            return new UndirectedToDirectedGraphGenerator();
-        }
+        return new UndirectedToDirectedGraphGenerator();
+    }
 
-        protected override void AssertNodes(DirectedGraphNode[] nodes)
+    protected override void AssertNodes(DirectedGraphNode[] nodes)
+    {
+        foreach (var node in nodes)
         {
-            foreach (var node in nodes)
+            foreach (var arc in node.OutgoingArcs)
             {
-                foreach (var arc in node.OutgoingArcs)
-                {
-                    Assert.IsTrue(arc.Destination.OutgoingArcs.Any(x => x.Destination.Id == node.Id));
-                }
+                Assert.IsTrue(arc.Destination.OutgoingArcs.Any(x => x.Destination.Id == node.Id));
             }
         }
     }

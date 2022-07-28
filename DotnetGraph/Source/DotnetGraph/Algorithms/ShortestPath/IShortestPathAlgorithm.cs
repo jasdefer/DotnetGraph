@@ -1,14 +1,10 @@
-﻿using DotnetGraph.Model.Properties;
-using System.Collections.Generic;
+﻿namespace DotnetGraph.Algorithms.ShortestPath;
 
-namespace DotnetGraph.Algorithms.ShortestPath
+public interface IShortestPathAlgorithm
 {
-    public interface IShortestPathAlgorithm
-    {
-        ShortestPathResult<TArc> GetShortestPath<TNode, TArc>(IReadOnlyList<TNode> nodes,
-            int originNodeId,
-            int destinationNodeId)
-            where TNode : IHasOutgoingArcs<TArc>, IHasId
-            where TArc : IHasDestination<TNode>, IHasWeight, IHasId;
-    }
+    ShortestPathResult<TArc> GetShortestPath<TNode, TArc>(IReadOnlyList<TNode> nodes,
+        int originNodeId,
+        int destinationNodeId)
+        where TNode : IHasOutgoingArcs<TArc>, IHasId
+        where TArc : IHasDestination<TNode>, IHasWeight, IHasId;
 }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿namespace DotnetGraph.Algorithms.Components.ConnectedComponents;
 
-namespace DotnetGraph.Algorithms.Components.ConnectedComponents
+public class ConnectedComponent<TNode>
 {
-    public class ConnectedComponent<TNode>
+    public ConnectedComponent(ReadOnlyCollection<TNode> nodes)
     {
-        public ConnectedComponent(ReadOnlyCollection<TNode> nodes)
-        {
-            Nodes = nodes ?? throw new ArgumentNullException(nameof(nodes));
-        }
-
-        public ReadOnlyCollection<TNode> Nodes { get; }
+        Nodes = nodes ?? throw new ArgumentNullException(nameof(nodes));
     }
+
+    public ReadOnlyCollection<TNode> Nodes { get; }
 }

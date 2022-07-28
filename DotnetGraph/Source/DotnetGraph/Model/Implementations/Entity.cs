@@ -1,6 +1,3 @@
-﻿using DotnetGraph.Model.Properties;
+﻿namespace DotnetGraph.Model.Implementations;
 
-namespace DotnetGraph.Model.Implementations
-{
-    public record Entity(int Id) : IHasId;
-}
+public record Entity(int Id) : IHasId;

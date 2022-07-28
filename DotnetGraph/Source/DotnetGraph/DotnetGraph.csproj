@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>Justus Bonz</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Collections" Version="4.3.0" />
-    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

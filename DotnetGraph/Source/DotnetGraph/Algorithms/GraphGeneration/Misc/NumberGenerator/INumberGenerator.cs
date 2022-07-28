@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator
+﻿namespace DotnetGraph.Algorithms.GraphGeneration.Misc.NumberGenerator;
+
+public interface INumberGenerator
 {
-    public interface INumberGenerator
-    {
-        double Generate();
-    }
+    double Generate();
 }
