@@ -7,6 +7,7 @@ global using PerformanceTests.Algorithms.MinimumSpanningTree;
 global using PerformanceTests.Algorithms.NetworkFlow.MaxFlow;
 global using PerformanceTests.Algorithms.ShortestPath;
 global using PerformanceTests.Algorithms.ShortestPathTree;
+using PerformanceTests.Algorithms.KShortestPathRouting;
 
 namespace PerformanceTests;
 
@@ -14,7 +15,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        RunBenchmarkDotNet();
+        //RunBenchmarkDotNet();
         //ProfileKruskal();
         //ProfileUndirectedToDirectedGraphConversion();
         //ProfileErdosRenyiGraphGenerator();
@@ -25,6 +26,7 @@ class Program
         //ProfileDijkstra();
         //ProfileFifoRaw();
         //ProfileFordFulkerson();
+        ProfileYen();
     }
 
     private static void RunBenchmarkDotNet()
@@ -37,6 +39,7 @@ class Program
         var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
         var shortestPathTreePerformance = BenchmarkRunner.Run<ShortestPathTreePerformance>();
         var forderFulkersonPerformance = BenchmarkRunner.Run<FordFulkersonPerformance>();
+        var kShortestPathRoutingPerformance = BenchmarkRunner.Run<KShortestPathRoutingPerformance>();
     }
 
     private static double ProfileKruskal()
@@ -156,6 +159,19 @@ class Program
         {
             //total += performanceTest.FordFulkersonWithConversion();
             total += performanceTest.FordFulkersonRaw();
+        }
+        return total;
+    }
+
+    private static double ProfileYen()
+    {
+        var performanceTest = new KShortestPathRoutingPerformance();
+        performanceTest.Setup();
+        var total = 0d;
+        for (int i = 0; i < 100000; i++)
+        {
+            //total += performanceTest.YenWithConversion();
+            total += performanceTest.YenRaw();
         }
         return total;
     }

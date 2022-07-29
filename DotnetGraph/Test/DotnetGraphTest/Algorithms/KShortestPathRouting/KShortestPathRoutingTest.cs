@@ -31,6 +31,51 @@ public abstract class KShortestPathRoutingTest
         result.SetOfPaths.Single().Should().Equal(nodes[0].OutgoingArcs.Single());
     }
 
+    [TestMethod]
+    public void ThreeArcs()
+    {
+        // Assign
+        var nodes = new WeightedDirectedGraphNode[]
+        {
+                new WeightedDirectedGraphNode(1),
+                new WeightedDirectedGraphNode(2),
+                new WeightedDirectedGraphNode(3)
+        };
+        nodes[0].Add(new WeightedDirectedGraphArc(1, 1, nodes[1]));
+        nodes[1].Add(new WeightedDirectedGraphArc(2, 1, nodes[2]));
+        nodes[1].Add(new WeightedDirectedGraphArc(3, 1, nodes[2]));
+        var algorithm = GetAlgorithm();
+
+        // Act
+        var result = algorithm.GetKShortestPaths<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes, 1, 2, 2);
+
+        // Assert
+        result.SetOfPaths.Should().HaveCount(2);
+    }
+
+    [TestMethod]
+    public void FourArcs()
+    {
+        // Assign
+        var nodes = new WeightedDirectedGraphNode[]
+        {
+                new WeightedDirectedGraphNode(1),
+                new WeightedDirectedGraphNode(2),
+                new WeightedDirectedGraphNode(3)
+        };
+        nodes[0].Add(new WeightedDirectedGraphArc(1, 1, nodes[1]));
+        nodes[0].Add(new WeightedDirectedGraphArc(2, 1, nodes[1]));
+        nodes[1].Add(new WeightedDirectedGraphArc(3, 1, nodes[2]));
+        nodes[1].Add(new WeightedDirectedGraphArc(4, 1, nodes[2]));
+        var algorithm = GetAlgorithm();
+
+        // Act
+        var result = algorithm.GetKShortestPaths<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes, 1, 2, 2);
+
+        // Assert
+        result.SetOfPaths.Should().HaveCount(4);
+    }
+
     [DataTestMethod]
     [DataRow(1)]
     [DataRow(2)]
