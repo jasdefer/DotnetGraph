@@ -1,8 +1,7 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasDiscoverInformation
 {
-    public interface IHasDiscoverInformation
-    {
-        int DiscoveredTime { get; set; }
-        int ExploredTime { get; set; }
-    }
+    int DiscoveredTime { get; set; }
+    int ExploredTime { get; set; }
 }

@@ -1,9 +1,8 @@
 ﻿using DotnetGraph.Model.Implementations.Graph.UndirectedGraph;
 
-namespace DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration
+namespace DotnetGraph.Algorithms.GraphGeneration.UndirectedGraphGeneration;
+
+public interface IUndirectedGraphGenerator
 {
-    public interface IUndirectedGraphGenerator
-    {
-        UndirectedGraphNode[] Generate(int numberOfNodes, double density);
-    }
+    UndirectedGraphNode[] Generate(int numberOfNodes, double density);
 }

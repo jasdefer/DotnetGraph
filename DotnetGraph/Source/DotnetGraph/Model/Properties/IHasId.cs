@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasId
 {
-    public interface IHasId
-    {
-        int Id { get; }
-    }
+    int Id { get; }
 }

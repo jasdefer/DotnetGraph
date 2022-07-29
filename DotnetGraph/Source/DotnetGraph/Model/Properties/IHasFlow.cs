@@ -1,7 +1,6 @@
-﻿namespace DotnetGraph.Model.Properties
+﻿namespace DotnetGraph.Model.Properties;
+
+public interface IHasFlow
 {
-    public interface IHasFlow
-    {
-        double Flow { get; set; }
-    }
+    double Flow { get; set; }
 }

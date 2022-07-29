@@ -1,20 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>Justus Bonz</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Description>This library is a collection of algorithms running on directed or undirected graphs.</Description>
     <PackageProjectUrl>https://github.com/jasdefer/DotnetGraph/</PackageProjectUrl>
     <PackageId>DotnetGraphCore</PackageId>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>1.2.0
+    <Version>1.2.1</Version>
+    <PackageReleaseNotes>1.2.1
+- Added Yen's algorithm for the k-shortest-path-routing
+1.2.0
 - Added Ford-Fulkerson algorithm for the max flow
 - Added Cormen depth first search algorithm
 - Reorganized the graph generation algorithms</PackageReleaseNotes>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
 
@@ -34,8 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
-    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
