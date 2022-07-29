@@ -19,4 +19,8 @@ public class DijkstraNode :
     {
         arcs.Add(arc);
     }
+    public void RemoveArc(DijkstraArc arc)
+    {
+        arcs.Remove(arc);
+    }
 }

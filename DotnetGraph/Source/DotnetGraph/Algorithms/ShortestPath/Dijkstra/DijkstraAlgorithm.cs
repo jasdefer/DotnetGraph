@@ -35,6 +35,19 @@ public class DijkstraAlgorithm : IShortestPathAlgorithm
         return dict.Values.ToList();
     }
 
+    public static void ResetProgress(IReadOnlyList<DijkstraNode> nodes)
+    {
+        if (nodes is null)
+        {
+            return;
+        }
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            nodes[i].DistanceFromOrigin = null;
+            nodes[i].BestPredecessor = null;
+        }
+    }
+
     public static ShortestPathResult<TArc> ConvertResult<TNode, TArc>(IReadOnlyList<TNode> nodes, ShortestPathResult<DijkstraArc> dijkstraResult)
         where TNode : IHasOutgoingArcs<TArc>, IHasId
         where TArc : IHasDestination<TNode>, IHasWeight, IHasId
