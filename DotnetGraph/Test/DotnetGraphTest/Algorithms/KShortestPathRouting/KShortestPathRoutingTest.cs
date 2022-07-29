@@ -221,10 +221,12 @@ public abstract class KShortestPathRoutingTest
             var numberOfNodes = 10 + 100 * i;
             var density = 4d / (numberOfNodes + 1);
             var nodes = generator.Generate(numberOfNodes, density, weightGenerator);
+            var numberOfArcs = nodes.Sum(x => x.OutgoingArcs.Count);
             var k = i % 5 + 1;
             var kShortestPaths = algorithm.GetKShortestPaths<WeightedDirectedGraphNode, WeightedDirectedGraphArc>(nodes, 1, nodes.Length - 1, k);
             kShortestPaths.Should().NotBeNull();
             kShortestPaths.SetOfPaths.Should().HaveCount(k);
+            nodes.Sum(x => x.OutgoingArcs.Count).Should().Be(numberOfArcs);
         }
     }
 }
