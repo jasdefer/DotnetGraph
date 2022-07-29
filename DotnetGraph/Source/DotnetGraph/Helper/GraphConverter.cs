@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.IO;
 using DotnetGraph.Model.Implementations.Graph.WeightedDirectedGraph;
 
 namespace DotnetGraph.Helper;
