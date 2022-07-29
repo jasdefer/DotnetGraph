@@ -56,7 +56,7 @@ public class YenAlgorithm : IKShortestPathRoutingAlgorithm
             {
                 var spurNode = shortestPaths[i - 1].Arcs[j].Origin;
                 var rootPath = shortestPaths[i - 1].Arcs.Take(j);
-                var removedArcs = new List<DijkstraArc>();
+                var removedArcs = new HashSet<DijkstraArc>();
                 foreach (var shortestPath in shortestPaths)
                 {
                     var rootOfShortestPath = shortestPath.Arcs.Take(j);
