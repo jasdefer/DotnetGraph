@@ -8,8 +8,10 @@
     <Description>This library is a collection of algorithms running on directed or undirected graphs.</Description>
     <PackageProjectUrl>https://github.com/jasdefer/DotnetGraph/</PackageProjectUrl>
     <PackageId>DotnetGraphCore</PackageId>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>1.2.0
+    <Version>1.2.1</Version>
+    <PackageReleaseNotes>1.2.1
+- Added Yen's algorithm for the k-shortest-path-routing
+1.2.0
 - Added Ford-Fulkerson algorithm for the max flow
 - Added Cormen depth first search algorithm
 - Reorganized the graph generation algorithms</PackageReleaseNotes>

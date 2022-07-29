@@ -14,6 +14,8 @@ Currently, the following algorithms are implemented:
     - [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
   - [Shrotest path tree](https://en.wikipedia.org/wiki/Shortest-path_tree)
     - FIFO Algorithm
+  - [k shortest path routing](https://en.wikipedia.org/wiki/K_shortest_path_routing#:~:text=The%20k%20shortest%20path%20routing,the%20loopless%20k%20shortest%20paths.)
+    - [Yen's algorithm](https://en.wikipedia.org/wiki/Yen%27s_algorithm)
   - Graph Components
     - [Strongly Connected Components](https://en.wikipedia.org/wiki/Strongly_connected_component)
   - [Depth-first search](https://en.wikipedia.org/wiki/Depth-first_search)
