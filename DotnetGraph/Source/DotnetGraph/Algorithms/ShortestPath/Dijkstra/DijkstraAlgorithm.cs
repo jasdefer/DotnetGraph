@@ -88,8 +88,9 @@ public class DijkstraAlgorithm : IShortestPathAlgorithm
                 {
                     throw new NegativeWeightException("Dijkstra cannot handle arcs with negative weights.");
                 }
-
+#pragma warning disable CS8629 // Nullable value type may be null.
                 var newDistance = node.DistanceFromOrigin.Value + arc.Weight;
+#pragma warning restore CS8629 // Nullable value type may be null.
                 heap.UpdateArc(arc, newDistance);
             }
         }
