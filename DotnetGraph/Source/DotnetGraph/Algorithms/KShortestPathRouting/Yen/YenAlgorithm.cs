@@ -44,22 +44,25 @@ public class YenAlgorithm : IKShortestPathRoutingAlgorithm
         Guard.Against.NegativeOrZero(k);
         Guard.Against.NullOrEmpty(nodes);
 
+        DijkstraAlgorithm.ResetProgress(nodes);
         var shortestPaths = new List<ShortestPathResult<DijkstraArc>>(k);
-        shortestPaths.Add(DijkstraAlgorithm.GetShortestPath(nodes, originNodeId, destinationNodeId));
+        var initialShortestPath = DijkstraAlgorithm.GetShortestPath(nodes, originNodeId, destinationNodeId);
+        shortestPaths.Add(initialShortestPath);
         var candidates = new List<ShortestPathResult<DijkstraArc>>();
         for (int i = 1; i < k; i++)
         {
             var jUpperBound = shortestPaths[i - 1].Arcs.Count;
             for (int j = 0; j < jUpperBound; j++)
             {
-                var graph = new List<DijkstraNode>(nodes);
                 var spurNode = shortestPaths[i - 1].Arcs[j].Origin;
                 var rootPath = shortestPaths[i - 1].Arcs.Take(j);
+                var removedArcs = new List<DijkstraArc>();
                 foreach (var shortestPath in shortestPaths)
                 {
                     var rootOfShortestPath = shortestPath.Arcs.Take(j);
                     if (Enumerable.SequenceEqual(rootPath, rootOfShortestPath))
                     {
+                        removedArcs.Add(shortestPath.Arcs[j]);
                         spurNode.RemoveArc(shortestPath.Arcs[j]);
                     }
                 }
@@ -67,17 +70,23 @@ public class YenAlgorithm : IKShortestPathRoutingAlgorithm
                 var candidateWeight = 0d;
                 foreach (var arc in rootPath)
                 {
+                    removedArcs.Add(arc);
                     arc.Origin.RemoveArc(arc);
                     canidateArcs.Add(arc);
                     candidateWeight += arc.Weight;
                 }
                 ShortestPathResult<DijkstraArc>? spurPath = null;
+                DijkstraAlgorithm.ResetProgress(nodes);
                 try
                 {
-                    spurPath = DijkstraAlgorithm.GetShortestPath(graph, spurNode.Id, destinationNodeId);
-
+                    spurPath = DijkstraAlgorithm.GetShortestPath(nodes, spurNode.Id, destinationNodeId);
                 }
                 catch (InvalidDestinationException) { }
+                catch (IdsNotUniqueException) { }
+                foreach (var arc in removedArcs)
+                {
+                    arc.Origin.AddArc(arc);
+                }
                 if (spurPath != null)
                 {
                     foreach (var arc in spurPath.Arcs)
