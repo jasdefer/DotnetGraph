@@ -1,5 +1,4 @@
 ﻿global using BenchmarkDotNet.Attributes;
-global using BenchmarkDotNet.Running;
 global using PerformanceTests.Algorithms.Components.ConnectedComponents;
 global using PerformanceTests.Algorithms.Components.StronglyConnectedComponents;
 global using PerformanceTests.Algorithms.GraphGeneration;
@@ -15,7 +14,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        //RunBenchmarkDotNet();
+        RunBenchmarkDotNet();
         //ProfileKruskal();
         //ProfileUndirectedToDirectedGraphConversion();
         //ProfileErdosRenyiGraphGenerator();
@@ -26,20 +25,20 @@ class Program
         //ProfileDijkstra();
         //ProfileFifoRaw();
         //ProfileFordFulkerson();
-        ProfileYen();
+        //ProfileYen();
     }
 
     private static void RunBenchmarkDotNet()
     {
-        var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
-        var erdosRenyiGeneratorSummary = BenchmarkRunner.Run<ErdosRenyiGeneratorPerformance>();
-        var lineGraphGeneratorSumary = BenchmarkRunner.Run<LineGraphGeneratorPerformance>();
-        var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
-        var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
-        var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
-        var shortestPathTreePerformance = BenchmarkRunner.Run<ShortestPathTreePerformance>();
-        var forderFulkersonPerformance = BenchmarkRunner.Run<FordFulkersonPerformance>();
-        var kShortestPathRoutingPerformance = BenchmarkRunner.Run<KShortestPathRoutingPerformance>();
+        //var shortestPathSummary = BenchmarkRunner.Run<ShortestPathPerformance>();
+        //var erdosRenyiGeneratorSummary = BenchmarkRunner.Run<ErdosRenyiGeneratorPerformance>();
+        //var lineGraphGeneratorSumary = BenchmarkRunner.Run<LineGraphGeneratorPerformance>();
+        //var componentsSummary = BenchmarkRunner.Run<ConnectedComponentsPerformance>();
+        //var stronglyConnectedComponentsSummary = BenchmarkRunner.Run<StronglyConnectedComponentsPerformance>();
+        //var minimumSpanningTreePeformance = BenchmarkRunner.Run<MinimumSpanningTreePerformance>();
+        //var shortestPathTreePerformance = BenchmarkRunner.Run<ShortestPathTreePerformance>();
+        //var forderFulkersonPerformance = BenchmarkRunner.Run<FordFulkersonPerformance>();
+        //var kShortestPathRoutingPerformance = BenchmarkRunner.Run<KShortestPathRoutingPerformance>();
     }
 
     private static double ProfileKruskal()

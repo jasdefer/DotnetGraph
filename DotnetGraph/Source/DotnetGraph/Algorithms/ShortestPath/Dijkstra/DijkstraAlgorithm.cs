@@ -35,16 +35,16 @@ public class DijkstraAlgorithm : IShortestPathAlgorithm
         return dict.Values.ToList();
     }
 
-    public static void ResetProgress(IReadOnlyCollection<DijkstraNode> nodes)
+    public static void ResetProgress(IReadOnlyList<DijkstraNode> nodes)
     {
         if (nodes is null)
         {
             return;
         }
-        foreach (var node in nodes)
+        for (int i = 0; i < nodes.Count; i++)
         {
-            node.DistanceFromOrigin = null;
-            node.BestPredecessor = null;
+            nodes[i].DistanceFromOrigin = null;
+            nodes[i].BestPredecessor = null;
         }
     }
 
