@@ -55,8 +55,10 @@ class Program
 
     private static double ProfileLineGraphGenerator()
     {
-        var performanceTest = new LineGraphGeneratorPerformance();
-        performanceTest.NumberOfNodes = LineGraphGeneratorPerformance.BigNumberOfNodes;
+        var performanceTest = new LineGraphGeneratorPerformance
+        {
+            NumberOfNodes = LineGraphGeneratorPerformance.BigNumberOfNodes
+        };
         var total = 0;
         for (int i = 0; i < 500; i++)
         {
@@ -67,8 +69,10 @@ class Program
 
     private static double ProfileErdosRenyiGraphGenerator()
     {
-        var performanceTest = new ErdosRenyiGeneratorPerformance();
-        performanceTest.NumberOfNodes = ErdosRenyiGeneratorPerformance.BigNumberOfNodes;
+        var performanceTest = new ErdosRenyiGeneratorPerformance
+        {
+            NumberOfNodes = ErdosRenyiGeneratorPerformance.BigNumberOfNodes
+        };
         var total = 0;
         for (int i = 0; i < 200; i++)
         {
@@ -167,7 +171,7 @@ class Program
         var performanceTest = new KShortestPathRoutingPerformance();
         performanceTest.Setup();
         var total = 0d;
-        for (int i = 0; i < 100000; i++)
+        for (int i = 0; i < 250; i++)
         {
             //total += performanceTest.YenWithConversion();
             total += performanceTest.YenRaw();
